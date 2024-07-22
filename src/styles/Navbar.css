@@ -12,12 +12,15 @@
   flex-direction: row;
 }
 
+.logo-sidebar img {
+  display: none;
+}
+
 .logo {
   font-size: 30px;
   font-weight: bold;
   align-items: flex-start;
   color: #01baf2;
-  margin: 0px 25px;
   font-family: "Pacifico", cursive;
 }
 
@@ -87,6 +90,12 @@
 }
 
 @media (max-width: 768px) {
+  .logo-sidebar img {
+    display: flex;
+  }
+  .logo {
+    margin: 0px 25px;
+  }
   .search-container {
     display: none;
   }
