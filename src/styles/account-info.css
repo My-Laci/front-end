@@ -1,0 +1,86 @@
+    /* src/components/Card.css */
+    .card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        padding: 15px;
+    }
+
+    hr {
+        margin: 10px 0px 10px 0px;
+        border-color: #C6C6C6;
+        border-width: 1px;
+    }
+
+    .card .description {
+        padding: 15px;
+    }
+
+    .card .description h2 {
+        margin-bottom: 15px;
+        font-size: 24px;
+    }
+
+    .card .description ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .card .description li {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .card .info {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        width: 100%;
+    }
+
+    .card .label {
+        font-weight: bold;
+    }
+
+    .card .value {
+        margin-left: 10px;
+    }
+
+    .card .edit-li {
+        margin-left: 10px;
+        padding: 5px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .card .edit-li:hover {
+        transform: scale(1.1);
+    }
+
+    .card .edit-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            background-color: #fff;
+            border-radius: 0px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 0;
+            padding: 15px;
+        }
+
+        hr {
+            margin: 10px 0px 10px 0px;
+        }
+    }

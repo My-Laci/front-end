@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import "../styles/Navbar.css";
 import burgerIcon from "../assets/burger.svg";
 import searchInIcon from "../assets/search-in.svg";
