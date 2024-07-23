@@ -1,0 +1,51 @@
+/* src/components/Sidebar.css */
+.sidebar {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: baseline;
+  padding-top: 20px;
+  height: calc(100vh - 70px);
+  position: fixed;
+  top: 70px;
+  left: 0;
+}
+
+.sidebar button {
+  width: 80%;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f1f2f6;
+  color: rgb(0, 0, 0);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 15px;
+  display: flex;
+  /* Added to align icon and text */
+  align-items: center;
+  /* Center icon and text vertically */
+}
+
+.sidebar button img {
+  margin-right: 20px;
+  /* Added margin to separate icon from text */
+  width: 20px;
+  /* Set a fixed width */
+  height: auto;
+  /* Maintain aspect ratio */
+}
+
+.sidebar button:hover {
+  background-color: #e5e6ea;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
