@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/post-content.css";
 import UserImage from "../assets/vinsen.svg";
 import PostImage1 from "../assets/image1.svg";
