@@ -4,7 +4,7 @@
   padding: 15px;
 }
 
-.post-info {
+.article-info {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -15,7 +15,7 @@
   display: flex;
 }
 
-.details-post {
+.details-article {
   display: flex;
   flex-direction: column;
 }
@@ -32,29 +32,37 @@
   font-size: 16px;
 }
 
-.date-time-post {
+.date-time-article {
   font-size: 10px;
   color: #7e7e7e;
 }
 
-.post-text {
+.article-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 5px 0px 10px 0px;
+}
+
+.article-text {
   font-size: 16px;
   color: #263238;
   margin-bottom: 10px;
 }
 
-.post-img {
+.article-img {
   flex-direction: row;
 }
 
-.post-img img {
-  width: 50%;
+.article-img img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .post-interactions {
   justify-content: space-between;
   display: flex;
-  margin: 7px 10px 13px 10px;
+  margin: 10px 10px 13px 10px;
 }
 
 .interaction {

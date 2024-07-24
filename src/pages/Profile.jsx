@@ -1,4 +1,3 @@
-import "../styles/profile.css";
 import settingIcon from "../assets/Setting-icon.svg";
 import bannerIcon from "../assets/Banner-Icon.svg";
 
@@ -28,7 +27,11 @@ function Profile() {
             <p>Articles</p>
           </div>
           <div className="article-display">
-            <img className="articleImage" src="https://pbs.twimg.com/media/GHqS6L3boAAjFXF.jpg:large" alt="" />
+            <img
+              className="articleImage"
+              src="https://pbs.twimg.com/media/GHqS6L3boAAjFXF.jpg:large"
+              alt=""
+            />
             <div className="title-content">
               <h4>Akhirnya Ketemu! Vincent Bertemu Pak Vinsen</h4>
               <p>
