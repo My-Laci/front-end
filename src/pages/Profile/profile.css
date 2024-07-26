@@ -1,0 +1,15 @@
+.profile {
+  width: 50%;
+}
+
+@media (max-width: 426px) {
+  .profile {
+    width: 100%;
+  }
+}
+
+@media (min-width: 427px) and (max-width: 768px) {
+  .profile {
+    width: 65%;
+  }
+}

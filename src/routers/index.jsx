@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Profile from "../pages/Profile";
+import Profile from "../pages/Profile/Profile.jsx";
 import Register from "../pages/Register";
 
 export const router = createBrowserRouter([
