@@ -1,5 +1,5 @@
-import '../styles/account-info.css';
-import editIcon from '../assets/editIcon.svg';
+import './account-info.css';
+import editIcon from '../../assets/editIcon.svg';
 
 
 export default function AccountInfo() {

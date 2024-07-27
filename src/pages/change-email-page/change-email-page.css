@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    background-color: #f1f2f6;
+    padding: 0;
+}
+
+.content {
+    margin-left: 25%;
+    width: 50%;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: none;
+    margin-top: 70px;
+}
+
+@media (max-width: 1024px) {
+    .aside {
+        display: none;
+    }
+
+    .content {
+        margin-left: 20%;
+        width: 80%;
+        margin-top: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        background-color: #f1f2f6;
+        padding: 0;
+    }
+
+    .content {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        margin-top: 70px;
+    }
+}
