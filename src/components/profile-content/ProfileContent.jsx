@@ -14,7 +14,7 @@ export default function ProfileContent() {
   return (
     <div className="profile-content">
       <div className="navigation">
-        <div className="button">
+        <div className="button-nest">
           <a
             href="#"
             className={activeTab === "posts" ? "active" : ""}
@@ -23,7 +23,7 @@ export default function ProfileContent() {
             Posts
           </a>
         </div>
-        <div className="button">
+        <div className="button-nest">
           <a
             href="#"
             className={activeTab === "articles" ? "active" : ""}
