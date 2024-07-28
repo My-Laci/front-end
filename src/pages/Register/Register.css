@@ -1,16 +1,16 @@
-.container {
+.register-container {
   display: flex;
   flex-direction: row;
 }
 
-.left-side {
+.register-left-side {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 50%;
 }
 
-.right-side {
+.register-right-side {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,36 +18,35 @@
   justify-content: center;
 }
 
-.right-side h1 {
+.register-right-side h1 {
   font-size: 40px;
   font-weight: 900;
   margin-bottom: 25px;
 }
 
-.formlist {
+.register-formlist {
   width: 70%;
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
-.formlist p {
+.register-formlist p {
   margin-bottom: 15px;
 }
 
-.formlist span {
+.register-formlist span {
   font-weight: bold;
   color: #f18931;
 }
 
-#loginSpan {
+#Register-loginSpan {
   font-weight: bold;
   color: #01baf2;
   text-decoration: none;
-
 }
 
-.icon-banner {
+.register-icon-banner {
   width: auto;
   height: 100vh;
   object-fit: cover;
@@ -55,22 +54,22 @@
   position: relative;
 }
 
-.login-icon {
+.register-login-icon {
   position: absolute;
   width: 25%;
   margin-left: 9%;
 }
 
-#enterText {
+#Register-enterText {
   margin: 7px 0 20px 0;
 }
 
 @media (max-width: 426px) {
-  .left-side {
+  .register-left-side {
     display: none;
   }
 
-  .right-side {
+  .register-right-side {
     width: 100%;
     height: 100vh;
   }
@@ -79,7 +78,7 @@
     display: none;
   }
 
-  .description {
+  .register-description {
     display: none;
   }
 
@@ -91,28 +90,33 @@
 }
 
 @media (min-width: 427px) and (max-width: 768px) {
-  .left-side {
+  .register-left-side {
     display: none;
-  }
-
-  .right-side {
-    width: 100%;
-    height: 100vh;
   }
 
   #register {
     display: none;
   }
 
-  .description {
+  .register-right-side {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #Login {
     display: none;
   }
-}
 
-#logo {
-  font-family: "Pacifico", cursive;
-  color: #01baf2;
-  font-size: 50px;
+  .register-description {
+    display: none;
+  }
+
+  #logo {
+    font-family: "Pacifico", cursive;
+    color: #01baf2;
+    font-size: 50px;
+    margin-bottom: 25px;
+  }
 }
 
 @media (min-width: 769px) {

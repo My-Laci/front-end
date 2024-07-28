@@ -1,5 +1,11 @@
 .profile {
   width: 50%;
+  margin-top: 90px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 426px) {

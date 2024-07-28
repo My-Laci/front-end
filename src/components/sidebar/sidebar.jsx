@@ -1,8 +1,8 @@
-import "../styles/sidebar.css";
-import homeIcon from "../assets/home.svg";
-import profileIcon from "../assets/profile.svg";
-import popularIcon from "../assets/popular.svg";
-import bookmarkIcon from "../assets/bookmark.svg";
+import "./sidebar.css";
+import homeIcon from "../../assets/home.svg";
+import profileIcon from "../../assets/profile.svg";
+import popularIcon from "../../assets/popular.svg";
+import bookmarkIcon from "../../assets/bookmark.svg";
 
 export default function Sidebar() {
   return (

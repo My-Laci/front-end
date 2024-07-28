@@ -1,0 +1,142 @@
+.login-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.login-left-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.login-right-side {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-right-side img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#login-banner {
+  transform: scaleX(-1);
+  object-position: right center;
+}
+
+#login-icon {
+  position: fixed;
+  width: 25%;
+  height: auto;
+}
+
+#login {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 25px;
+}
+
+.login-fogot-password a {
+  color: #01baf2;
+}
+
+.login-or {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  border-bottom: 1px solid #000;
+}
+
+.login-formlist {
+  width: 70%;
+}
+
+.login-forgot-password {
+  display: flex;
+  justify-content: end;
+}
+
+.login-forgot-password a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #01baf2;
+  margin-bottom: 15px;
+}
+
+#dont-have-account {
+  font-weight: 300;
+}
+
+#dont-have-account a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #01baf2;
+  margin-left: 5px;
+}
+
+#login-or {
+  font-weight: 300;
+  font-style: italic;
+  margin: 20px 0 20px 0;
+}
+
+#login-logo {
+  font-family: "Pacifico", cursive;
+  color: #01baf2;
+  font-size: 50px;
+}
+
+@media (max-width: 426px) {
+  .login-right-side {
+    display: none;
+  }
+
+  .login-left-side {
+    width: 100%;
+  }
+
+  #login {
+    display: none;
+  }
+
+  #login-logo {
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 427px) and (max-width: 768px) {
+  .login-right-side {
+    display: none;
+  }
+
+  .login-left-side {
+    width: 100%;
+  }
+
+  #login {
+    display: none;
+  }
+
+  #login-logo {
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 769px) {
+  #login-logo {
+    font-family: "Pacifico", cursive;
+    color: #01baf2;
+    font-size: 50px;
+    display: none;
+  }
+}

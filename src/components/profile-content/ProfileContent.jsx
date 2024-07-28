@@ -37,6 +37,9 @@ export default function ProfileContent() {
         <div className="content">
           <Article />
           <Article />
+          <Article />
+          <Article />
+          <Article />
         </div>
       )}
       {activeTab === "posty" && (
