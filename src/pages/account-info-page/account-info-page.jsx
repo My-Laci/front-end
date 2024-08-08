@@ -8,9 +8,9 @@ const AccountInfoPage = () => {
         <>
             <body>
                 <Navbar />
-                <div className="container">
+                <div className="account-container">
                     <Sidebar />
-                    <div className="content">
+                    <div className="account-content">
                         <AccountInfo />
                     </div>
 

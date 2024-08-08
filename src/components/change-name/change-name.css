@@ -1,5 +1,5 @@
     /* src/components/Card.css */
-    .card {
+    .changeName-card {
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 15px;
@@ -15,11 +15,11 @@
         border-width: 1px;
     }
 
-    .card .description {
+    .changeName-card .changeName-description {
         padding: 15px;
     }
 
-    .card .description h2 {
+    .changeName-card .changeName-description h2 {
         margin-bottom: 15px;
         font-size: 24px;
     }
@@ -44,7 +44,7 @@
 
 
     @media (max-width: 768px) {
-        .card {
+        .changeName-card {
             background-color: #fff;
             border-radius: 0px;
             overflow: hidden;

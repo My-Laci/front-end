@@ -6,6 +6,9 @@ import Popular from "../pages/popular/popular";
 import AccountInfoPage from "../pages/account-info-page/account-info-page";
 import ChangeNamePage from "../pages/change-name-page/change-name-page";
 import ChangeEmailPage from "../pages/change-email-page/change-email-page";
+import ChangePasswordPage from "../pages/change-password-page/change-password-page";
+import SearchResultPage from "../pages/search-result-page/search-result-page";
+import OtpEmailPage from "../pages/otp-email-page/otp-email-page";
 
 export const router = createBrowserRouter([
   {
@@ -35,5 +38,17 @@ export const router = createBrowserRouter([
   {
     path: "/ChangeEmail",
     element: <ChangeEmailPage />,
+  },
+  {
+    path: "/ChangePassword",
+    element: <ChangePasswordPage />,
+  },
+  {
+    path: "/EmailVerification",
+    element: <OtpEmailPage />,
+  },
+  {
+    path: "/SearchResult",
+    element: <SearchResultPage />,
   },
 ]);

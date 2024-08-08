@@ -1,10 +1,9 @@
 import Navbar from "../../components/navbar/Navbar.jsx";
 import Sidebar from "../../components/sidebar/sidebar.jsx";
-import "./change-email-page.css";
-import SaveChangesButton from "../../components/save-changes-button/save-changes-button.jsx";
-import ChangeEmail from "../../components/change-email/change-email.jsx";
+import "./otp-email-page.css";
+import OtpEmail from "../../components/otp-email/otp-email.jsx";
 
-const ChangeEmailPage = () => {
+const OtpEmailPage = () => {
     return (
         <>
             <body>
@@ -12,8 +11,7 @@ const ChangeEmailPage = () => {
                 <div className="changeEmail-container">
                     <Sidebar />
                     <div className="changeEmail-content">
-                        <ChangeEmail />
-                        <SaveChangesButton />
+                        <OtpEmail />
                     </div>
 
                 </div>
@@ -22,4 +20,4 @@ const ChangeEmailPage = () => {
     );
 };
 
-export default ChangeEmailPage;
+export default OtpEmailPage;

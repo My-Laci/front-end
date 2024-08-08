@@ -10,7 +10,7 @@ body {
     padding: 0;
 }
 
-.content {
+.changeName-content {
     margin-left: 25%;
     width: 50%;
     padding: 20px;
@@ -24,7 +24,7 @@ body {
         display: none;
     }
 
-    .content {
+    .changeName-content {
         margin-left: 20%;
         width: 80%;
         margin-top: 70px;
@@ -39,7 +39,7 @@ body {
         padding: 0;
     }
 
-    .content {
+    .changeName-content {
         margin: 0;
         padding: 0;
         width: 100%;
