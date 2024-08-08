@@ -17,7 +17,7 @@ export default function ChangeEmail() {
     };
 
     return (
-        <div className="changeEmail-card">
+        <div className="emailVerification-card">
             <div className="changeEmail-description">
                 <h2>Change Email</h2>
                 <hr></hr>

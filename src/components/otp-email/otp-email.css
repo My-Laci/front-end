@@ -1,5 +1,5 @@
 /* src/components/Card.css */
-.changeEmail-card {
+.emailVerification-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -15,11 +15,11 @@ hr {
     border-width: 1px;
 }
 
-.changeEmail-card .changeEmail-description {
+.emailVerification-card .changeEmail-description {
     padding: 15px;
 }
 
-.changeEmail-card .changeEmail-description h2 {
+.emailVerification-card .changeEmail-description h2 {
     margin-bottom: 15px;
     font-size: 24px;
 }
@@ -85,7 +85,7 @@ hr {
 }
 
 @media (max-width: 768px) {
-    .changeEmail-card {
+    .emailVerification-card {
         background-color: #fff;
         border-radius: 0px;
         overflow: hidden;
