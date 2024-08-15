@@ -48,15 +48,35 @@ body {
   font-family: "Nunito Sans", sans-serif;
 }
 
+.create-voucher-batch-total:focus {
+  outline: none;
+  border-color: #01baf2;
+  box-shadow: 0 0 5px rgba(1, 186, 242, 0.5);
+}
+
 .create-voucher-batch-name:focus {
   outline: none;
   border-color: #01baf2;
   box-shadow: 0 0 5px rgba(1, 186, 242, 0.5);
 }
-.create-voucher-batch-total:focus {
-  outline: none;
-  border-color: #01baf2;
-  box-shadow: 0 0 5px rgba(1, 186, 242, 0.5);
+
+.create-voucher-button {
+  margin-top: 25px;
+  width: 70%;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  background-color: #3ed2ff;
+  color: white;
+  font-size: 16px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.create-voucher-button:hover {
+  color: #3ed2ff;
+  background-color: #f1f2f6;
+  font-size: 16px;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 @media (max-width: 1024px) {

@@ -41,22 +41,22 @@ const PostContent = () => {
         <img src={PostImage2} alt="Post Image" />
       </div>
       <div className="post-interactions">
-        <div className="interaction">
-          <img src={Like} />
+        <button className="interaction">
+          <img src={Like} alt="Like" />
           <div className="text-interaction">Like</div>
-        </div>
-        <div className="interaction">
-          <img src={Comment} />
+        </button>
+        <button className="interaction">
+          <img src={Comment} alt="Comment" />
           <div className="text-interaction">Comment</div>
-        </div>
-        <div className="interaction">
-          <img src={Repost} />
+        </button>
+        <button className="interaction">
+          <img src={Repost} alt="Repost" />
           <div className="text-interaction">Repost</div>
-        </div>
-        <div className="interaction">
-          <img src={Bookmark} />
+        </button>
+        <button className="interaction">
+          <img src={Bookmark} alt="Bookmark" />
           <div className="text-interaction">Bookmark</div>
-        </div>
+        </button>
       </div>
       <hr></hr>
       <div className="bottom-section">

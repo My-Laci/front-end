@@ -55,15 +55,27 @@
 .post-interactions {
   justify-content: space-between;
   display: flex;
-  margin: 7px 10px 13px 10px;
+  margin: 10px 10px 13px 10px;
 }
 
 .interaction {
+  background: none;
+  border: none;
+  cursor: pointer;
   display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 600;
 }
 
 .interaction img {
   transform: scale(0.9);
+}
+
+.interaction:focus {
+  outline: none;
 }
 
 .text-interaction {

@@ -23,7 +23,9 @@ const AdminCreateVoucher = () => {
             className="create-voucher-batch-total"
             min="1"
           />
-          {/* <button>Create Vouchers</button> */}
+          <button className="create-voucher-button" onClick={() => {}}>
+            Create Voucher
+          </button>
         </div>
       </div>
     </>

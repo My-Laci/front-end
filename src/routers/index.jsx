@@ -5,7 +5,6 @@ import Login from "../pages/Login/Login.jsx";
 import Canvas from "../pages/Canvas/Canvas.jsx";
 import AdminCreateVoucher from "../pages/admin/admin-create-voucher";
 import AdminListVoucher from "../pages/admin/admin-list-voucher";
-import AdminHistoryVoucher from "../pages/admin/admin-history-voucher";
 import AdminListBatch from "../pages/admin/admin-list-batch";
 import Homepage from "../pages/homepage/homepage";
 import Popular from "../pages/popular/popular";
@@ -49,9 +48,5 @@ export const router = createBrowserRouter([
   {
     path: "/AdminListBatch",
     element: <AdminListBatch />,
-  },
-  {
-    path: "/AdminHistoryVoucher",
-    element: <AdminHistoryVoucher />,
   },
 ]);
