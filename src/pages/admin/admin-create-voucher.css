@@ -20,11 +20,7 @@ body {
   background-color: none;
 }
 
-<<<<<<< HEAD
 .admin-h1 {
-=======
-h1 {
->>>>>>> 920f0ff71a649808ebdb0fbdff658a19d1295f3c
   margin-top: 20px;
   font-weight: 800;
 }
@@ -67,13 +63,10 @@ h1 {
   .admin-create-content {
     margin: 0px 10px 0px 10px;
   }
-<<<<<<< HEAD
 
-  h1 {
+  .admin-h1 {
     margin-top: 70px;
   }
-=======
->>>>>>> 920f0ff71a649808ebdb0fbdff658a19d1295f3c
 }
 @media (max-width: 768px) {
   .admin-create-content {
