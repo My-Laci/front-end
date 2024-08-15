@@ -1,0 +1,18 @@
+.create-button {
+  display: flex;
+  justify-content: center;
+  background-color: #94d020;
+  width: 120px;
+  border-radius: 7px;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 20px 20px 20px;
+  padding: 10px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.create-button-nest {
+  text-decoration: none;
+}

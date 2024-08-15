@@ -1,0 +1,129 @@
+.register-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.register-left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+.register-right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  justify-content: center;
+}
+
+.register-right-side h1 {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 25px;
+}
+
+.register-formlist {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.register-formlist p {
+  margin-bottom: 15px;
+}
+
+.register-formlist span {
+  font-weight: bold;
+  color: #f18931;
+}
+
+#Register-loginSpan {
+  font-weight: bold;
+  color: #01baf2;
+  text-decoration: none;
+}
+
+.register-icon-banner {
+  width: auto;
+  height: 100vh;
+  object-fit: cover;
+  object-position: right center;
+  position: relative;
+}
+
+.register-login-icon {
+  position: absolute;
+  width: 25%;
+  margin-left: 9%;
+}
+
+#Register-enterText {
+  margin: 7px 0 20px 0;
+}
+
+@media (max-width: 426px) {
+  .register-left-side {
+    display: none;
+  }
+
+  .register-right-side {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #register {
+    display: none;
+  }
+
+  .register-description {
+    display: none;
+  }
+
+  #logo {
+    font-family: "Pacifico", cursive;
+    color: #01baf2;
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 427px) and (max-width: 768px) {
+  .register-left-side {
+    display: none;
+  }
+
+  #register {
+    display: none;
+  }
+
+  .register-right-side {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #Login {
+    display: none;
+  }
+
+  .register-description {
+    display: none;
+  }
+
+  #logo {
+    font-family: "Pacifico", cursive;
+    color: #01baf2;
+    font-size: 50px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 769px) {
+  #logo {
+    font-family: "Pacifico", cursive;
+    color: #01baf2;
+    font-size: 50px;
+    display: none;
+  }
+}

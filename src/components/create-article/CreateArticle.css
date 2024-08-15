@@ -1,0 +1,195 @@
+.create-article-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-article-content {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.create-article-thumbnail-space {
+  border-radius: 20px 20px 0 0;
+  background-color: #e3e3e3;
+  box-sizing: border-box;
+  width: 100%;
+  height: 210px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.create-article-thumbnail-space img {
+  border-radius: 20px 20px 0 0;
+}
+
+.create-article-thumbnail-container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.create-article-thumbnail-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.create-article-thumbnail-container button {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  color: #db7777;
+  padding: 8px 14px 8px 14px;
+  font-size: 11px;
+  border: none;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.create-article-back-button {
+  font-size: 20px;
+  object-fit: cover;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 11;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+}
+
+.create-article-back-button i {
+  font-size: 30px;
+  color: #db7777;
+}
+
+.create-article-textarea {
+  background-color: #f9f9f9;
+  border-radius: 0 0 20px 20px;
+}
+
+.create-article-textarea .ql-toolbar {
+  background-color: #f9f9f9; /* Style the toolbar */
+  border: none;
+  padding: 10px 3% 10px 3%;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #5d5d5d; /* Ganti dengan warna yang Anda inginkan */
+}
+
+.ql-toolbar .ql-stroke {
+  stroke: #5d5d5d; /* Ganti dengan warna yang Anda inginkan */
+}
+
+.create-article-textarea {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.ql-editor {
+  width: 100%;
+  height: 180px;
+  padding-left: 3%;
+  padding-right: 3%;
+  margin: 0;
+  font-size: 14px;
+}
+
+.ql-container .ql-snow {
+  border: none;
+  outline: none;
+}
+
+.ql-editor::before {
+  padding-left: 2%;
+}
+
+.ql-container.ql-snow p {
+  color: #5d5d5d;
+  padding: 0;
+}
+
+.ql-container.ql-snow {
+  border: none;
+}
+
+.create-article-title-input {
+  background-color: #bcbcbc;
+  padding: 0px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #5d5d5d;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Nunito Sans", sans-serif;
+  padding: 0 3% 0 3%;
+}
+
+/* To ensure it works, use more specific selectors if needed */
+.ql-toolbar button.ql-active .ql-fill,
+.ql-toolbar button.ql-active .ql-stroke {
+  stroke: #01baf2 !important;
+}
+
+.create-article-upload-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-article-upload-icon img {
+  width: 50%;
+}
+
+.create-article-upload-icon h3 {
+  color: #a0a0a0;
+  text-align: center;
+}
+
+.ql-clipboard {
+  display: none;
+}
+
+.publish-button-create-article {
+  display: flex;
+  justify-content: right;
+  padding: 0 25px 20px 0;
+}
+
+.publish-button-create-article button {
+  background-color: #94d020;
+  border: none;
+  font-family: "Nunito Sans", sans-serif;
+  padding: 7px 15px 7px 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.publish-button-create-article button:hover {
+  background-color: #89bc26;
+  transition: background-color 0.1s ease;
+}

@@ -62,6 +62,7 @@
   border: none;
   background: none;
   outline: none;
+  box-sizing: border-box;
   padding: 5px;
   font-family: "Nunito Sans", sans-serif;
   width: 100%;
@@ -118,6 +119,35 @@
   height: 40px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+  .search-container {
+    display: none;
+  }
+  .search-icon {
+    display: flex;
+    margin-right: 15px;
+    transform: scale(0.9);
+  }
+  .search-icon a {
+    display: flex;
+  }
+  .add-post-article a {
+    display: flex;
+  }
+  .add-post-article {
+    display: flex;
+    margin-right: 15px;
+    transform: scale(0.9);
+  }
+  .user-section {
+    display: flex;
+    align-items: center;
+  }
+  .user-info {
+    display: none;
+  }
 }
 
 @media (max-width: 1024px) {
