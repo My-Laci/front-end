@@ -1,0 +1,123 @@
+/* src/components/Card.css */
+.emailVerification-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 15px;
+}
+
+hr {
+    margin: 10px 0px 10px 0px;
+    border-color: #C6C6C6;
+    border-width: 1px;
+}
+
+.emailVerification-card .changeEmail-description {
+    padding: 15px;
+}
+
+.emailVerification-card .changeEmail-description h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.otp-instruction {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #7E7E7E;
+    text-align: center;
+}
+
+.otp-input-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 35px 15px 35px;
+}
+
+.otp-input {
+    width: 15%;
+    height: 40px;
+    padding: 15px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: #F1F2F6;
+    color: #7E7E7E;
+    font-size: 16px;
+    font-family: "Nunito Sans", sans-serif;
+    text-align: center;
+}
+
+.otp-input:focus {
+    outline: none;
+    border-color: #01BAF2;
+    box-shadow: 0 0 5px rgba(1, 186, 242, 0.5);
+}
+
+.button-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.resend-button,
+.verify-button {
+    width: 48%;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.resend-button {
+    background-color: #F1F2F6;
+    color: #868686;
+}
+
+.verify-button {
+    background-color: #C5EBF6;
+    color: #01BAF2;
+}
+
+@media (max-width: 768px) {
+    .emailVerification-card {
+        background-color: #fff;
+        border-radius: 0px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 0;
+        padding: 15px;
+    }
+
+    hr {
+        margin: 10px 0px 10px 0px;
+    }
+
+    .otp-input-container {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .otp-input {
+        width: 13%;
+        padding: 10px;
+        height: 40px;
+        border-radius: 10px;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .resend-button,
+    .verify-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

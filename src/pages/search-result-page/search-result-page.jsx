@@ -1,11 +1,11 @@
 // import React from "react";
 import Navbar from "../../components/navbar/Navbar.jsx";
 import Sidebar from "../../components/sidebar/sidebar.jsx";
-import PostContent from "../../components/post-content/post-content.jsx";
-import Aside from "../../components/aside/aside.jsx";
-import "./homepage.css";
+import SearchContent from "../../components/search-result/search-result.jsx";
+import "./search-result-page.css";
+import Suggestion from "../../components/suggestion/suggestion.jsx";
 
-const Homepage = () => {
+export default function SearchResultPage() {
   return (
     <>
       <body>
@@ -13,13 +13,11 @@ const Homepage = () => {
         <div className="container">
           <Sidebar />
           <div className="content">
-            <PostContent />
+            <SearchContent />
           </div>
-          <Aside />
+          <Suggestion />
         </div>
       </body>
     </>
   );
-};
-
-export default Homepage;
+}
