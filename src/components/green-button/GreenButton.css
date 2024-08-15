@@ -1,12 +1,13 @@
 #green-button {
     background-image: linear-gradient(#C1ED6F, #B1E351);
     width: 100%;
-    padding: 9px 0;
-    border-radius: 20px;
+    border-radius: 100px;
     color: #ffffff;
     margin: 7px 0 20px 0;
     border: none;
+    font-size: 14px;
     font-weight: 600;
+    padding: 12px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3)
   }
   

@@ -15,22 +15,22 @@ export default function ProfileContent() {
     <div className="profile-content">
       <div className="navigation">
         <div className="button-nest">
-          <a
+          <span
             href="#"
             className={activeTab === "posts" ? "active" : ""}
             onClick={() => handleTabClick("posts")}
           >
             Posts
-          </a>
+          </span>
         </div>
         <div className="button-nest">
-          <a
+          <span
             href="#"
             className={activeTab === "articles" ? "active" : ""}
             onClick={() => handleTabClick("articles")}
           >
             Articles
-          </a>
+          </span>
         </div>
       </div>
       {activeTab === "articles" && (
@@ -42,11 +42,7 @@ export default function ProfileContent() {
           <Article />
         </div>
       )}
-      {activeTab === "posty" && (
-        <div className="content">
-          <h1>Malas</h1>
-        </div>
-      )}
+      {activeTab === "posts" && <div className="content"></div>}
     </div>
   );
 }
