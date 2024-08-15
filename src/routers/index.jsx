@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminCreateVoucher from "../pages/admin/admin-create-voucher";
+import AdminHistoryVoucher from "../pages/admin/admin-history-voucher";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import Homepage from "../pages/homepage/homepage";
@@ -50,5 +52,13 @@ export const router = createBrowserRouter([
   {
     path: "/SearchResult",
     element: <SearchResultPage />,
+  },
+  {
+    path: "/AdminCreateVoucher",
+    element: <AdminCreateVoucher />,
+  },
+  {
+    path: "/AdminHistoryVoucher",
+    element: <AdminHistoryVoucher />,
   },
 ]);
