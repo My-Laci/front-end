@@ -17,6 +17,11 @@
   margin-bottom: 50px;
 }
 
+.admin-sidebar .nav-link {
+  text-decoration: none;
+  width: 80%;
+}
+
 .admin-sidebar button {
   width: 80%;
   padding: 15px;
@@ -31,6 +36,7 @@
   font-weight: 600;
   border-radius: 15px;
   display: flex;
+  align-items: center;
   /* Added to align icon and text */
   align-items: center;
   /* Center icon and text vertically */
