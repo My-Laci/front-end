@@ -1,29 +1,35 @@
-import "./post-content.css"; // Correct relative path for the CSS file
+import React from "react";
 import UserImage from "../../assets/vinsen.svg";
-import PostImage1 from "../../assets/image1.svg";
-import PostImage2 from "../../assets/image2.svg";
+import ArticleCover from "../../assets/image1.svg";
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
 import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
+import "./article-content.css";
 
-const PostContent = () => {
+const ArticleContent = () => {
   return (
     <div className="content-card">
-      <div className="post-info">
+      <div className="article-info">
         <div className="user-image">
           <img src={UserImage} alt="User" />
         </div>
-        <div className="details-post">
+        <div className="details-article">
           <div className="user-name">
             Vinsen
             <span className="divider"> | </span>
             <span className="user-instance"> Universitas Airlangga</span>
           </div>
-          <div className="date-time-post">10 hours ago</div>
+          <div className="date-time-article">10 hours ago</div>
         </div>
       </div>
-      <div className="post-text">
+      <div className="article-img">
+        <img src={ArticleCover} alt="Article Image" />
+      </div>
+      <div className="article-title">
+        Peningkatan Kualitas Sinyal Setelah Optimisasi
+      </div>
+      <div className="article-text">
         Hari ini adalah hari yang sangat memuaskan bagi saya dan tim. Kami
         berhasil menyelesaikan proyek optimisasi jaringan di wilayah Jakarta
         yang sudah kami kerjakan selama beberapa minggu terakhir. Proyek ini
@@ -35,10 +41,6 @@ const PostContent = () => {
         dan memberikan dukungan penuh dalam setiap tahap proyek ini. Pengalaman
         ini benar-benar menambah wawasan dan keterampilan saya dalam bidang
         telekomunikasi.
-      </div>
-      <div className="post-img">
-        <img src={PostImage1} alt="Post Image" />
-        <img src={PostImage2} alt="Post Image" />
       </div>
       <div className="post-interactions">
         <div className="interaction">
@@ -71,4 +73,4 @@ const PostContent = () => {
   );
 };
 
-export default PostContent;
+export default ArticleContent;

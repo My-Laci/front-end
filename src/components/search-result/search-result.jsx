@@ -1,4 +1,4 @@
-import "./post-content.css"; // Correct relative path for the CSS file
+import "./search-result.css"; // Correct relative path for the CSS file
 import UserImage from "../../assets/vinsen.svg";
 import PostImage1 from "../../assets/image1.svg";
 import PostImage2 from "../../assets/image2.svg";

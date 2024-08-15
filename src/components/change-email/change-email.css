@@ -1,5 +1,5 @@
     /* src/components/Card.css */
-    .changeName-card {
+    .changeEmail-card {
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 15px;
@@ -15,16 +15,16 @@
         border-width: 1px;
     }
 
-    .changeName-card .changeName-description {
+    .changeEmail-card .changeEmail-description {
         padding: 15px;
     }
 
-    .changeName-card .changeName-description h2 {
+    .changeEmail-card .changeEmail-description h2 {
         margin-bottom: 15px;
         font-size: 24px;
     }
 
-    .name-input {
+    .changeEmail-email-input {
         width: 100%;
         padding: 15px;
         margin-top: 10px;
@@ -36,7 +36,7 @@
         font-family: "Nunito Sans", sans-serif;
     }
 
-    .name-input:focus {
+    .changeEmail-email-input:focus {
         outline: none;
         border-color: #01BAF2;
         box-shadow: 0 0 5px rgba(1, 186, 242, 0.5);
@@ -44,7 +44,7 @@
 
 
     @media (max-width: 768px) {
-        .changeName-card {
+        .changeEmail-card {
             background-color: #fff;
             border-radius: 0px;
             overflow: hidden;

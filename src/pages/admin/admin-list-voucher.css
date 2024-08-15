@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: #f1f2f6;
+  padding: 0;
+}
+
+.admin-h1 {
+  margin-top: 20px;
+  font-weight: 800;
+}
+
+.admin-list-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 27%;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: none;
+}
+
+.voucher-list {
+  margin-top: 15px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.left-voucher-side {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  font-weight: 600;
+}
+@media (max-width: 1024px) {
+  .admin-list-content {
+    margin: 0px 10px 0px 10px;
+  }
+
+  .admin-h1 {
+    margin-top: 70px;
+  }
+}

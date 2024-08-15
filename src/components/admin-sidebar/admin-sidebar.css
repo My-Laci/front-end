@@ -1,0 +1,60 @@
+/* src/components/Sidebar.css */
+.admin-sidebar {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: baseline;
+  padding-top: 20px;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  box-shadow: 9px 0 27px 0 rgba(0, 0, 0, 0.08);
+}
+
+.logo img {
+  margin-top: 35px;
+  margin-bottom: 50px;
+}
+
+.admin-sidebar .nav-link {
+  text-decoration: none;
+  width: 80%;
+}
+
+.admin-sidebar button {
+  width: 80%;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f1f2f6;
+  color: #01baf2;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  /* Added to align icon and text */
+  align-items: center;
+  /* Center icon and text vertically */
+}
+
+.admin-sidebar button img {
+  margin-right: 20px;
+  width: 20px;
+  height: auto;
+}
+
+.admin-sidebar button:hover {
+  color: #01baf2;
+  background-color: #e5e6ea;
+}
+
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    display: none;
+  }
+}

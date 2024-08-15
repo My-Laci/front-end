@@ -1,5 +1,5 @@
     /* src/components/Card.css */
-    .card {
+    .account-card {
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 15px;
@@ -15,21 +15,21 @@
         border-width: 1px;
     }
 
-    .card .description {
+    .account-card .account-description {
         padding: 15px;
     }
 
-    .card .description h2 {
+    .account-card .account-description h2 {
         margin-bottom: 15px;
         font-size: 24px;
     }
 
-    .card .description ul {
+    .account-card .account-description ul {
         list-style-type: none;
         padding: 0;
     }
 
-    .card .description li {
+    .account-card .account-description li {
         font-size: 16px;
         color: #666;
         margin-bottom: 10px;
@@ -37,22 +37,22 @@
         align-items: center;
     }
 
-    .card .info {
+    .account-card .account-info {
         display: grid;
         grid-template-columns: auto 1fr;
         align-items: center;
         width: 100%;
     }
 
-    .card .label {
+    .account-card .label {
         font-weight: bold;
     }
 
-    .card .value {
+    .account-card .value {
         margin-left: 10px;
     }
 
-    .card .edit-li {
+    .account-card .account-edit-li {
         margin-left: 10px;
         padding: 5px;
         background-color: transparent;
@@ -61,17 +61,17 @@
         transition: transform 0.3s;
     }
 
-    .card .edit-li:hover {
+    .account-card .account-edit-li:hover {
         transform: scale(1.1);
     }
 
-    .card .edit-icon {
+    .account-card .account-edit-icon {
         width: 16px;
         height: 16px;
     }
 
     @media (max-width: 768px) {
-        .card {
+        .account-card {
             background-color: #fff;
             border-radius: 0px;
             overflow: hidden;
