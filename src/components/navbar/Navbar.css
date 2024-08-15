@@ -1,4 +1,4 @@
-.header {
+.navbar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,26 +11,26 @@
   z-index: 1;
 }
 
-.section-1 {
+.navbar-section-1 {
   width: 25%;
 }
 
-.logo-sidebar {
+.navbar-logo-sidebar {
   display: flex;
   flex-direction: row;
 }
 
-.logo-sidebar a {
+.navbar-logo-sidebar a {
   display: flex;
   text-decoration: none;
   align-items: center;
 }
 
-.logo-sidebar img {
+.navbar-logo-sidebar img {
   display: none;
 }
 
-.logo {
+.navbar-logo {
   font-size: 30px;
   font-weight: bold;
   align-items: flex-start;
@@ -38,11 +38,11 @@
   font-family: "Pacifico", cursive;
 }
 
-.section-2 {
+.navbar-section-2 {
   width: 50%;
 }
 
-.search-container {
+.navbar-search-container {
   background-color: #f1f2f6;
   border-radius: 15px;
   border: 1px solid #5c6c74;
@@ -53,12 +53,12 @@
   justify-content: center;
 }
 
-.search-container img {
+.navbar-search-container img {
   margin: 0px 5px 0px 5px;
   width: 20px;
 }
 
-.search-container input {
+.navbar-search-container input {
   border: none;
   background: none;
   outline: none;
@@ -67,54 +67,57 @@
   width: 100%;
 }
 
-.section-3 {
+.navbar-section-3 {
   width: 25%;
   display: flex;
   justify-content: flex-end;
 }
 
-.search-icon {
+.navbar-search-icon {
   display: none;
 }
 
-.add-post-article {
+.navbar-add-post-article {
   display: none;
 }
 
-.user-section {
+.navbar-user-section {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.user-info {
+.navbar-user-info {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin-right: 10px;
 }
-.user-name {
+.navbar-user-name {
   font-weight: bold;
   color: black;
 }
 
-.user-university {
+.navbar-user-university {
   font-size: 12px;
   color: #7e7e7e;
+  font-weight: 700;
 }
 
-.user-image {
+.navbar-user-image {
   display: flex;
   align-items: center;
 }
 
-.user-image a {
+.navbar-user-image a {
   display: flex;
 }
 
-.user-image img {
+.navbar-user-image img {
   width: 40px;
   height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 @media (max-width: 1024px) {

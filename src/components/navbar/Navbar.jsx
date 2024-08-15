@@ -7,42 +7,42 @@ import addPostIcon from "../../assets/add.svg";
 
 const Navbar = () => {
   return (
-    <header className="header">
-      <div className="section-1">
-        <div className="logo-sidebar">
+    <header className="navbar-header">
+      <div className="navbar-section-1">
+        <div className="navbar-logo-sidebar">
           <a href="/sidebar">
             <img src={burgerIcon} alt="Sidebar Icon" />
           </a>
           <a href="/">
-            <div className="logo">Laci</div>
+            <div className="navbar-logo">Laci</div>
           </a>
         </div>
       </div>
-      <div className="section-2">
-        <div className="search-container">
+      <div className="navbar-section-2">
+        <div className="navbar-search-container">
           <img src={searchInIcon} alt="Search Icon" />
           <input type="text" placeholder="Search" />
         </div>
       </div>
-      <div className="section-3">
-        <div className="user-section">
-          <div className="user-info">
-            <div className="user-name">Edo Mahendra</div>
-            <div className="user-university">Universitas Airlangga</div>
+      <div className="navbar-section-3">
+        <div className="navbar-user-section">
+          <div className="navbar-user-info">
+            <div className="navbar-user-name">Edo Mahendra</div>
+            <div className="navbar-user-university">Universitas Airlangga</div>
           </div>
-          <div className="search-icon">
+          <div className="navbar-search-icon">
             <a href="/search">
               <img src={searchIcon} alt="Search Icon" />
             </a>
           </div>
-          <div className="add-post-article">
+          <div className="navbar-add-post-article">
             <a href="">
               <img src={addPostIcon} alt="Add Post Icon" />
             </a>
           </div>
-          <div className="user-image">
+          <div className="navbar-user-image">
             <a href="/profile">
-              <img src="src/assets/sakil.png" alt="User Image" />
+              <img src="src/assets/ammar.svg" alt="User Image" />
             </a>
           </div>
         </div>

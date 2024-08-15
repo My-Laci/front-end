@@ -3,9 +3,9 @@ import "./aside.css";
 export default function Aside() {
   return (
     <div className="aside">
-      <div className="post-container">
-        <div className="create-post-text">Create a story</div>
-        <div className="post-field">
+      <div className="aside-post-container">
+        <div className="aside-create-post-text">Create a story</div>
+        <div className="aside-post-field">
           {/* <input type="post-story" placeholder="Post your story" /> */}
           <textarea
             name="post-story"
