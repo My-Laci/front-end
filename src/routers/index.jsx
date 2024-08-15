@@ -1,8 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminCreateVoucher from "../pages/admin/admin-create-voucher";
+<<<<<<< HEAD
 import AdminListVoucher from "../pages/admin/admin-list-voucher";
 import AdminHistoryVoucher from "../pages/admin/admin-history-voucher";
 import AdminListBatch from "../pages/admin/admin-list-batch";
+=======
+import AdminHistoryVoucher from "../pages/admin/admin-history-voucher";
+>>>>>>> 920f0ff71a649808ebdb0fbdff658a19d1295f3c
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import Homepage from "../pages/homepage/homepage";
@@ -30,6 +34,7 @@ export const router = createBrowserRouter([
     element: <AdminCreateVoucher />,
   },
   {
+<<<<<<< HEAD
     path: "/AdminListVoucher",
     element: <AdminListVoucher />,
   },
@@ -38,6 +43,8 @@ export const router = createBrowserRouter([
     element: <AdminListBatch />,
   },
   {
+=======
+>>>>>>> 920f0ff71a649808ebdb0fbdff658a19d1295f3c
     path: "/AdminHistoryVoucher",
     element: <AdminHistoryVoucher />,
   },
