@@ -68,14 +68,22 @@
   margin: 0;
   font-family: "Nunito Sans", sans-serif;
   font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .interaction img {
   transform: scale(0.9);
+  transition: transform 0.2s ease;
 }
 
-.interaction:focus {
-  outline: none;
+.interaction.animate {
+  transform: scale(1.1);
+  color: #01baf2;
+}
+
+.interaction.animate img {
+  transform: scale(1.1);
+  color: #01baf2;
 }
 
 .text-interaction {
@@ -83,8 +91,12 @@
   color: #7e7e7e;
   font-weight: 600;
   margin-left: 5px;
+  transition: color 0.2s ease;
 }
 
+.interaction.active .text-interaction {
+  color: #ff6b6b;
+}
 .hr {
   color: #c6c6c6;
 }
