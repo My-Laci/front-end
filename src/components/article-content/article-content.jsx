@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import UserImage from "../../assets/vinsen.svg";
 import ArticleCover from "../../assets/image1.svg";
 import Like from "../../assets/like.svg";
@@ -8,6 +8,27 @@ import Bookmark from "../../assets/post-bookmark.svg";
 import "./article-content.css";
 
 const ArticleContent = () => {
+  const [animateLike, setAnimateLike] = useState(false);
+  const [animateBookmark, setAnimateBookmark] = useState(false);
+
+  const commentInputRef = useRef(null);
+
+  const triggerLikeAnimation = () => {
+    setAnimateLike(true);
+    setTimeout(() => setAnimateLike(false), 300);
+  };
+
+  const triggerBookmarkAnimation = () => {
+    setAnimateBookmark(true);
+    setTimeout(() => setAnimateBookmark(false), 300);
+  };
+
+  const focusCommentField = () => {
+    if (commentInputRef.current) {
+      commentInputRef.current.focus();
+    }
+  };
+
   return (
     <div className="content-card">
       <div className="article-info">
@@ -43,7 +64,10 @@ const ArticleContent = () => {
         telekomunikasi.
       </div>
       <div className="post-interactions">
-        <button className="interaction">
+        <button
+          className={`interaction ${animateLike ? "animate" : ""}`}
+          onClick={triggerLikeAnimation}
+        >
           <img src={Like} alt="Like" />
           <div className="text-interaction">Like</div>
         </button>
@@ -55,7 +79,10 @@ const ArticleContent = () => {
           <img src={Repost} alt="Repost" />
           <div className="text-interaction">Repost</div>
         </button>
-        <button className="interaction">
+        <button
+          className={`interaction ${animateBookmark ? "animate" : ""}`}
+          onClick={triggerBookmarkAnimation}
+        >
           <img src={Bookmark} alt="Bookmark" />
           <div className="text-interaction">Bookmark</div>
         </button>
@@ -66,7 +93,11 @@ const ArticleContent = () => {
           <img src={UserImage} alt="User" />
         </div>
         <div className="comment-field">
-          <input type="text" placeholder="Write your comment here" />
+          <input
+            type="text"
+            placeholder="Write your comment here"
+            ref={commentInputRef}
+          />
         </div>
       </div>
     </div>

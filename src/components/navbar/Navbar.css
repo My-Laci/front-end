@@ -13,6 +13,14 @@
 
 .navbar-section-1 {
   width: 25%;
+  display: flex;
+}
+
+.navbar-a {
+  width: 10%;
+}
+.navbar-b {
+  width: 90%;
 }
 
 .navbar-logo-sidebar {
@@ -151,6 +159,12 @@
 }
 
 @media (max-width: 768px) {
+  .navbar-a {
+    width: 0%;
+  }
+  .navbar-b {
+    width: 100%;
+  }
   .navbar-logo-sidebar img {
     display: flex;
     align-items: center;

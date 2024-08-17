@@ -1,3 +1,4 @@
+import React, { useState, useRef } from "react";
 import "./post-content.css"; // Correct relative path for the CSS file
 import UserImage from "../../assets/vinsen.svg";
 import PostImage1 from "../../assets/image1.svg";
@@ -8,6 +9,27 @@ import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
 
 const PostContent = () => {
+  const [animateLike, setAnimateLike] = useState(false);
+  const [animateBookmark, setAnimateBookmark] = useState(false);
+
+  const commentInputRef = useRef(null);
+
+  const triggerLikeAnimation = () => {
+    setAnimateLike(true);
+    setTimeout(() => setAnimateLike(false), 300);
+  };
+
+  const triggerBookmarkAnimation = () => {
+    setAnimateBookmark(true);
+    setTimeout(() => setAnimateBookmark(false), 300);
+  };
+
+  const focusCommentField = () => {
+    if (commentInputRef.current) {
+      commentInputRef.current.focus();
+    }
+  };
+
   return (
     <div className="content-card">
       <div className="post-info">
@@ -41,11 +63,14 @@ const PostContent = () => {
         <img src={PostImage2} alt="Post Image" />
       </div>
       <div className="post-interactions">
-        <button className="interaction">
+        <button
+          className={`interaction ${animateLike ? "animate" : ""}`}
+          onClick={triggerLikeAnimation}
+        >
           <img src={Like} alt="Like" />
           <div className="text-interaction">Like</div>
         </button>
-        <button className="interaction">
+        <button className="interaction" onClick={focusCommentField}>
           <img src={Comment} alt="Comment" />
           <div className="text-interaction">Comment</div>
         </button>
@@ -53,18 +78,25 @@ const PostContent = () => {
           <img src={Repost} alt="Repost" />
           <div className="text-interaction">Repost</div>
         </button>
-        <button className="interaction">
+        <button
+          className={`interaction ${animateBookmark ? "animate" : ""}`}
+          onClick={triggerBookmarkAnimation}
+        >
           <img src={Bookmark} alt="Bookmark" />
           <div className="text-interaction">Bookmark</div>
         </button>
       </div>
-      <hr></hr>
+      <hr />
       <div className="bottom-section">
         <div className="user-image">
           <img src={UserImage} alt="User" />
         </div>
         <div className="comment-field">
-          <input type="text" placeholder="Write your comment here" />
+          <input
+            type="text"
+            placeholder="Write your comment here"
+            ref={commentInputRef}
+          />
         </div>
       </div>
     </div>

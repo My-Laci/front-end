@@ -9,13 +9,16 @@ const Navbar = () => {
   return (
     <header className="navbar-header">
       <div className="navbar-section-1">
-        <div className="navbar-logo-sidebar">
-          <a href="/sidebar">
-            <img src={burgerIcon} alt="Sidebar Icon" />
-          </a>
-          <a href="/">
-            <div className="navbar-logo">Laci</div>
-          </a>
+        <div className="navbar-a"></div>
+        <div className="navbar-b">
+          <div className="navbar-logo-sidebar">
+            <a href="/sidebar">
+              <img src={burgerIcon} alt="Sidebar Icon" />
+            </a>
+            <a href="/">
+              <div className="navbar-logo">Laci</div>
+            </a>
+          </div>
         </div>
       </div>
       <div className="navbar-section-2">
