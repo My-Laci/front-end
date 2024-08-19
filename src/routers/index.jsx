@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: "/Homepage",
+    path: "/",
     element: <Homepage />,
   },
   {
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
     element: <AdminListBatch />,
   },
   {
-    path: "/NotFoundPage",
+    path: "*",
     element: <NotFoundPage />,
   },
 ]);
