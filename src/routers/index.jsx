@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Profile from "../pages/Profile/Profile.jsx";
 import Register from "../pages/Register/Register.jsx";
 import Login from "../pages/Login/Login.jsx";
-import Canvas from "../pages/Canvas/Canvas.jsx";
 import AdminCreateVoucher from "../pages/admin/admin-create-voucher";
 import AdminListVoucher from "../pages/admin/admin-list-voucher";
 import AdminListBatch from "../pages/admin/admin-list-batch";
@@ -19,11 +18,6 @@ export const router = createBrowserRouter([
   {
     path: "/Login",
     element: <Login />,
-  },
-
-  {
-    path: "/Canvas",
-    element: <Canvas />,
   },
 
   {
