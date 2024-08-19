@@ -1,6 +1,4 @@
 .create-article-container {
-  width: 100%;
-  height: 100vh;
   margin: 0;
   padding: 0;
   display: flex;
@@ -9,7 +7,9 @@
 }
 
 .create-article-content {
-  width: 70%;
+  background-color: #f9f9f9;
+  padding-bottom: 80px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -22,10 +22,15 @@
   background-color: #e3e3e3;
   box-sizing: border-box;
   width: 100%;
-  height: 210px;
+  height: 240px;
   position: relative;
   display: flex;
   justify-content: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.create-article-thumbnail-space:hover {
+  background-color: #cbcbcb;
 }
 
 .create-article-thumbnail-space img {
@@ -58,6 +63,7 @@
   z-index: 10;
   font-weight: bold;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .create-article-back-button {
@@ -72,6 +78,7 @@
   height: 30px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .create-article-back-button i {
@@ -81,21 +88,33 @@
 
 .create-article-textarea {
   background-color: #f9f9f9;
-  border-radius: 0 0 20px 20px;
+}
+
+.create-article-textarea .ql-editor::-webkit-scrollbar {
+  width: 8px;
+  padding-right: 30px;
+}
+
+.create-article-textarea .ql-editor::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.create-article-textarea .ql-editor::-webkit-scrollbar-thumb:hover {
+  background-color: transparent; 
 }
 
 .create-article-textarea .ql-toolbar {
-  background-color: #f9f9f9; /* Style the toolbar */
+  background-color: #f9f9f9; 
   border: none;
   padding: 10px 3% 10px 3%;
 }
 
 .ql-toolbar .ql-fill {
-  fill: #5d5d5d; /* Ganti dengan warna yang Anda inginkan */
+  fill: #5d5d5d; 
 }
 
 .ql-toolbar .ql-stroke {
-  stroke: #5d5d5d; /* Ganti dengan warna yang Anda inginkan */
+  stroke: #5d5d5d;
 }
 
 .create-article-textarea {
@@ -132,7 +151,7 @@
 }
 
 .create-article-title-input {
-  background-color: #bcbcbc;
+  background-color: #d9d9d9;
   padding: 0px;
   height: 50px;
   border: none;
@@ -140,12 +159,10 @@
   color: #5d5d5d;
   font-size: 20px;
   font-weight: 700;
-  text-transform: uppercase;
   font-family: "Nunito Sans", sans-serif;
   padding: 0 3% 0 3%;
 }
 
-/* To ensure it works, use more specific selectors if needed */
 .ql-toolbar button.ql-active .ql-fill,
 .ql-toolbar button.ql-active .ql-stroke {
   stroke: #01baf2 !important;
@@ -171,25 +188,24 @@
   display: none;
 }
 
-.publish-button-create-article {
-  display: flex;
-  justify-content: right;
-  padding: 0 25px 20px 0;
-}
-
-.publish-button-create-article button {
+.create-article-publish-button {
   background-color: #94d020;
   border: none;
   font-family: "Nunito Sans", sans-serif;
   padding: 7px 15px 7px 15px;
-  margin-top: 20px;
   border-radius: 5px;
   font-size: 14px;
   font-weight: bold;
+  position: absolute;
   cursor: pointer;
+  width: 100px;
+  bottom: 0;
+  right: 0;
+  margin-right: 30px;
+  margin-bottom: 30px;
 }
 
-.publish-button-create-article button:hover {
+.create-article-publish-button:hover {
   background-color: #89bc26;
   transition: background-color 0.1s ease;
 }
