@@ -8,7 +8,7 @@ export default function ProfileBanner() {
       <img className="imgBanner" src={bannerIcon} alt="" />
       <div className="banner-content">
         <div className="identity">
-          <h3>Edo Mahendra</h3>
+          <h2>Edo Mahendra</h2>
           <p>Universitas Airlangga</p>
           <p>Web Development Intern</p>
         </div>

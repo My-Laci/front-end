@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../profile-content/ProfileContent.css";
 import Article from "../profile-article/ProfileArticle";
 import PostContent from "../post-content/post-content";
 
 export default function ProfileContent() {
-  // State untuk melacak tab yang aktif
   const [activeTab, setActiveTab] = useState("posts");
 
-  // Data posts dan articles sebagai contoh
   const posts = [
     <>
       <PostContent />
     </>,
   ];
 
-  // Array kosong untuk mensimulasikan tidak ada konten
   const articles = [
     <>
       <Article />
@@ -25,7 +22,6 @@ export default function ProfileContent() {
     </>,
   ];
 
-  // Handler untuk mengubah tab yang aktif
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -41,7 +37,7 @@ export default function ProfileContent() {
           }
           onClick={() => handleTabClick("posts")}
         >
-          <span>Posts</span>
+          <h3>Posts</h3>
         </div>
         <div
           className={
@@ -51,7 +47,7 @@ export default function ProfileContent() {
           }
           onClick={() => handleTabClick("articles")}
         >
-          <span>Articles</span>
+          <h3>Articles</h3>
         </div>
       </div>
       {activeTab === "articles" && (
