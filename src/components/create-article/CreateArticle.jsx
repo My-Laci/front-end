@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import ReactQuill from "react-quill";
 import { useDropzone } from "react-dropzone";
 import "react-quill/dist/quill.snow.css";
 import "./CreateArticle.css";
 
-import UploudIcon from "../../assets/Upload-icon.svg";
+import UploadIcon from "../../assets/Upload-icon.svg";
 
-export default function CreateArticle() {
+export default function CreateArticle({ onClose }) {
   const [thumbnail, setThumbnail] = useState(null);
   const [content, setContent] = useState("");
   const fileInputRef = useRef(null);
@@ -25,17 +25,25 @@ export default function CreateArticle() {
   });
 
   const handleDeleteThumbnail = (e) => {
-    e.stopPropagation(); // Prevent the click event from propagating to parent elements
-    setThumbnail(null);
-    fileInputRef.current.value = null;
+    e.stopPropagation(); 
+    setThumbnail(null); 
+    fileInputRef.current.value = null; 
+  };
+
+  const handleBackButtonClick = (e) => {
+    e.stopPropagation(); 
+    onClose(); 
   };
 
   return (
     <div className="create-article-container">
       <div className="create-article-content">
         <div className="create-article-thumbnail-space" {...getRootProps()}>
-          <button className="create-article-back-button">
-            <i class="fa-solid fa-xmark"></i>
+          <button
+            className="create-article-back-button"
+            onClick={handleBackButtonClick}
+          >
+            <i className="fa-solid fa-xmark"></i>
           </button>
           <input
             {...getInputProps()}
@@ -53,7 +61,7 @@ export default function CreateArticle() {
             </div>
           ) : (
             <div className="create-article-upload-icon">
-              <img src={UploudIcon} alt="" />
+              <img src={UploadIcon} alt="" />
               <h3>Upload Your Thumbnail Here!</h3>
             </div>
           )}
@@ -75,9 +83,7 @@ export default function CreateArticle() {
             ],
           }}
         />
-        <div className="publish-button-create-article">
-            <button>Publish</button>
-          </div>
+        <button className="create-article-publish-button">Publish</button>
       </div>
     </div>
   );
