@@ -43,14 +43,20 @@ export default function CertificateGenerator() {
   };
 
   return (
-    <>
+    <div className="certificate-master-container">
       <Navbar />
       <div className="certificate-generator-container">
-        <div id="certificate" ref={certificateRef}>
+        <div
+          id="certificate"
+          ref={certificateRef}
+          className="scrollable-certificate"
+        >
           <Certificate />
         </div>
+      </div>
+      <div className="certificate-button-nest">
         <button onClick={handleDownload}>Download</button>
       </div>
-    </>
+    </div>
   );
 }
