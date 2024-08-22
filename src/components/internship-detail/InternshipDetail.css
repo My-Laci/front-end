@@ -1,0 +1,20 @@
+.internship-detail {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-jobdesk {
+  padding-left: 10px;
+  padding-top: 5px;
+  text-align: left;
+}
+
+.intern-time {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  color: #01baf2;
+}
