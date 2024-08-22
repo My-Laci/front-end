@@ -2,6 +2,7 @@
   border-radius: 15px;
   background-color: white;
   padding: 15px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
 .post-info {
@@ -13,6 +14,8 @@
 
 .user-image img {
   display: flex;
+  height: 40px;
+  border-radius: 12px;
 }
 
 .details-post {
@@ -45,11 +48,46 @@
 }
 
 .post-img {
-  flex-direction: row;
+  /* flex-direction: row;
+  display: flex;
+  gap: 10px; */
+  margin-bottom: 20px;
 }
 
 .post-img img {
   width: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.post-img img:hover {
+  transform: scale(1.005);
+}
+
+.slick-slide img {
+  width: 100%;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  color: #01baf2;
+  font-size: 50px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #000;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #01baf2;
 }
 
 .post-interactions {

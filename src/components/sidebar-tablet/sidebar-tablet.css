@@ -1,0 +1,82 @@
+.sidebar-tablet {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .sidebar-tablet {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+    padding-top: 20px;
+    height: calc(100vh - 70px);
+    position: fixed;
+    top: 70px;
+    left: 0;
+    background-color: transparent;
+  }
+
+  .sidebar-tablet button {
+    width: 60px; /* Circular button */
+    height: 60px;
+    margin: 10px 0;
+    background-color: #f1f2f6;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%; /* Circle shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .sidebar-tablet button img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .sidebar-tablet button:hover {
+    background-color: #e5e6ea;
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+
+  .sidebar-tablet button::after {
+    content: attr(data-title); /* Use data-title attribute */
+    position: absolute;
+    left: calc(100% + 10px); /* Position to the right of the button */
+    white-space: nowrap;
+    background-color: #01baf2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translateY(-50%);
+    top: 50%;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 16px;
+  }
+
+  .sidebar-tablet button:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(10px); /* Slide in the text */
+  }
+
+  .sidebar-tablet button.active {
+    background-color: #01baf2;
+    color: white;
+  }
+
+  .sidebar-tablet button.active img {
+    filter: brightness(0) invert(1); /* Make the icon white */
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-tablet {
+    display: none;
+  }
+}

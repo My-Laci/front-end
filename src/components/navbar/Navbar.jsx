@@ -1,4 +1,4 @@
-// import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import burgerIcon from "../../assets/burger.svg";
 import searchInIcon from "../../assets/search-in.svg";
@@ -6,6 +6,26 @@ import searchIcon from "../../assets/search.svg";
 import addPostIcon from "../../assets/add.svg";
 
 const Navbar = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const closeDropdown = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", closeDropdown);
+    return () => {
+      document.removeEventListener("mousedown", closeDropdown);
+    };
+  }, []);
+
   return (
     <header className="navbar-header">
       <div className="navbar-section-1">
@@ -39,9 +59,21 @@ const Navbar = () => {
             </a>
           </div>
           <div className="navbar-add-post-article">
-            <a href="">
-              <img src={addPostIcon} alt="Add Post Icon" />
-            </a>
+            <div className="dropdown-container" ref={dropdownRef}>
+              <button className="dropdown-toggle" onClick={toggleDropdown}>
+                <img src={addPostIcon} alt="Add Post Icon" />
+              </button>
+              {dropdownOpen && (
+                <div className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}>
+                  <div className="create-article-a">
+                    <a href="/create-article">Create Article</a>
+                  </div>
+                  <div className="create-post-a">
+                    <a href="/create-post">Create Post</a>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           <div className="navbar-user-image">
             <a href="/profile">

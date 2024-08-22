@@ -8,6 +8,7 @@ import AdminListBatch from "../pages/admin/admin-list-batch";
 import Homepage from "../pages/homepage/homepage";
 import Popular from "../pages/popular/popular";
 import NotFoundPage from "../pages/NotFound/NotFound.jsx";
+import PostDetail from "../pages/post-detail-page/post-detail-page.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
   {
     path: "/AdminListBatch",
     element: <AdminListBatch />,
+  },
+  {
+    path: "/PostDetail",
+    element: <PostDetail />,
   },
   {
     path: "*",

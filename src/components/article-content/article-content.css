@@ -84,7 +84,6 @@
 }
 
 .interaction.active {
-  color: #ff6b6b;
   transform: scale(1.1);
 }
 
@@ -98,6 +97,10 @@
 
 .interaction.animate img {
   transform: scale(1.1);
+}
+
+.interaction.animate .text-interaction {
+  color: #01baf2;
 }
 
 .text-interaction {

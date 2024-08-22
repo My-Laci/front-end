@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import UserImage from "../../assets/vinsen.svg";
+import React, { useState, useRef } from "react";
+import UserImage from "../../assets/test-profile.svg";
 import ArticleCover from "../../assets/image1.svg";
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
@@ -10,6 +10,8 @@ import "./article-content.css";
 const ArticleContent = () => {
   const [animateLike, setAnimateLike] = useState(false);
   const [animateBookmark, setAnimateBookmark] = useState(false);
+  const [animateComment, setAnimateComment] = useState(false);
+  const [animateRepost, setAnimateRepost] = useState(false);
 
   const commentInputRef = useRef(null);
 
@@ -21,6 +23,17 @@ const ArticleContent = () => {
   const triggerBookmarkAnimation = () => {
     setAnimateBookmark(true);
     setTimeout(() => setAnimateBookmark(false), 300);
+  };
+
+  const triggerCommentAnimation = () => {
+    setAnimateComment(true);
+    setTimeout(() => setAnimateComment(false), 300);
+    focusCommentField();
+  };
+
+  const triggerRepostAnimation = () => {
+    setAnimateRepost(true);
+    setTimeout(() => setAnimateRepost(false), 300);
   };
 
   const focusCommentField = () => {
@@ -71,11 +84,17 @@ const ArticleContent = () => {
           <img src={Like} alt="Like" />
           <div className="text-interaction">Like</div>
         </button>
-        <button className="interaction">
+        <button
+          className={`interaction ${animateComment ? "animate" : ""}`}
+          onClick={triggerCommentAnimation}
+        >
           <img src={Comment} alt="Comment" />
           <div className="text-interaction">Comment</div>
         </button>
-        <button className="interaction">
+        <button
+          className={`interaction ${animateRepost ? "animate" : ""}`}
+          onClick={triggerRepostAnimation}
+        >
           <img src={Repost} alt="Repost" />
           <div className="text-interaction">Repost</div>
         </button>
