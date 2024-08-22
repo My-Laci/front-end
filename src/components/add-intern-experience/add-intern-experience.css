@@ -10,11 +10,10 @@
     align-items: center;
 }
 
-/* Modal Box */
 .internship-modal {
     background-color: white;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 15px;
     width: 100%;
     max-width: 400px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -25,7 +24,6 @@
     font-size: 1.5rem;
 }
 
-/* Input Group */
 .modal-input-group {
     margin-bottom: 15px;
 }
@@ -36,33 +34,43 @@
     font-weight: bold;
 }
 
-.modal-input-group input {
+.modal-password-input {
     width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: #F1F2F6;
+    color: #7E7E7E;
+    font-size: 16px;
+    font-family: "Nunito Sans", sans-serif;
 }
 
-/* Buttons */
+.modal-password-input:focus {
+    outline: none;
+    border-color: #01BAF2;
+    box-shadow: 0 0 5px rgba(1, 186, 242, 0.5);
+}
+
 .modal-buttons {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
 }
 
-.cancel-button,
-.save-button {
+.intern-cancel-button,
+.intern-save-button {
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 15px;
     border: none;
     cursor: pointer;
 }
 
-.cancel-button {
+.intern-cancel-button {
     background-color: #ccc;
 }
 
-.save-button {
-    background-color: #4CAF50;
+.intern-save-button {
+    background-color: #01BAF2;
     color: white;
 }

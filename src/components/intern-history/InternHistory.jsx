@@ -1,36 +1,69 @@
+import { useState } from 'react';
 import "./InternHistory.css";
+import editIcon from '../../assets/editIcon.svg';
+import AddInternExperience from "../add-intern-experience/add-intern-experience";
 
 export default function InternHistory() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [internships, setInternships] = useState([
+    {
+      id: 1,
+      role: "Fullstack Web Developer",
+      period: "February 2024 - June 2024",
+      jobdesk: ["Develop laci", "Deploy laci"]
+    },
+    {
+      id: 2,
+      role: "Backend Developer",
+      period: "January 2023 - March 2023",
+      jobdesk: ["Develop API", "Integrate database"]
+    }
+  ]);
+
+  const handleEditClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSaveInternship = (newInternship) => {
+    setInternships([...internships, newInternship]);
+  };
+
   return (
     <div className="intern-history-container">
-      <h2>Internship Experience</h2>
+      <div className="intern-history-header">
+        <h2>Internship Experience</h2>
+        <button className="internship-edit" onClick={handleEditClick}>
+          <img src={editIcon} alt="Edit" className="internship-edit-icon" />
+        </button>
+      </div>
       <hr />
       <div className="internship-detail-container">
-        <div className="internship-detail">
-          <div className="intern-job-desk">
-            <h4>Fullstack Web Developer </h4>
-            <div className="detail-jobdesk">
-              <li>Develop laci</li>
-              <li>Deploy laci</li>
+        {internships.map((internship, index) => (
+          <div key={index} className="internship-detail">
+            <div className="intern-job-desk">
+              <h4>{internship.role}</h4>
+              <div className="detail-jobdesk">
+                {internship.jobdesk.map((task, i) => (
+                  <li key={i}>{task}</li>
+                ))}
+              </div>
+            </div>
+            <div className="intern-time">
+              <p>{internship.period}</p>
             </div>
           </div>
-          <div className="intern-time">
-            <p>February 2024 - Juni 2024</p>
-          </div>
-        </div>
-        <div className="internship-detail">
-          <div className="intern-job-desk">
-            <h4>Fullstack Web Developer </h4>
-            <div className="detail-jobdesk">
-              <li>Develop laci</li>
-              <li>Deploy laci</li>
-            </div>
-          </div>
-          <div className="intern-time">
-            <p>February 2024 - Juni 2024</p>
-          </div>
-        </div>
+        ))}
       </div>
+
+      <AddInternExperience
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSaveInternship}
+      />
     </div>
   );
 }

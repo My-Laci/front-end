@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
-import './InternshipModal.css';
+import './add-intern-experience.css';
 
-const InternshipModal = ({ isOpen, onClose, onSave }) => {
+const AddInternExperience = ({ isOpen, onClose, onSave }) => {
     const [internRole, setInternRole] = useState('');
     const [internPeriod, setInternPeriod] = useState('');
     const [internJobdesk, setInternJobdesk] = useState('');
@@ -9,13 +10,15 @@ const InternshipModal = ({ isOpen, onClose, onSave }) => {
     if (!isOpen) return null;
 
     const handleSave = () => {
-        const newInternship = {
-            role: internRole,
-            period: internPeriod,
-            jobdesk: internJobdesk,
-        };
-        onSave(newInternship);
-        onClose();
+        // const newInternship = {
+        //     role: internRole,
+        //     period: internPeriod,
+        //     jobdesk: internJobdesk,
+        // };
+        // onSave(newInternship);
+        // onClose();
+
+        //back end disini?
     };
 
     return (
@@ -29,6 +32,7 @@ const InternshipModal = ({ isOpen, onClose, onSave }) => {
                         value={internRole}
                         onChange={(e) => setInternRole(e.target.value)}
                         placeholder="Enter your role"
+                        className="modal-password-input"
                     />
                 </div>
                 <div className="modal-input-group">
@@ -38,6 +42,7 @@ const InternshipModal = ({ isOpen, onClose, onSave }) => {
                         value={internPeriod}
                         onChange={(e) => setInternPeriod(e.target.value)}
                         placeholder="e.g., June 2023 - August 2023"
+                        className="modal-password-input"
                     />
                 </div>
                 <div className="modal-input-group">
@@ -47,15 +52,16 @@ const InternshipModal = ({ isOpen, onClose, onSave }) => {
                         value={internJobdesk}
                         onChange={(e) => setInternJobdesk(e.target.value)}
                         placeholder="Enter your jobdesk"
+                        className="modal-password-input"
                     />
                 </div>
                 <div className="modal-buttons">
-                    <button onClick={onClose} className="cancel-button">Cancel</button>
-                    <button onClick={handleSave} className="save-button">Save</button>
+                    <button onClick={onClose} className="intern-cancel-button">Cancel</button>
+                    <button onClick={handleSave} className="intern-save-button">Save</button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default InternshipModal;
+export default AddInternExperience;
