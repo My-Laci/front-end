@@ -9,9 +9,9 @@ const ChangeNamePage = () => {
         <>
             <body>
                 <Navbar />
-                <div className="container">
+                <div className="changeName-container">
                     <Sidebar />
-                    <div className="content">
+                    <div className="changeName-content">
                         <ChangeName />
                         <SaveChangesButton />
                     </div>
