@@ -5,21 +5,21 @@ import ChangeName from "../../components/change-name/change-name.jsx";
 import SaveChangesButton from "../../components/save-changes-button/save-changes-button.jsx";
 
 const ChangeNamePage = () => {
-    return (
-        <>
-            <body>
-                <Navbar />
-                <div className="changeName-container">
-                    <Sidebar />
-                    <div className="changeName-content">
-                        <ChangeName />
-                        <SaveChangesButton />
-                    </div>
+  return (
+    <>
+      <body>
+        <Navbar />
+        <div className="changeName-container">
+          <Sidebar />
+          <div className="changeName-content">
+            <ChangeName />
+            <SaveChangesButton />
+          </div>
 
-                </div>
-            </body>
-        </>
-    );
+        </div>
+      </body>
+    </>
+  );
 };
 
 export default ChangeNamePage;

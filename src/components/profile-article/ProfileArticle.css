@@ -14,21 +14,27 @@
 
 .articles-detail {
   margin-left: 15px;
+  box-sizing: border-box;
 }
 
 .articles-detail h3 {
   font-size: 14px;
   margin-top: 1px;
+  color: black;
 }
 
 .articles-detail p {
   font-size: 14px;
   margin-top: 4px;
+  color: black;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
-.articles-detail span {
-  color: #0082c2;
-  font-weight: bold;
+.article-list-link {
+  text-decoration: none;
 }
 
 @media (max-width: 426px) {
@@ -37,6 +43,10 @@
     width: 100px;
     height: 70px;
     object-fit: cover;
+  }
+
+  .articles-detail p {
+    -webkit-line-clamp: 1;
   }
 }
 
@@ -51,10 +61,13 @@
     font-size: 13px;
     margin-top: 1px;
   }
-  
+
   .articles-detail p {
     font-size: 13px;
     margin-top: 3px;
   }
-  
+
+  .articles-detail p {
+    -webkit-line-clamp: 2;
+  }
 }

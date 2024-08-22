@@ -2,6 +2,7 @@ import { useState } from 'react';
 import "./InternHistory.css";
 import editIcon from '../../assets/editIcon.svg';
 import AddInternExperience from "../add-intern-experience/add-intern-experience";
+import InternshipDetail from "../internship-detail/InternshipDetail";
 
 export default function InternHistory() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,21 +43,7 @@ export default function InternHistory() {
       </div>
       <hr />
       <div className="internship-detail-container">
-        {internships.map((internship, index) => (
-          <div key={index} className="internship-detail">
-            <div className="intern-job-desk">
-              <h4>{internship.role}</h4>
-              <div className="detail-jobdesk">
-                {internship.jobdesk.map((task, i) => (
-                  <li key={i}>{task}</li>
-                ))}
-              </div>
-            </div>
-            <div className="intern-time">
-              <p>{internship.period}</p>
-            </div>
-          </div>
-        ))}
+        <InternshipDetail />
       </div>
 
       <AddInternExperience
