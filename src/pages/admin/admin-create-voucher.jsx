@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 // import SaveButton from "../../components/"
 import AdminSidebar from "../../components/admin-sidebar/admin-sidebar";
 import AdminNavbar from "../../components/admin-navbar/admin-navbar";
@@ -23,7 +23,7 @@ const AdminCreateVoucher = () => {
             className="create-voucher-batch-total"
             min="1"
           />
-          <button className="create-voucher-button" onClick={() => {}}>
+          <button className="create-voucher-button" onClick={() => { }}>
             Create Voucher
           </button>
         </div>
