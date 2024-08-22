@@ -2,9 +2,11 @@
 import { useState } from 'react';
 import './add-intern-experience.css';
 
+// eslint-disable-next-line no-unused-vars
 const AddInternExperience = ({ isOpen, onClose, onSave }) => {
     const [internRole, setInternRole] = useState('');
-    const [internPeriod, setInternPeriod] = useState('');
+    const [internStartDate, setInternStartDate] = useState('');
+    const [internEndDate, setInternEndDate] = useState('');
     const [internJobdesk, setInternJobdesk] = useState('');
 
     if (!isOpen) return null;
@@ -12,7 +14,8 @@ const AddInternExperience = ({ isOpen, onClose, onSave }) => {
     const handleSave = () => {
         // const newInternship = {
         //     role: internRole,
-        //     period: internPeriod,
+        //     startDate: internStartDate,
+        //     endDate: internEndDate,
         //     jobdesk: internJobdesk,
         // };
         // onSave(newInternship);
@@ -32,17 +35,27 @@ const AddInternExperience = ({ isOpen, onClose, onSave }) => {
                         value={internRole}
                         onChange={(e) => setInternRole(e.target.value)}
                         placeholder="Enter your role"
-                        className="modal-password-input"
+                        className="intern-modal-input"
                     />
                 </div>
                 <div className="modal-input-group">
-                    <label>Intern Period</label>
+                    <label>Intern Start Date</label>
                     <input
-                        type="text"
-                        value={internPeriod}
-                        onChange={(e) => setInternPeriod(e.target.value)}
-                        placeholder="e.g., June 2023 - August 2023"
-                        className="modal-password-input"
+                        type="month"
+                        value={internStartDate}
+                        onChange={(e) => setInternStartDate(e.target.value)}
+                        placeholder="MM-YYYY"
+                        className="intern-modal-input"
+                    />
+                </div>
+                <div className="modal-input-group">
+                    <label>Intern End Date</label>
+                    <input
+                        type="month"
+                        value={internEndDate}
+                        onChange={(e) => setInternEndDate(e.target.value)}
+                        placeholder="MM-YYYY"
+                        className="intern-modal-input"
                     />
                 </div>
                 <div className="modal-input-group">
@@ -52,7 +65,7 @@ const AddInternExperience = ({ isOpen, onClose, onSave }) => {
                         value={internJobdesk}
                         onChange={(e) => setInternJobdesk(e.target.value)}
                         placeholder="Enter your jobdesk"
-                        className="modal-password-input"
+                        className="intern-modal-input"
                     />
                 </div>
                 <div className="modal-buttons">
