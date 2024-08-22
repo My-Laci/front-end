@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import CheckIcon from "../../assets/check.svg";
 import CreateVoucherIcon from "../../assets/voucher.svg";
 import HistoryIcon from "../../assets/history.svg";
+import ValidateIcon from "../../assets/validate.svg";
 import Logo from "../../assets/Laci.svg";
 import "./admin-sidebar.css";
 
@@ -27,6 +28,12 @@ export default function AdminSidebar() {
         <button>
           <img src={HistoryIcon} alt="Edit" className="edit-icon" />
           History
+        </button>
+      </Link>
+      <Link to="/AdminValidate" className="nav-link">
+        <button>
+          <img src={ValidateIcon} alt="Edit" className="edit-icon" />
+          Validate
         </button>
       </Link>
     </div>

@@ -1,6 +1,7 @@
 import bannerIcon from "../../assets/Banner-Icon.svg";
 import settingIcon from "../../assets/Setting-icon.svg";
-import "../profile-banner/ProfileBanner.css"
+import "../profile-banner/ProfileBanner.css";
+import { Link } from "react-router-dom";
 
 export default function ProfileBanner() {
   return (
@@ -12,7 +13,9 @@ export default function ProfileBanner() {
           <p>Universitas Airlangga</p>
           <p>Web Development Intern</p>
         </div>
-        <img className="setting-icon" src={settingIcon} alt="" />
+        <Link to="/AccountInfo">
+          <img className="setting-icon" src={settingIcon} alt="" />
+        </Link>
       </div>
       <img
         className="profile-picture"

@@ -1,0 +1,95 @@
+.certificate-content {
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 10px #00000033;
+}
+
+.outer-outline-left-side-certificate {
+  display: flex;
+  align-items: center;
+  margin-left: 45px;
+}
+
+.outline-left-side-certificate {
+  width: 90%;
+  padding-top: 8px;  
+  padding-left: 8px;  
+  padding-bottom: 8px;
+  background: linear-gradient(to right, #f71123 25%, #ffffff);
+}
+
+
+.left-side-certificate {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 150px 30px 40px;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.left-side-kelulusan-magang-box {
+  background: linear-gradient(to right, #f71123, #ff9d0d);
+  width: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: white;
+  padding-bottom: 2px;
+  margin-bottom: 30px;
+}
+
+.left-side-certificate h1 {
+  font-size: 45px;
+}
+
+#certificate-diberikan-kepada {
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: #ffd2d2 solid 2px;
+  padding-bottom: 3px;
+  width: 136px;
+}
+
+.left-side-certificate h2 {
+  color: #fd3d12;
+  font-weight: bold;
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
+.creatificate-position p {
+  font-size: 14px;
+}
+
+.certificate-jobdesk {
+  font-weight: bold;
+  color: #f71123;
+}
+
+.certificate-hand-sign {
+  margin-top: 30px;
+}
+
+.certificate-hand-sign p {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.left-side-certificate img {
+  width: 110px;
+  height: 60px;
+  object-fit: cover;
+}
+
+#certificate-aside {
+  width: auto;
+}
+
+#hand-sign-positions {
+  font-weight: 300;
+  font-style: italic;
+}
