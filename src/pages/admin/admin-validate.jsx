@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AdminSidebar from "../../components/admin-sidebar/admin-sidebar";
 import AdminNavbar from "../../components/admin-navbar/admin-navbar";
 import "./admin-validate.css";
@@ -51,15 +51,17 @@ const AdminValidate = () => {
                 <AdminSidebar />
                 <div className="admin-validate-content">
                     <h2 className="admin-validate-h1">Validate Interns</h2>
+
                     <input
                         type="text"
                         placeholder="Search by name or email..."
-                        className="search-bar"
+                        className="admin-validate-search"
                         value={searchQuery}
                         onChange={handleSearchChange}
                     />
+
                     {filteredUsers.length === 0 ? (
-                        <p>No users found.</p>
+                        <p className="no-user-found">No users found.</p>
                     ) : (
                         filteredUsers.map(user => (
                             <div key={user.id} className="user-validation-card">
@@ -70,7 +72,7 @@ const AdminValidate = () => {
                                 <p><strong>Periode Magang:</strong> {user.internshipPeriod}</p>
                                 <p><strong>Jobdesk:</strong> {user.jobDesk}</p>
                                 <p><strong>Posisi:</strong> {user.position}</p>
-                                <button className="validate-button">Validasi</button>
+                                <button className="validate-button">Validate</button>
                             </div>
                         ))
                     )}
