@@ -1,0 +1,53 @@
+.comment-field-box {
+  margin: 0 26% 15px 26%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  display: flex;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0px 1px 20px 2px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  gap: 15px;
+  /* position: fixed; */
+}
+
+.comment-field-send-button button {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  padding: 5px 10px;
+  background-color: #01baf2;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  font-family: "Nunito Sans", sans-serif;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.comment-field-send-button button:hover {
+  background-color: #008eb9;
+  transform: scale(1.05);
+}
+
+.comment-field-send-button button:active {
+  background-color: #007ab8;
+  transform: scale(0.98);
+}
+
+@media (max-width: 1024px) {
+  .comment-field-box {
+    margin-right: 2%;
+    margin-left: 22%;
+  }
+}
+
+@media (max-width: 768px) {
+  .comment-field-box {
+    margin: 0;
+    border-radius: 0;
+  }
+}

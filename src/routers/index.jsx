@@ -14,6 +14,7 @@ import ChangePasswordPage from "../pages/change-password-page/change-password-pa
 import SearchResultPage from "../pages/search-result-page/search-result-page.jsx";
 import OtpEmailPage from "../pages/otp-email-page/otp-email-page.jsx";
 import NotFoundPage from "../pages/NotFound/NotFound.jsx";
+import PostDetail from "../pages/post-detail-page/post-detail-page.jsx";
 import AdminValidate from "../pages/admin/admin-validate.jsx";
 import Certificate from "../pages/certificate-generator/CertificateGenarator.jsx";
 import Article from "../pages/article-page/Article.jsx";
@@ -54,6 +55,8 @@ export const router = createBrowserRouter([
     element: <AdminListBatch />,
   },
   {
+    path: "/PostDetail",
+    element: <PostDetail />,
     path: "/AccountInfo",
     element: <AccountInfoPage />,
   },

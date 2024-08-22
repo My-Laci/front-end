@@ -1,0 +1,19 @@
+.post-comments {
+  display: flex;
+  gap: 15px;
+}
+
+.post-comment-user-image img {
+  height: 40px;
+  border-radius: 12px;
+}
+
+.post-comment-text-section {
+  background-color: #f5f5f5;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+.post-comment-text-section h3 {
+  font-size: 16px;
+}
