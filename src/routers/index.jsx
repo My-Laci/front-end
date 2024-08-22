@@ -8,6 +8,8 @@ import AdminListBatch from "../pages/admin/admin-list-batch";
 import Homepage from "../pages/homepage/homepage";
 import Popular from "../pages/popular/popular";
 import NotFoundPage from "../pages/NotFound/NotFound.jsx";
+import Certificate from "../pages/certificate-generator/CertificateGenarator.jsx";
+import Article from "../pages/article-page/Article.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ export const router = createBrowserRouter([
   {
     path: "/AdminListBatch",
     element: <AdminListBatch />,
+  },
+  {
+    path: "/Certificate",
+    element: <Certificate />,
+  },
+  {
+    path: "/Article",
+    element: <Article />,
   },
   {
     path: "*",
