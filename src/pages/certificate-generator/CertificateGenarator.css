@@ -1,0 +1,27 @@
+.certificate-generator-container {
+  display: flex;
+  margin-top: 80px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.certificate-button-nest {
+  display: flex;
+  justify-content: center;
+}
+
+.certificate-button-nest button {
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 7px 20px 7px 20px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background-image: linear-gradient(to right, #5cd9ff, #01baf2);
+  cursor: pointer;
+}
+
+.certificate-button-nest button:active {
+  transform: scale(0.95);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.3);
+}

@@ -15,6 +15,8 @@ import SearchResultPage from "../pages/search-result-page/search-result-page.jsx
 import OtpEmailPage from "../pages/otp-email-page/otp-email-page.jsx";
 import NotFoundPage from "../pages/NotFound/NotFound.jsx";
 import AdminValidate from "../pages/admin/admin-validate.jsx";
+import Certificate from "../pages/certificate-generator/CertificateGenarator.jsx";
+import Article from "../pages/article-page/Article.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +80,14 @@ export const router = createBrowserRouter([
   {
     path: "/AdminValidate",
     element: <AdminValidate />,
+  },
+  {
+    path: "/Certificate",
+    element: <Certificate />,
+  },
+  {
+    path: "/Article",
+    element: <Article />,
   },
   {
     path: "*",
