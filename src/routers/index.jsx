@@ -57,6 +57,8 @@ export const router = createBrowserRouter([
   {
     path: "/PostDetail",
     element: <PostDetail />,
+  },
+  {
     path: "/AccountInfo",
     element: <AccountInfoPage />,
   },
