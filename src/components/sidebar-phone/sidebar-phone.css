@@ -1,0 +1,116 @@
+.sidebar-phone {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 75%;
+  max-width: 300px;
+  height: 100vh;
+  background-color: #fff;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar-phone-logo {
+  font-size: 42px;
+  font-weight: bold;
+  /* align-items: flex-start; */
+  color: #01baf2;
+  font-family: "Pacifico", cursive;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.sidebar-phone.open {
+  transform: translateX(0);
+}
+
+.sidebar-phone-content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: baseline;
+  /* padding-top: 20px; */
+  height: calc(100vh - 70px);
+  position: fixed;
+  top: 110px;
+  left: 0;
+  /* background-color: transparent; */
+  /* z-index: 1000; */
+}
+
+.sidebar-phone-content button {
+  width: 80%;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: white;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+}
+
+.sidebar-phone-content img {
+  margin-right: 20px;
+  width: 20px;
+  height: auto;
+}
+
+.sidebar-phone-content button:hover {
+  background-color: #e5e6ea;
+  transform: translateX(5px);
+  z-index: 1000;
+}
+
+.sidebar-phone-content button.active {
+  background-color: #01baf2;
+  transform: scale(1.05);
+  color: white;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sidebar-phone-content button.active img {
+  filter: brightness(0) invert(1);
+}
+
+.sidebar-phone-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid white;
+  color: white;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-phone-item img {
+  margin-right: 15px;
+}
+
+.sidebar-phone-item:hover {
+  background-color: #e5e6ea;
+  transform: translateX(5px);
+  z-index: 1000;
+}
+
+.sidebar-phone-item:last-child {
+  border-bottom: none;
+}

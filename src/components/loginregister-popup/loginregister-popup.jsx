@@ -9,7 +9,7 @@ const LoginRegisterPopup = ({ show, onClose }) => {
       <div className="popup-content">
         <h2>Welcome!</h2>
         <p>Please log in or register to continue.</p>
-        <button className="popup-button register" onClick={onClose}>
+        <button className="popup-button" onClick={onClose}>
           Register
         </button>
         <div className="pop-up-bottom-area">
