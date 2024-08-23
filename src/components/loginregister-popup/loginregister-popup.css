@@ -1,0 +1,114 @@
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 100%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 1000 !important;
+}
+
+.popup-content {
+  align-content: center ;
+  background-color: white !important;
+  padding: 20px !important;
+  border-radius: 15px !important;
+  text-align: center !important;
+  position: relative !important;
+  width: 30%;
+  height: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.popup-content h2 {
+  color: #01baf2 !important;
+  margin-bottom: 10px !important;
+  font-size: 30px !important;
+}
+
+.popup-content p {
+  color: #333 !important;
+  font-size: 16px !important;
+}
+
+.pop-up-bottom-area {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 5px !important;
+}
+
+.pop-up-bottom-area p {
+  font-size: 16px !important;
+}
+
+.pop-up-bottom-area button {
+  all: unset !important;
+  cursor: pointer !important;
+  color: #277dd2 !important;
+}
+
+.popup-button {
+  margin-top: 20px !important;
+  background-color: #c5ebf6 !important;
+  color: #01baf2 !important;
+  border: 1px solid #01baf2 !important;
+  height: 40px;
+  width: 70%;
+  font-size: larger !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+  margin-bottom: 10px !important;
+  font-family: "Nunito Sans", sans-serif !important;
+}
+
+.popup-button-text-fill p {
+  color: #01baf2;
+}
+
+.popup-button:hover {
+  background-color: #01baf2 !important;
+  color: white !important;
+}
+
+.popup-close {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  background: none !important;
+  border: none !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+  color: #01baf2 !important;
+  transition: color 0.3s ease !important;
+}
+
+.popup-close:hover {
+  color: #0191c8 !important;
+}
+
+@media (max-width: 1024px) {
+  .popup-content {
+    width: 30%;
+  }
+
+  .popup-content h2 {
+    font-size: 24px !important;
+  }
+
+  .popup-content p {
+    font-size: 16px !important;
+  }
+
+  .pop-up-bottom-area {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 5px !important;
+  }
+
+  .pop-up-bottom-area p {
+    font-size: 16px !important;
+  }
+}

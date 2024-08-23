@@ -1,133 +1,179 @@
 .content-card {
-  border-radius: 15px;
-  background-color: white;
-  padding: 15px;
+  border-radius: 15px !important;
+  background-color: white !important;
+  padding: 15px !important;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25) !important;
+  z-index: 1;
 }
 
 .post-info {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  margin: 0px 0px 12px 0px;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+  margin: 0px 0px 12px 0px !important;
 }
 
 .user-image img {
-  display: flex;
+  display: flex !important;
+  height: 40px !important;
+  border-radius: 12px !important;
 }
 
 .details-post {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .user-name {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }
 
 .divider {
-  font-size: 16px;
+  font-size: 16px !important;
 }
 
 .user-instance {
-  font-size: 16px;
+  font-size: 16px !important;
 }
 
 .date-time-post {
-  font-size: 10px;
-  color: #7e7e7e;
+  font-size: 10px !important;
+  color: #7e7e7e !important;
 }
 
 .post-text {
-  font-size: 16px;
-  color: #263238;
-  margin-bottom: 10px;
+  font-size: 16px !important;
+  color: #263238 !important;
+  margin-bottom: 10px !important;
 }
 
 .post-img {
-  flex-direction: row;
+  margin-bottom: 20px !important;
 }
 
 .post-img img {
-  width: 50%;
+  width: 50% !important;
+  cursor: pointer !important;
+  transition: transform 0.3s ease !important;
+}
+
+.post-img img:hover {
+  transform: scale(1.005) !important;
+}
+
+.slick-slide img {
+  width: 100% !important;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1 !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  color: #01baf2 !important;
+  font-size: 35px !important;
+}
+
+.slick-dots {
+  margin-bottom: 40px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px !important;
+  color: #000 !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #01baf2 !important;
 }
 
 .post-interactions {
-  justify-content: space-between;
-  display: flex;
-  margin: 10px 10px 13px 10px;
+  justify-content: space-between !important;
+  display: flex !important;
+  margin: 10px 10px 13px 10px !important;
 }
 
 .interaction {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  font-family: "Nunito Sans", sans-serif;
-  font-weight: 600;
-  transition: transform 0.2s ease, color 0.2s ease;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-family: "Nunito Sans", sans-serif !important;
+  font-weight: 600 !important;
+  transition: transform 0.2s ease, color 0.2s ease !important;
 }
 
 .interaction img {
-  transform: scale(0.9);
-  transition: transform 0.2s ease;
+  transform: scale(0.9) !important;
+  transition: transform 0.2s ease !important;
 }
 
 .interaction.animate {
-  transform: scale(1.1);
-  color: #01baf2;
+  transform: scale(1.1) !important;
+  color: #01baf2 !important;
 }
 
 .interaction.animate img {
-  transform: scale(1.1);
-  color: #01baf2;
+  transform: scale(1.1) !important;
+  color: #01baf2 !important;
 }
 
 .text-interaction {
-  font-size: 14px;
-  color: #7e7e7e;
-  font-weight: 600;
-  margin-left: 5px;
-  transition: color 0.2s ease;
+  font-size: 14px !important;
+  color: #7e7e7e !important;
+  font-weight: 600 !important;
+  margin-left: 5px !important;
+  transition: color 0.2s ease !important;
 }
 
 .interaction.active .text-interaction {
-  color: #ff6b6b;
+  color: #ff6b6b !important;
 }
+
 .hr {
-  color: #c6c6c6;
+  color: #c6c6c6 !important;
 }
 
 .comment-field {
-  background-color: #f1f2f6;
-  border-radius: 15px;
-  border: 1px solid #7e7e7e;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  width: 100%;
+  background-color: #f1f2f6 !important;
+  border-radius: 15px !important;
+  border: 1px solid #7e7e7e !important;
+  padding: 5px !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
 }
 
 .comment-field input {
-  width: 100%;
-  border: none;
-  background: none;
-  outline: none;
-  margin-left: 10px;
-  font-family: "Nunito Sans", sans-serif;
+  width: 100% !important;
+  border: none !important;
+  background: none !important;
+  outline: none !important;
+  margin-left: 10px !important;
+  font-family: "Nunito Sans", sans-serif !important;
 }
 
 .bottom-section {
-  display: flex;
-  margin-top: 15px;
-  gap: 10px;
+  display: flex !important;
+  margin-top: 15px !important;
+  gap: 10px !important;
 }
 
 @media (max-width: 768px) {
   .content-card {
-    border-radius: 0px;
+    border-radius: 0px !important;
+  }
+
+  .slick-prev,
+  .slick-next {
+    display: none !important;
   }
 }

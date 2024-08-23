@@ -1,0 +1,41 @@
+.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.image-modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 80%;
+  z-index: 1000;
+}
+
+.image-modal-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  /* background: #fff; */
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #01baf2;
+  display: flex;
+}
+.close-button img {
+  width: 15px;
+}

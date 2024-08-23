@@ -86,8 +86,93 @@
   display: none;
 }
 
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dropdown-menu {
+  display: flex;
+  width: 170px;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: dropdownIn 0.3s forwards ease-in-out;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu.exit {
+  animation: dropdownOut 0.3s forwards ease-in-out;
+}
+
+@keyframes dropdownOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.create-article-a a {
+  margin: 10px 10px 0 10px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  color: #01baf2;
+  background-color: white;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.create-post-a a {
+  margin: 0px 10px 10px 10px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  color: #01baf2;
+  background-color: white;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #01baf2;
+  color: white;
+  transform: scale(1.05);
+}
+
 .navbar-add-post-article {
   display: none;
+  margin-top: 6px;
 }
 
 .navbar-user-section {
@@ -129,6 +214,13 @@
   border-radius: 10px;
 }
 
+.sidebar-toggle {
+  /* display: none; */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 @media (max-width: 1024px) {
   .navbar-search-container {
     display: none;
@@ -142,6 +234,11 @@
     display: flex;
   }
   .navbar-add-post-article a {
+    display: flex;
+  }
+  .navbar-add-post-article {
+    margin-right: 15px;
+    transform: scale(0.9);
     display: flex;
   }
   .navbar-add-post-article {
@@ -198,4 +295,10 @@
   .navbar-user-info {
     display: none;
   }
+  .sidebar-toggle {
+    display: block;
+  }
+  /* .navbar-logo {
+    margin: 0 10px;
+  } */
 }

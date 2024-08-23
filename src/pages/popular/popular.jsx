@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "../../components/navbar/Navbar.jsx";
+import SidebarTablet from "../../components/sidebar-tablet/sidebar-tablet.jsx";
 import Sidebar from "../../components/sidebar/sidebar.jsx";
 import PostContent from "../../components/post-content/post-content.jsx";
 import Aside from "../../components/aside/aside.jsx";
@@ -17,13 +18,18 @@ const Popular = () => {
     <>
       <body>
         <Navbar />
+        <Sidebar />
         <div className="container">
-          <Sidebar />
           <div className="content">
             <FaceSwitch onSwitch={handleSwitch} />
-            {view === "posts" ? <PostContent /> : <ArticleContent />}
+            {view === "posts" ? (
+              <PostContent showCommentSection={true} />
+            ) : (
+              <ArticleContent />
+            )}
             {/* <AccountInfo /> */}
           </div>
+          <SidebarTablet />
           <Aside />
         </div>
       </body>
