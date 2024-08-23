@@ -214,6 +214,13 @@
   border-radius: 10px;
 }
 
+.sidebar-toggle {
+  /* display: none; */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 @media (max-width: 1024px) {
   .navbar-search-container {
     display: none;
@@ -288,4 +295,10 @@
   .navbar-user-info {
     display: none;
   }
+  .sidebar-toggle {
+    display: block;
+  }
+  /* .navbar-logo {
+    margin: 0 10px;
+  } */
 }

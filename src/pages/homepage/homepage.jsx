@@ -18,12 +18,12 @@ const Homepage = () => {
     <>
       <body>
         <Navbar />
+        <Sidebar />
         <div className="container">
-          <Sidebar />
-          <SidebarTablet />
           <div className="content">
             <PostContent showCommentSection={true} />
           </div>
+          <SidebarTablet />
           <Aside />
         </div>
         <LoginRegisterPopup show={showPopup} onClose={closePopup} />

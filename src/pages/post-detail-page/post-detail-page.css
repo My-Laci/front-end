@@ -23,6 +23,8 @@
 .return-section button {
   all: unset;
   cursor: pointer;
+  display: flex;
+  gap: 15px;
 }
 
 .third-part {
