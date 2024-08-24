@@ -6,6 +6,7 @@ import LoginIcon from "../../assets/Login-icon.svg";
 import Form from "../../components/input-form/InputFrom";
 import BlueButton from "../../components/blue-button/BlueButton";
 import GreenButton from "../../components/green-button/GreenButton";
+import Cookies from "js-cookie";
 import "./Login.css";
 
 export default function Login() {
@@ -16,9 +17,6 @@ export default function Login() {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-
-    console.log("Submitting login with email:", email);
-    console.log("Password:", password);
 
     try {
       // Send data as JSON
@@ -35,8 +33,10 @@ export default function Login() {
         }
       );
 
-      console.log("Login successful:", response.data);
-      localStorage.setItem("token", response.data.token);
+      console.log("Login successful");
+      const token = response.data.token;
+      Cookies.set("token", token, { expires: 7 });
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       navigate("/");
     } catch (error) {
       if (error.response) {
@@ -60,14 +60,14 @@ export default function Login() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            type="email" // Ensure correct type for email input
+            type="email"
           />
           <Form
             name="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            type="password" // Ensure correct type for password input
+            type="password"
           />
           <div className="login-forgot-password">
             <a href="#">Forgot Password?</a>
