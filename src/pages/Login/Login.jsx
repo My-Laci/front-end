@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import LoginBanner from "../../assets/Regist-banner.svg";
 import LoginIcon from "../../assets/Login-icon.svg";
 import Form from "../../components/input-form/InputFrom";
@@ -6,30 +9,80 @@ import GreenButton from "../../components/green-button/GreenButton";
 import "./Login.css";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [validation, setValidation] = useState([]);
+  const navigate = useNavigate();
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+
+    console.log("Submitting login with email:", email);
+    console.log("Password:", password);
+
+    try {
+      // Send data as JSON
+      const response = await axios.post(
+        "http://localhost:8080/signIn",
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Login successful:", response.data);
+      localStorage.setItem("token", response.data.token);
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        console.error("Login failed:", error.response.data);
+        setValidation(error.response.data);
+      } else {
+        console.error("Error:", error.message);
+      }
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-left-side">
         <h1 id="login">Login</h1>
         <h1 id="login-logo">Laci</h1>
 
-        <div className="login-formlist">
-          <Form placeholder="Email" />
-          <Form placeholder="Password" />
+        <form className="login-formlist" onSubmit={loginHandler}>
+          <Form
+            name="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email" // Ensure correct type for email input
+          />
+          <Form
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password" // Ensure correct type for password input
+          />
           <div className="login-forgot-password">
-            <a href="#">Forgot Password ?</a>
+            <a href="#">Forgot Password?</a>
           </div>
-          <BlueButton label="Continue" />
+          <BlueButton type="submit" label="Continue" />
           <p id="dont-have-account">
             Don’t have an account?<a href="#">Register Here</a>
           </p>
           <p id="login-or">OR</p>
           <GreenButton label="View As Guest" />
-        </div>
-
+        </form>
       </div>
       <div className="login-right-side">
-        <img src={LoginBanner} id="login-banner" alt="" />
-        <img src={LoginIcon} id="login-icon" alt="" />
+        <img src={LoginBanner} id="login-banner" alt="Login Banner" />
+        <img src={LoginIcon} id="login-icon" alt="Login Icon" />
       </div>
     </div>
   );
