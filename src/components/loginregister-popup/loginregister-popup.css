@@ -1,4 +1,4 @@
-.popup-overlay {
+.login-regist-popup-overlay {
   background: rgba(0, 0, 0, 0.5) !important;
   position: fixed !important;
   top: 0 !important;
@@ -10,7 +10,7 @@
   z-index: 1000 !important;
 }
 
-.popup-content {
+.login-regist-popup-content {
   align-content: center ;
   background-color: white !important;
   padding: 20px !important;

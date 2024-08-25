@@ -30,14 +30,23 @@ function Profile() {
           `http://localhost:8080/users/${id}`
         );
 
-        const internshipResponse = await axios.get(`http://localhost:8080/internship/user/${id}`)
+        const internshipResponse = await axios.get(
+          `http://localhost:8080/internship/user/${id}`
+        );
 
-        // Set bannerData from the response
+        // Assuming you want the latest internship item
+        const latestInternship =
+          internshipResponse.data.length > 0
+            ? internshipResponse.data[0] // Take the first item if already sorted by date or criteria
+            : null;
+
         setBannerData({
           name: profileResponse.data.name,
           agencyOrigin: profileResponse.data.agencyOrigin,
           profileImg: profileResponse.data.profileImg,
-          lastPosition : internshipResponse.
+          lastPosition: latestInternship
+            ? latestInternship.position
+            : "No position data",
         });
       } catch (err) {
         setError(err.message);
@@ -54,7 +63,7 @@ function Profile() {
       <SideBar />
       <div className="profile">
         {error ? (
-          <p className="error">Login dulu pepek</p>
+          <p className="error">{error}</p>
         ) : (
           <>
             {bannerData && <ProfileBanner bannerData={bannerData} />}
