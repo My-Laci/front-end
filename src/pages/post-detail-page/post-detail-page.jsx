@@ -12,20 +12,20 @@ const PostDetailPage = () => {
   return (
     <>
       <Navbar />
+      <Sidebar />
       <div className="container">
-        <Sidebar />
-        <SidebarTablet />
         <div className="content">
           <div className="return-section">
             <button onClick={{}}>
               <img src={BackButton2} alt="Back Button" />
+              <p>Back</p>
             </button>
-            <p>Back</p>
           </div>
           <CommentFieldBox />
           <PostContent showCommentSection={false} />
           <PostComment />
         </div>
+        <SidebarTablet />
         <div className="third-part"></div>
       </div>
     </>

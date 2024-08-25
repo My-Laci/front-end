@@ -18,9 +18,8 @@ const Popular = () => {
     <>
       <body>
         <Navbar />
+        <Sidebar />
         <div className="container">
-          <Sidebar />
-          <SidebarTablet />
           <div className="content">
             <FaceSwitch onSwitch={handleSwitch} />
             {view === "posts" ? (
@@ -30,6 +29,7 @@ const Popular = () => {
             )}
             {/* <AccountInfo /> */}
           </div>
+          <SidebarTablet />
           <Aside />
         </div>
       </body>
