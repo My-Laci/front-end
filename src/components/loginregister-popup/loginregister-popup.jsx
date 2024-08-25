@@ -5,8 +5,8 @@ const LoginRegisterPopup = ({ show, onClose }) => {
   if (!show) return null;
 
   return (
-    <div className="popup-overlay">
-      <div className="popup-content">
+    <div className="login-regist-popup-overlay">
+      <div className="login-regist-popup-content">
         <h2>Welcome!</h2>
         <p>Please log in or register to continue.</p>
         <button className="popup-button" onClick={onClose}>

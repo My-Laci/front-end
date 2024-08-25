@@ -143,44 +143,59 @@
   padding: 20px;
 }
 
-.upper-create-post-container-right-side {
-  width: 100%;
+.inside-create-post-container {
   display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.upper-create-post-container-right-side {
+  display: flex;
+  box-sizing: border-box;
   flex: 1;
 }
 
 .create-post-tag-maker {
+  width: 100%;
   padding-right: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex: 1;
 }
 
 .create-post-tag-list {
   display: flex;
-  flex-direction: row;
-  gap: 5px;
+  flex-wrap: wrap; 
+  gap: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
+
 
 .create-post-tag {
   background-color: #01baf2;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  color: #ffffff;
   gap: 7px;
   font-weight: bold;
-  font-size: 11px;
+  text-transform: uppercase;
   padding: 1px 10px;
   border-radius: 8px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
+.create-post-tag p {
+  font-size: 10px;
+  color: #ffffff;
+  margin: 0;
+}
+
 .create-post-tag img {
   cursor: pointer;
-  width: 10px;
-  height: 10px;
+  width: 7px;
+  height: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
