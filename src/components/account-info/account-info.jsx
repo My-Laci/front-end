@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './account-info.css';
 import editIcon from '../../assets/editIcon.svg';
 import { useNavigate } from 'react-router-dom';
