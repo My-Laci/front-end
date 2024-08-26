@@ -19,6 +19,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
+      Cookies.remove("token");
       // Send data as JSON
       const response = await axios.post(
         "http://localhost:8080/signIn",

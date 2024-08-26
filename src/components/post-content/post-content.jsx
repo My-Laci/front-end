@@ -13,7 +13,8 @@ import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
 import ImageModal from "../image-modal/image-modal.jsx";
 
-const PostContent = ({ showCommentSection = true }) => {
+const PostContent = ({ profile, post, showCommentSection = true }) => {
+  console.log("uini post", post);
   const [animateLike, setAnimateLike] = useState(false);
   const [animateBookmark, setAnimateBookmark] = useState(false);
   const [animateComment, setAnimateComment] = useState(false);
@@ -73,53 +74,33 @@ const PostContent = ({ showCommentSection = true }) => {
     <div className="content-card">
       <div className="post-info">
         <div className="user-image">
-          <img src={UserImage} alt="User" />
+          <img src={profile.profileImg} alt="User" />
         </div>
         <div className="details-post">
           <div className="user-name">
-            Vinsen
+            {post.fullname}
             <span className="divider"> | </span>
-            <span className="user-instance"> Universitas Airlangga</span>
+            <span className="user-instance">{post.agencyOrigin}</span>
           </div>
-          <div className="date-time-post">10 hours ago</div>
+          <div className="date-time-post">{post.createdAt}</div>
         </div>
       </div>
-      <div className="post-text">
-        Hari ini adalah hari yang sangat memuaskan bagi saya dan tim. Kami
-        berhasil menyelesaikan proyek optimisasi jaringan di wilayah Jakarta
-        yang sudah kami kerjakan selama beberapa minggu terakhir. Proyek ini
-        melibatkan analisis menyeluruh terhadap area dengan sinyal lemah,
-        perencanaan penempatan perangkat tambahan, dan pengujian hasil
-        perbaikan. Setelah optimisasi, kualitas sinyal di area tersebut
-        meningkat sebesar 20%, yang sangat signifikan untuk meningkatkan
-        pengalaman pelanggan. Terima kasih kepada tim yang selalu bekerja keras
-        dan memberikan dukungan penuh dalam setiap tahap proyek ini. Pengalaman
-        ini benar-benar menambah wawasan dan keterampilan saya dalam bidang
-        telekomunikasi.
-      </div>
+      <div className="post-text">{post.caption}</div>
       <div className="post-img">
         <Slider {...settings}>
-          <div>
-            <img
-              src={PostImage1}
-              alt="Post Image 1"
-              onClick={() => openImageModal(PostImage1)}
-            />
-          </div>
-          <div>
-            <img
-              src={PostImage2}
-              alt="Post Image 2"
-              onClick={() => openImageModal(PostImage2)}
-            />
-          </div>
-          <div>
-            <img
-              src={PostImage3}
-              alt="Post Image 3"
-              onClick={() => openImageModal(PostImage3)}
-            />
-          </div>
+          {post.imageContent && post.imageContent.length > 0 ? (
+            post.imageContent.map((item, index) => (
+              <div key={index}>
+                <img
+                  src={item} // Use `item` as the src for each image
+                  alt={`Post Image ${index + 1}`}
+                  onClick={() => openImageModal(item)}
+                />
+              </div>
+            ))
+          ) : (
+            <p>No images available</p>
+          )}
         </Slider>
       </div>
       <div className="post-interactions">
@@ -157,7 +138,7 @@ const PostContent = ({ showCommentSection = true }) => {
           <hr />
           <div className="bottom-section">
             <div className="user-image">
-              <img src={UserImage} alt="User" />
+              <img src={profile.profileImg} alt="User" />
             </div>
             <div className="comment-field">
               <input
