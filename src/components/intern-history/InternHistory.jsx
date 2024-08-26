@@ -4,9 +4,24 @@ import editIcon from '../../assets/editIcon.svg';
 import AddInternExperience from "../add-intern-experience/add-intern-experience";
 import InternshipDetail from "../internship-detail/InternshipDetail";
 
-import "./InternHistory.css";
-
 export default function InternHistory({ internship }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEditClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSaveInternship = (newInternship) => {
+    // You would typically handle saving the new internship experience here
+    // For example, you might update the parent component's state or make an API call
+    setIsModalOpen(false);
+    console.log("New Internship Experience Saved", newInternship);
+  };
+
   return (
     <div className="intern-history-container">
       <div className="intern-history-header">
@@ -22,7 +37,7 @@ export default function InternHistory({ internship }) {
             <InternshipDetail key={index} detail={item} />
           ))
         ) : (
-          ""
+          <p>No internship experience added yet.</p>
         )}
       </div>
 
