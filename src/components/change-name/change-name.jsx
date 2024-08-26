@@ -9,6 +9,7 @@ import { jwtDecode } from "jwt-decode";
 export default function ChangeName() {
     const [newFullName, setNewFullName] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState("");
     const navigate = useNavigate();
 
     const handleNameChange = async () => {
@@ -21,10 +22,8 @@ export default function ChangeName() {
         try {
             const decodedToken = jwtDecode(token);
             const userId = decodedToken.payload.id;
-            console.log(token);
-            console.log(userId);
 
-            await axios.patch(`http://localhost:8080/users/${userId}/updateFullName`, {
+            const response = await axios.patch(`http://localhost:8080/users/${userId}/updateFullName`, {
                 newFullName,
             }, {
                 headers: {
@@ -33,10 +32,12 @@ export default function ChangeName() {
                 },
             });
 
-            // Navigate to account info page after successful change
-            navigate('/AccountInfo');
+            if (response.status === 200) {
+                setSuccess("Name changed successfully.");
+                setError("");
+                navigate('/AccountInfo');
+            }
         } catch (error) {
-            console.error('Error updating name:', error);
             setError('Failed to update name. Please try again.');
         }
     };
@@ -54,6 +55,7 @@ export default function ChangeName() {
                         value={newFullName}
                         onChange={(e) => setNewFullName(e.target.value)}
                     />
+                    {success && <p className="success-message">{success}</p>}
                     {error && <p className="error-message">{error}</p>}
                 </div>
             </div>
