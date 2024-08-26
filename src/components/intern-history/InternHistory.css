@@ -16,8 +16,8 @@
 .intern-history-container hr {
   border: none;
   height: 0.1px;
-  background-color: #e2e2e2;
-  margin-bottom: 15px;
+  background-color: #E2E2E2;
+
 }
 
 .internship-detail-container {
@@ -34,4 +34,22 @@
   font-size: 12px;
   font-weight: 600;
   font-style: italic;
+  color: #01BAF2;
+}
+
+.intern-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.internship-edit {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.internship-edit-icon {
+  width: 20px;
+  height: 20px;
 }
