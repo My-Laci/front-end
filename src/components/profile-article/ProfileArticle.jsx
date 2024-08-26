@@ -1,25 +1,19 @@
 import "../profile-article/ProfileArticle.css";
 import { Link } from "react-router-dom";
 
-export default function ArticleProfile() {
+export default function ArticleProfile(article) {
   return (
     <>
-      <Link to="/Article" className="article-list-link">
+      <Link to="/Article" className="article-list-link" state={{article}}>
         <div className="article">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnv7w7ucSs7oFZr2IEj0iCY7y_PXV87c2o1A&s"
+            src={article.image.url}
             alt=""
           />
           <div className="articles-detail">
-            <h3>Akhirnya Ketemu! Vincent Bertemu Pak Vinsen</h3>
+            <h3>{article.title}</h3>
             <p>
-              Hari ini adalah hari yang sangat memuaskan bagi saya dan tim. Kami
-              berhasil menyelesaikan proyek optimisasi jaringan di wilayah
-              Jakarta  Hari ini adalah hari yang sangat memuaskan bagi saya dan tim. Kami
-              berhasil menyelesaikan proyek optimisasi jaringan di wilayah
-              Jakarta Hari ini adalah hari yang sangat memuaskan bagi saya dan tim. Kami
-              berhasil menyelesaikan proyek optimisasi jaringan di wilayah
-              Jakarta
+            {article.content}
             </p>
           </div>
         </div>

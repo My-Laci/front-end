@@ -3,24 +3,8 @@ import "../profile-content/ProfileContent.css";
 import Article from "../profile-article/ProfileArticle";
 import PostContent from "../post-content/post-content";
 
-export default function ProfileContent() {
+export default function ProfileContent({ post, profile, article }) {
   const [activeTab, setActiveTab] = useState("posts");
-
-  const posts = [
-    <>
-      <PostContent />
-    </>,
-  ];
-
-  const articles = [
-    <>
-      <Article />
-      <Article />
-      <Article />
-      <Article />
-      <Article />
-    </>,
-  ];
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -52,12 +36,22 @@ export default function ProfileContent() {
       </div>
       {activeTab === "articles" && (
         <div className="profile-content-list">
-          {articles.length > 0 ? articles : <p>Nothing to post</p>}
+          {article.length > 0 ? (
+            article.map((item) => <Article key={item._id} {...item} />)
+          ) : (
+            <p>No articles available</p>
+          )}
         </div>
       )}
       {activeTab === "posts" && (
         <div className="profile-content-list">
-          {posts.length > 0 ? posts : <p>Nothing to post</p>}
+          {post.length > 0 ? (
+            post.map((item, index) => (
+              <PostContent key={index} post={item} profile={profile} />
+            ))
+          ) : (
+            <p>No posts available</p>
+          )}
         </div>
       )}
     </div>

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Certificate from "../../components/certificate/certificate";
 import { jsPDF } from "jspdf";
@@ -7,6 +8,10 @@ import "./CertificateGenarator.css";
 
 export default function CertificateGenerator() {
   const certificateRef = useRef();
+  const location = useLocation();
+  const { detail } = location.state || {};
+
+  console.log("Ini adalah detail di CertificateGenerator:", detail);
 
   const handleDownload = () => {
     if (certificateRef.current) {
@@ -51,7 +56,7 @@ export default function CertificateGenerator() {
           ref={certificateRef}
           className="scrollable-certificate"
         >
-          <Certificate />
+          <Certificate detail={detail} />
         </div>
       </div>
       <div className="certificate-button-nest">

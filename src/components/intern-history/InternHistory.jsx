@@ -4,22 +4,8 @@ import editIcon from '../../assets/editIcon.svg';
 import AddInternExperience from "../add-intern-experience/add-intern-experience";
 import InternshipDetail from "../internship-detail/InternshipDetail";
 
-export default function InternHistory() {
+export default function InternHistory({ internship }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [internships, setInternships] = useState([
-    {
-      id: 1,
-      role: "Fullstack Web Developer",
-      period: "February 2024 - June 2024",
-      jobdesk: ["Develop laci", "Deploy laci"]
-    },
-    {
-      id: 2,
-      role: "Backend Developer",
-      period: "January 2023 - March 2023",
-      jobdesk: ["Develop API", "Integrate database"]
-    }
-  ]);
 
   const handleEditClick = () => {
     setIsModalOpen(true);
@@ -30,7 +16,10 @@ export default function InternHistory() {
   };
 
   const handleSaveInternship = (newInternship) => {
-    setInternships([...internships, newInternship]);
+    // You would typically handle saving the new internship experience here
+    // For example, you might update the parent component's state or make an API call
+    setIsModalOpen(false);
+    console.log("New Internship Experience Saved", newInternship);
   };
 
   return (
@@ -43,7 +32,13 @@ export default function InternHistory() {
       </div>
       <hr />
       <div className="internship-detail-container">
-        <InternshipDetail />
+        {internship.length > 0 ? (
+          internship.map((item, index) => (
+            <InternshipDetail key={index} detail={item} />
+          ))
+        ) : (
+          <p>No internship experience added yet.</p>
+        )}
       </div>
 
       <AddInternExperience

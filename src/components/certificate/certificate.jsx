@@ -2,7 +2,17 @@ import CertificateRightSide from "../../assets/certificate.svg";
 import TTD from "../../assets/Tanda_tangan_bapak.png";
 import "./certificate.css";
 
-export default function Certificate() {
+// Function to format date to "1 Januari 2024"
+const formatDate = (date) => {
+  if (!date) return "Tanggal tidak tersedia";
+  return new Date(date).toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
+export default function Certificate({ detail }) {
   return (
     <>
       <div id="certificate-content" className="certificate-content">
@@ -15,14 +25,14 @@ export default function Certificate() {
               </div>
 
               <p id="certificate-diberikan-kepada">Diberikan kepada :</p>
-              <h2>Edo Mahendra</h2>
+              <h2>{detail.fullname}</h2>
               <div className="creatificate-position">
                 <p>Atas kelulusan magang telkomsel sebagai</p>
-                <p className="certificate-jobdesk">Fullstack Developer</p>
+                <p className="certificate-jobdesk">{detail.positions}</p>
               </div>
 
               <div className="certificate-hand-sign">
-                <p>25 Agustus 2024</p>
+                <p>{formatDate(detail.updatedAt)}</p> {/* Format tanggal */}
                 <img src={TTD} alt="Signature" />
                 <p>Nugroho</p>
                 <p id="hand-sign-positions">Direktur Utama Telkomsel</p>
