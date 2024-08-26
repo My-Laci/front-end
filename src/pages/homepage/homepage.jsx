@@ -43,10 +43,9 @@ const Homepage = () => {
         );
         setProfile(profileResponse.data);
 
-        const postResponse = await axios.get(`http://localhost:8080/post/all`);
-        
-        // Assuming postResponse.data has a property 'getUserPost' that contains the posts array
-        setPost(postResponse.data.getUserPost || []);
+        const postResponse = await axios.get(`http://localhost:8080/posts`);
+
+        setPost(postResponse.data.getAllPost || []);
         console.log(postResponse.data);
       } catch (err) {
         setError(err.message);
