@@ -1,124 +1,142 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import UserImage from "../../assets/test-profile.svg";
-import ArticleCover from "../../assets/image1.svg";
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
 import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
+
 import "./article-content.css";
 
 const ArticleContent = () => {
-  const [animateLike, setAnimateLike] = useState(false);
-  const [animateBookmark, setAnimateBookmark] = useState(false);
-  const [animateComment, setAnimateComment] = useState(false);
-  const [animateRepost, setAnimateRepost] = useState(false);
+  const [articles, setArticles] = useState([]);
+  const [animateLike, setAnimateLike] = useState(null);
+  const [animateBookmark, setAnimateBookmark] = useState(null);
+  const [animateComment, setAnimateComment] = useState(null);
+  const [animateRepost, setAnimateRepost] = useState(null);
 
-  const commentInputRef = useRef(null);
+  const commentInputRefs = useRef([]);
 
-  const triggerLikeAnimation = () => {
-    setAnimateLike(true);
-    setTimeout(() => setAnimateLike(false), 300);
+  useEffect(() => {
+    // Fetch articles from the API
+    const fetchArticles = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/articles");
+        setArticles(response.data);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
+  const triggerLikeAnimation = (index) => {
+    setAnimateLike(index);
+    setTimeout(() => setAnimateLike(null), 300);
   };
 
-  const triggerBookmarkAnimation = () => {
-    setAnimateBookmark(true);
-    setTimeout(() => setAnimateBookmark(false), 300);
+  const triggerBookmarkAnimation = (index) => {
+    setAnimateBookmark(index);
+    setTimeout(() => setAnimateBookmark(null), 300);
   };
 
-  const triggerCommentAnimation = () => {
-    setAnimateComment(true);
-    setTimeout(() => setAnimateComment(false), 300);
-    focusCommentField();
+  const triggerCommentAnimation = (index) => {
+    setAnimateComment(index);
+    setTimeout(() => setAnimateComment(null), 300);
+    focusCommentField(index);
   };
 
-  const triggerRepostAnimation = () => {
-    setAnimateRepost(true);
-    setTimeout(() => setAnimateRepost(false), 300);
+  const triggerRepostAnimation = (index) => {
+    setAnimateRepost(index);
+    setTimeout(() => setAnimateRepost(null), 300);
   };
 
-  const focusCommentField = () => {
-    if (commentInputRef.current) {
-      commentInputRef.current.focus();
+  const focusCommentField = (index) => {
+    if (commentInputRefs.current[index]) {
+      commentInputRefs.current[index].focus();
     }
   };
 
   return (
-    <div className="content-card">
-      <div className="article-info">
-        <div className="user-image">
-          <img src={UserImage} alt="User" />
-        </div>
-        <div className="details-article">
-          <div className="user-name">
-            Vinsen
-            <span className="divider"> | </span>
-            <span className="user-instance"> Universitas Airlangga</span>
+    <div className="content-container">
+      {articles.map((article, index) => (
+        <div className="content-card" key={article._id}>
+          <div className="article-info">
+            <div className="user-image">
+              <img src={UserImage} alt="User" />
+            </div>
+            <div className="details-article">
+              <div className="user-name">
+                {article.author.name}
+                <span className="divider"> | </span>
+                <span className="user-instance">
+                  {article.author.agencyOrigin}
+                </span>
+              </div>
+              <div className="date-time-article">
+                {new Date(article.createdAt).toLocaleString()}
+              </div>
+            </div>
           </div>
-          <div className="date-time-article">10 hours ago</div>
+          <div className="article-img">
+            <img src={article.image.url} alt="Article Image" />
+          </div>
+          <div className="article-title">{article.title}</div>
+          <div className="article-text">{article.content}</div>
+          <div className="post-interactions">
+            <button
+              className={`interaction ${
+                animateLike === index ? "animate" : ""
+              }`}
+              onClick={() => triggerLikeAnimation(index)}
+            >
+              <img src={Like} alt="Like" />
+              <div className="text-interaction">Like</div>
+            </button>
+            <button
+              className={`interaction ${
+                animateComment === index ? "animate" : ""
+              }`}
+              onClick={() => triggerCommentAnimation(index)}
+            >
+              <img src={Comment} alt="Comment" />
+              <div className="text-interaction">Comment</div>
+            </button>
+            <button
+              className={`interaction ${
+                animateRepost === index ? "animate" : ""
+              }`}
+              onClick={() => triggerRepostAnimation(index)}
+            >
+              <img src={Repost} alt="Repost" />
+              <div className="text-interaction">Repost</div>
+            </button>
+            <button
+              className={`interaction ${
+                animateBookmark === index ? "animate" : ""
+              }`}
+              onClick={() => triggerBookmarkAnimation(index)}
+            >
+              <img src={Bookmark} alt="Bookmark" />
+              <div className="text-interaction">Bookmark</div>
+            </button>
+          </div>
+          <hr></hr>
+          <div className="bottom-section">
+            <div className="user-image">
+              <img src={UserImage} alt="User" />
+            </div>
+            <div className="comment-field">
+              <input
+                type="text"
+                placeholder="Write your comment here"
+                ref={(el) => (commentInputRefs.current[index] = el)}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="article-img">
-        <img src={ArticleCover} alt="Article Image" />
-      </div>
-      <div className="article-title">
-        Peningkatan Kualitas Sinyal Setelah Optimisasi
-      </div>
-      <div className="article-text">
-        Hari ini adalah hari yang sangat memuaskan bagi saya dan tim. Kami
-        berhasil menyelesaikan proyek optimisasi jaringan di wilayah Jakarta
-        yang sudah kami kerjakan selama beberapa minggu terakhir. Proyek ini
-        melibatkan analisis menyeluruh terhadap area dengan sinyal lemah,
-        perencanaan penempatan perangkat tambahan, dan pengujian hasil
-        perbaikan. Setelah optimisasi, kualitas sinyal di area tersebut
-        meningkat sebesar 20%, yang sangat signifikan untuk meningkatkan
-        pengalaman pelanggan. Terima kasih kepada tim yang selalu bekerja keras
-        dan memberikan dukungan penuh dalam setiap tahap proyek ini. Pengalaman
-        ini benar-benar menambah wawasan dan keterampilan saya dalam bidang
-        telekomunikasi.
-      </div>
-      <div className="post-interactions">
-        <button
-          className={`interaction ${animateLike ? "animate" : ""}`}
-          onClick={triggerLikeAnimation}
-        >
-          <img src={Like} alt="Like" />
-          <div className="text-interaction">Like</div>
-        </button>
-        <button
-          className={`interaction ${animateComment ? "animate" : ""}`}
-          onClick={triggerCommentAnimation}
-        >
-          <img src={Comment} alt="Comment" />
-          <div className="text-interaction">Comment</div>
-        </button>
-        <button
-          className={`interaction ${animateRepost ? "animate" : ""}`}
-          onClick={triggerRepostAnimation}
-        >
-          <img src={Repost} alt="Repost" />
-          <div className="text-interaction">Repost</div>
-        </button>
-        <button
-          className={`interaction ${animateBookmark ? "animate" : ""}`}
-          onClick={triggerBookmarkAnimation}
-        >
-          <img src={Bookmark} alt="Bookmark" />
-          <div className="text-interaction">Bookmark</div>
-        </button>
-      </div>
-      <hr></hr>
-      <div className="bottom-section">
-        <div className="user-image">
-          <img src={UserImage} alt="User" />
-        </div>
-        <div className="comment-field">
-          <input
-            type="text"
-            placeholder="Write your comment here"
-            ref={commentInputRef}
-          />
-        </div>
-      </div>
+      ))}
     </div>
   );
 };

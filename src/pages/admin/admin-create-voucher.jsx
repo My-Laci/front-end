@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+import React, { useState } from "react";
 import axios from "axios";
 import AdminSidebar from "../../components/admin-sidebar/admin-sidebar";
 import AdminNavbar from "../../components/admin-navbar/admin-navbar";
@@ -8,43 +7,39 @@ import "./admin-create-voucher.css";
 const AdminCreateVoucher = () => {
   const [batchName, setBatchName] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-  }, []);
-
-  // Function to handle form submission
-  const handleSubmit = async () => {
-    const token = Cookies.get("token");
-    if (!token) {
-      setError("You're not logged in yet.");
-      return;
-    }
+  const handleCreateVoucher = async () => {
+    setLoading(true);
+    setError("");
+    setSuccess("");
 
     try {
-      const decodedToken = JSON.parse(atob(token.split(".")[1]));
-      const id = decodedToken.payload.id;
+      const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        `http://localhost:8080/vouchers/create`,
+        "http://localhost:8080/vouchers/create",
+        { batchName, quantity },
         {
-          batchName,
-          quantity,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
-      // Handle successful response
-      console.log("Voucher created:", response.data);
-      // Reset form or redirect user if needed
-      setBatchName("");
-      setQuantity(1);
-    } catch (error) {
-      setError("Failed to create voucher. Please try again.");
-      console.error("API error:", error);
+      setSuccess(
+        `Vouchers created successfully!`
+      );
+    } catch (err) {
+      setError(
+        err.response?.data?.error ||
+          "Failed to create vouchers. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,15 +63,17 @@ const AdminCreateVoucher = () => {
             className="create-voucher-batch-total"
             min="1"
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={(e) => setQuantity(Number(e.target.value))}
           />
           <button
             className="create-voucher-button"
-            onClick={handleSubmit}
+            onClick={handleCreateVoucher}
+            disabled={loading}
           >
-            Create Voucher
+            {loading ? "Creating..." : "Create Voucher"}
           </button>
           {error && <p className="error-message">{error}</p>}
+          {success && <p className="success-message">{success}</p>}
         </div>
       </div>
     </>

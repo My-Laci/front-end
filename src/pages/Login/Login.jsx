@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginBanner from "../../assets/Regist-banner.svg";
 import LoginIcon from "../../assets/Login-icon.svg";
@@ -75,7 +75,9 @@ export default function Login() {
           </div>
           <BlueButton type="submit" label="Continue" />
           <p id="dont-have-account">
-            Don’t have an account?<a href="#">Register Here</a>
+            Don’t have an account?<Link to="/register">
+              Register Here
+            </Link>
           </p>
           <p id="login-or">OR</p>
           <GreenButton label="View As Guest" />
