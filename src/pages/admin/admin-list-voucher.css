@@ -38,6 +38,7 @@ body {
   gap: 20px;
   font-weight: 600;
 }
+
 @media (max-width: 1024px) {
   .admin-list-content {
     margin: 0px 10px 0px 10px;

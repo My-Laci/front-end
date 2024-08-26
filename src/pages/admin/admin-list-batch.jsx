@@ -1,51 +1,72 @@
-import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import AdminSidebar from "../../components/admin-sidebar/admin-sidebar";
 import AdminNavbar from "../../components/admin-navbar/admin-navbar";
 import "./admin-list-batch.css";
 
 const AdminListBatch = () => {
+  const [batchList, setBatchList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchVouchers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8080/vouchers", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const groupedVouchers = Object.keys(response.data).map(
+          (batchName, index) => ({
+            batchName,
+            index: index + 1,
+          })
+        );
+
+        setBatchList(groupedVouchers);
+      } catch (err) {
+        setError("Failed to load voucher batches.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVouchers();
+  }, []);
+
   return (
     <>
       <AdminNavbar />
       <AdminSidebar />
-      <body>
-        <div className="admin-list-batch">
-          <h1 className="admin-h1">Batch Created</h1>
-          <div className="main-list-batch">
-            <Link to="/AdminCreateVoucher" className="batch-link">
-              <a className="batch-list" href="/">
-                <div className="batch-number-list">1</div>
-                <div className="batch-name-list">Magang Batch 1</div>
-              </a>
-            </Link>
-            <Link to="/AdminCreateVoucher" className="batch-link">
-              <a className="batch-list" href="/">
-                <div className="batch-number-list">2</div>
-                <div className="batch-name-list">Magang Batch 2</div>
-              </a>
-            </Link>
-            <Link to="/AdminCreateVoucher" className="batch-link">
-              <a className="batch-list" href="/">
-                <div className="batch-number-list">3</div>
-                <div className="batch-name-list">Magang Batch 3</div>
-              </a>
-            </Link>
-            <Link to="/AdminCreateVoucher" className="batch-link">
-              <a className="batch-list" href="/">
-                <div className="batch-number-list">4</div>
-                <div className="batch-name-list">Magang Batch 4</div>
-              </a>
-            </Link>
-            <Link to="/AdminCreateVoucher" className="batch-link">
-              <a className="batch-list" href="/">
-                <div className="batch-number-list">5</div>
-                <div className="batch-name-list">Magang Batch 5</div>
-              </a>
-            </Link>
-          </div>
+      <div className="admin-list-batch">
+        <h1 className="admin-h1">Batch Created</h1>
+        <div className="main-list-batch">
+          {loading && <p>Loading...</p>}
+          {error && <p>{error}</p>}
+          {!loading && !error && batchList.length === 0 && (
+            <p>No voucher batches found.</p>
+          )}
+          {!loading &&
+            !error &&
+            batchList.length > 0 &&
+            batchList.map((batch) => (
+              <Link
+                to={`/AdminCreateVoucher/${batch.batchName}`}
+                className="batch-link"
+                key={batch.index}
+              >
+                <div className="batch-list">
+                  <div className="batch-number-list">{batch.index}</div>
+                  <div className="batch-name-list">{batch.batchName}</div>
+                </div>
+              </Link>
+            ))}
         </div>
-      </body>
+      </div>
     </>
   );
 };

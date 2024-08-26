@@ -77,10 +77,10 @@ const Navbar = () => {
                     className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}
                   >
                     <div className="create-article-a">
-                      <a href="/create-article">Create Article</a>
+                      <a href="/createarticle">Create Article</a>
                     </div>
                     <div className="create-post-a">
-                      <a href="/create-post">Create Post</a>
+                      <a href="/createpost">Create Post</a>
                     </div>
                   </div>
                 )}
