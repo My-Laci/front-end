@@ -42,6 +42,34 @@
         box-shadow: 0 0 5px rgba(1, 186, 242, 0.5);
     }
 
+    .save-changes-button {
+        width: calc(100% - 40px);
+        margin: 0px 20px 20px 20px;
+        padding: 15px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #9ACB3D;
+        background-color: #E5EFD3;
+        border: 1px solid #9ACB3D;
+        border-radius: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.2s;
+    }
+
+    .save-changes-button:hover {
+        background-color: #d9ff92;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+        text-align: center;
+        /* Center align text */
+    }
+
 
     @media (max-width: 768px) {
         .changeName-card {
@@ -55,5 +83,9 @@
 
         hr {
             margin: 10px 0px 10px 0px;
+        }
+
+        .save-changes-button {
+            margin: 20px 20px 20px 20px;
         }
     }

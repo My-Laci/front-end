@@ -1,5 +1,10 @@
 import "../blue-button/BlueButton.css";
 
-export default function BlueButton(props) {
-  return <button id="blue-button">{props.label || "Label"}</button>;
+// eslint-disable-next-line react/prop-types
+export default function BlueButton({ label, onClick }) {
+  return (
+    <button id="blue-button" onClick={onClick}>
+      {label || "Label"}
+    </button>
+  );
 }

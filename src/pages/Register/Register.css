@@ -1,3 +1,81 @@
+.modal-dialog {
+  max-width: 600px;
+  /* Lebar maksimum modal */
+  margin: 30px auto;
+  /* Margin untuk memastikan modal berada di tengah layar */
+}
+
+.modal-content {
+  border-radius: 15px;
+  /* Radius sudut modal */
+  padding: 20px;
+  /* Padding di dalam modal */
+  border: none;
+  /* Menghilangkan border default */
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  border: none;
+  /* Menghilangkan border default */
+}
+
+.modal-header {
+  border-bottom: none;
+  /* Menghilangkan border bawah header modal */
+  padding-bottom: 0;
+  /* Mengurangi padding bawah header */
+}
+
+.modal-footer {
+  border-top: none;
+  /* Menghilangkan border atas footer modal */
+  padding-top: 0;
+  /* Mengurangi padding atas footer */
+  text-align: center;
+  /* Menempatkan isi footer di tengah */
+}
+
+.modal-title {
+  font-size: 24px;
+  /* Ukuran font judul modal */
+}
+
+.modal-body {
+  font-size: 16px;
+  /* Ukuran font isi modal */
+  text-align: center;
+  /* Memusatkan teks di dalam modal body */
+}
+
+.go-to-login-btn {
+  background-image: linear-gradient(to right, #5cd9ff, #01baf2);
+  /* Warna latar belakang tombol "Go to Login" */
+  color: #ffffff;
+  /* Warna teks tombol */
+}
+
+
+.modal-footer .btn {
+  /* Warna latar belakang tombol */
+  border: none;
+  /* Menghilangkan border default tombol */
+  color: #ffffff;
+  /* Warna teks tombol */
+  border-radius: 50px;
+  /* Membulatkan sudut tombol */
+  font-size: 14px;
+  /* Ukuran font tombol */
+  font-weight: 600;
+  /* Berat font tombol */
+  padding: 10px 20px;
+  /* Padding tombol */
+  margin-top: 20px;
+  /* Jarak tombol dari elemen di atasnya */
+}
+
+/* CSS yang ada */
 .register-container {
   display: flex;
   flex-direction: row;
@@ -26,9 +104,20 @@
 
 .register-formlist {
   width: 70%;
+  /* Pertahankan lebar untuk responsivitas */
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+
+.register-formlist p,
+.register-formlist form,
+.register-formlist input,
+.register-formlist button {
+  width: 100%;
+  /* Memastikan semua elemen dalam form memiliki lebar penuh */
+  box-sizing: border-box;
+  /* Pastikan padding tidak memengaruhi lebar */
 }
 
 .register-formlist p {
