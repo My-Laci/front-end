@@ -40,7 +40,11 @@ export default function ChangePassword() {
                 navigate('/AccountInfo');
             }
         } catch (error) {
-            setError("Failed to change password. Please try again.");
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError('Failed to update password. Please try again.');
+            }
         }
     };
 
