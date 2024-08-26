@@ -30,6 +30,10 @@ const Homepage = () => {
         <div className="container">
           <div className="content">
             <PostContent showCommentSection={true} />
+            <PostContent showCommentSection={true} />
+            <PostContent showCommentSection={true} />
+            <PostContent showCommentSection={true} />
+            <PostContent showCommentSection={true} />
           </div>
           <SidebarTablet />
           <Aside />

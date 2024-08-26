@@ -50,6 +50,8 @@
 
 .post-img {
   margin-bottom: 20px !important;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 .post-img img {
@@ -71,11 +73,22 @@
   z-index: 1 !important;
   width: 40px !important;
   height: 40px !important;
+  color: white;
+}
+
+.slick-next {
+  right: 0;
+  margin-right: 10px;
+}
+
+.slick-prev {
+  left: 0;
+  margin-left: 10px;
 }
 
 .slick-prev::before,
 .slick-next::before {
-  color: #01baf2 !important;
+  color: white !important;
   font-size: 35px !important;
 }
 
@@ -89,7 +102,7 @@
 }
 
 .slick-dots li.slick-active button:before {
-  color: #01baf2 !important;
+  color: white !important;
 }
 
 .post-interactions {

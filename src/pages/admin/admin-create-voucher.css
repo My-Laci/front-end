@@ -79,6 +79,11 @@ body {
   font-family: "Nunito Sans", sans-serif;
 }
 
+.success-message,
+.error-message {
+  margin-top: 15px;
+}
+
 @media (max-width: 1024px) {
   .admin-create-content {
     margin: 0px 10px 0px 10px;
