@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProfileBanner from "../../components/profile-banner/ProfileBanner";
 import Navbar from "../../components/navbar/Navbar";
 import SideBar from "../../components/sidebar/sidebar";
+import SidebarTablet from "../../components/sidebar-tablet/sidebar-tablet.jsx";
 import InternHistory from "../../components/intern-history/InternHistory";
 import ProfileContent from "../../components/profile-content/ProfileContent";
 import axios from "axios";
@@ -73,9 +74,10 @@ function Profile() {
   console.log("last inter", lastInternship);
 
   return (
-    <div className="container">
+    <div className="profile-container">
       <Navbar />
       <SideBar />
+      <SidebarTablet />
       <div className="profile">
         {error ? (
           <p className="error">{error}</p>

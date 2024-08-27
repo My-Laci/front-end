@@ -57,10 +57,11 @@ const Homepage = () => {
   }, []);
 
   return (
-    <>
+    <div className="homepage-container">
       <Navbar />
       <Sidebar />
-      <div className="container">
+      <SidebarTablet />
+      <div className="homepage-content">
         <div className="content">
           {error && <p className="error">{error}</p>}
           {post.length > 0 ? (
@@ -71,11 +72,10 @@ const Homepage = () => {
             <p>No posts available</p>
           )}
         </div>
-        <SidebarTablet />
         <Aside />
       </div>
       <LoginRegisterPopup show={showPopup} onClose={closePopup} />
-    </>
+    </div>
   );
 };
 
