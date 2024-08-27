@@ -48,7 +48,7 @@ export default function Register() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/signup", {
+      const response = await axios.post("https://laci-api-owihrlqaza-et.a.run.app/signup", {
         name: fullName,
         email,
         password,

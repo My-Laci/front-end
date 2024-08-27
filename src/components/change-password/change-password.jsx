@@ -24,7 +24,7 @@ export default function ChangePassword() {
         try {
             const token = Cookies.get('token');
             const userId = jwtDecode(token).payload.id;
-            const response = await axios.patch(`http://localhost:8080/users/${userId}/updatePassword`, {
+            const response = await axios.patch(`https://laci-api-owihrlqaza-et.a.run.app/users/${userId}/updatePassword`, {
                 oldPassword,
                 newPassword
             }, {

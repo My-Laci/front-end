@@ -27,7 +27,7 @@ export default function ChangePasswordPage() {
                 const decodedToken = jwtDecode(token);
                 const userId = decodedToken.payload.id;
 
-                const response = await axios.get(`http://localhost:8080/users/${userId}`, {
+                const response = await axios.get(`https://laci-api-owihrlqaza-et.a.run.app/users/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
