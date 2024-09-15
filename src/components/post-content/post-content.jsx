@@ -3,15 +3,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./post-content.css";
-import UserImage from "../../assets/test-profile.svg";
-import PostImage1 from "../../assets/imagetest1.jpg";
-import PostImage2 from "../../assets/imagetest2.jpg";
-import PostImage3 from "../../assets/imagetest3.jpg";
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
 import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
 import ImageModal from "../image-modal/image-modal.jsx";
+import GuestProfile from "../../assets/unknown-profile.svg"
+import { format, parseISO } from "date-fns"; // Import date-fns functions
 
 const PostContent = ({ profile, post, showCommentSection = true }) => {
   console.log("uini post", post);
@@ -70,11 +68,17 @@ const PostContent = ({ profile, post, showCommentSection = true }) => {
     adaptiveHeight: true,
   };
 
+  // Format the post date
+  const formatDate = (dateString) => {
+    const date = parseISO(dateString);
+    return format(date, "dd MMM yyyy 'at' HH:mm");
+  };
+
   return (
     <div className="content-card">
       <div className="post-info">
         <div className="user-image">
-          <img src={profile.profileImg} alt="User" />
+          <img src={post.profileImage} alt="User" />
         </div>
         <div className="details-post">
           <div className="user-name">
@@ -82,7 +86,7 @@ const PostContent = ({ profile, post, showCommentSection = true }) => {
             <span className="divider"> | </span>
             <span className="user-instance">{post.agencyOrigin}</span>
           </div>
-          <div className="date-time-post">{post.createdAt}</div>
+          <div className="date-time-post">{formatDate(post.createdAt)}</div>
         </div>
       </div>
       <div className="post-text">{post.caption}</div>
@@ -138,7 +142,7 @@ const PostContent = ({ profile, post, showCommentSection = true }) => {
           <hr />
           <div className="bottom-section">
             <div className="user-image">
-              <img src={profile.profileImg} alt="User" />
+              <img src={profile.profileImg || GuestProfile } alt="User" />
             </div>
             <div className="comment-field">
               <input

@@ -13,6 +13,13 @@
   z-index: 1000;
 }
 
+.sidebar a {
+  display: flex;
+  text-decoration: none;
+  width: 100%;
+  justify-content: center;
+}
+
 .sidebar button {
   width: 80%;
   padding: 15px;

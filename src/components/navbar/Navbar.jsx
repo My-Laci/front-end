@@ -1,15 +1,47 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
 import "./Navbar.css";
 import burgerIcon from "../../assets/burger.svg";
 import searchInIcon from "../../assets/search-in.svg";
 import searchIcon from "../../assets/search.svg";
 import addPostIcon from "../../assets/add.svg";
 import SidebarPhone from "../sidebar-phone/sidebar-phone.jsx";
+import GuestProfile from "../../assets/unknown-profile.svg"; // Ensure this path is correct
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [user, setUser] = useState(null); // State to hold user info
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const token = Cookies.get("token");
+
+        if (token) {
+          // Token exists, decode and fetch user profile
+          const decodedToken = JSON.parse(atob(token.split(".")[1]));
+          const userId = decodedToken.payload.id;
+
+          // Fetch user profile
+          const profileResponse = await axios.get(`http://localhost:8080/users/${userId}`);
+          console.log("iki profilemu navbar su", profileResponse.data)
+          setUser(profileResponse.data); // Set profile data
+        } else {
+          // No token means guest
+          setUser({ name: "Guest", agencyOrigin: "Guest Campus" }); // Adjust agencyOrigin if needed
+        }
+      } catch (error) {
+        console.error("Failed to check user", error);
+        setUser({ name: "Guest", agencyOrigin: "Guest Campus" }); // Fallback for errors
+      }
+    };
+
+    checkUser();
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -42,9 +74,9 @@ const Navbar = () => {
               <button className="sidebar-toggle" onClick={toggleSidebar}>
                 <img src={burgerIcon} alt="Sidebar Icon" />
               </button>
-              <a href="/">
+              <Link to="/">
                 <div className="navbar-logo">Laci</div>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -57,9 +89,11 @@ const Navbar = () => {
         <div className="navbar-section-3">
           <div className="navbar-user-section">
             <div className="navbar-user-info">
-              <div className="navbar-user-name">Edo Mahendra</div>
+              <div className="navbar-user-name">
+                {user ? user.name : "Guest"}
+              </div>
               <div className="navbar-user-university">
-                Universitas Airlangga
+                {user ? user.agencyOrigin : "Guest Campus"}
               </div>
             </div>
             <div className="navbar-search-icon">
@@ -73,9 +107,7 @@ const Navbar = () => {
                   <img src={addPostIcon} alt="Add Post Icon" />
                 </button>
                 {dropdownOpen && (
-                  <div
-                    className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}
-                  >
+                  <div className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}>
                     <div className="create-article-a">
                       <a href="/createarticle">Create Article</a>
                     </div>
@@ -87,9 +119,9 @@ const Navbar = () => {
               </div>
             </div>
             <div className="navbar-user-image">
-              <a href="/profile">
-                <img src="src/assets/ammar.svg" alt="User Image" />
-              </a>
+              <Link to="/Profile">
+                <img src={user && user.profileImg ? user.profileImg : GuestProfile} alt="User Image" />
+              </Link>
             </div>
           </div>
         </div>

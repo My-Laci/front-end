@@ -50,7 +50,7 @@ function Profile() {
         );
 
         setPost(postResponse.data.getUserPost ?? []);
-        console.log(postResponse.data.getUserPost);
+        console.log("Ini Post Data", postResponse.data.getUserPost);
 
         const articleResponse = await axios.get(
           `http://localhost:8080/articles/user/${id}`
@@ -75,9 +75,6 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <Navbar />
-      <SideBar />
-      <SidebarTablet />
       <div className="profile">
         {error ? (
           <p className="error">{error}</p>

@@ -55,7 +55,7 @@ const AdminListBatch = () => {
             batchList.length > 0 &&
             batchList.map((batch) => (
               <Link
-                to={`/AdminCreateVoucher/${batch.batchName}`}
+                to={`/Admin/ListVoucher/${batch.batchName}`}
                 className="batch-link"
                 key={batch.index}
               >

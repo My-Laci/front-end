@@ -73,7 +73,7 @@ export default function CreatePost({ onClose }) {
 
     try {
       const response = await axios.post(
-        "https://laci-api-owihrlqaza-et.a.run.app/post",
+        "http://localhost:8080/post",
         formData,
         {
           headers: {

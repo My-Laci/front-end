@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import LoginRegisterPopup from "../../components/loginregister-popup/loginregister-popup.jsx";
-import Navbar from "../../components/navbar/Navbar.jsx";
-import SidebarTablet from "../../components/sidebar-tablet/sidebar-tablet.jsx";
-import Sidebar from "../../components/sidebar/sidebar.jsx";
 import PostContent from "../../components/post-content/post-content.jsx";
 import Aside from "../../components/aside/aside.jsx";
 import axios from "axios";
@@ -12,44 +9,34 @@ import "./homepage.css";
 const Homepage = () => {
   const [post, setPost] = useState([]);
   const [profile, setProfile] = useState({});
-  const [error, setError] = useState(null);
   const [showPopup, setShowPopup] = useState(true);
 
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-  }, []);
-
+  // Tutup popup setelah pengguna melihatnya
   const closePopup = () => {
     setShowPopup(false);
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = Cookies.get("token");
-      if (!token) {
-        setError("You're not logged in yet.");
-        return;
-      }
-
       try {
-        const decodedToken = JSON.parse(atob(token.split(".")[1]));
-        const id = decodedToken.payload.id;
-
-        const profileResponse = await axios.get(
-          `http://localhost:8080/users/${id}`
-        );
-        setProfile(profileResponse.data);
-
+        // Ambil semua post tanpa memeriksa token
         const postResponse = await axios.get(`http://localhost:8080/posts`);
+        setPost(postResponse.data.getAllPost || []); // Set postingan
 
-        setPost(postResponse.data.getAllPost || []);
-        console.log(postResponse.data);
+        const token = Cookies.get("token");
+
+        // Jika token ada, ambil data profil
+        if (token) {
+          const decodedToken = JSON.parse(atob(token.split(".")[1]));
+          const id = decodedToken.payload.id;
+
+          const profileResponse = await axios.get(
+            `http://localhost:8080/users/${id}`
+          );
+          setProfile(profileResponse.data); // Set profil jika login
+        }
       } catch (err) {
-        setError(err.message);
-        console.error("Error fetching data", err);
+        console.error("Error fetching data", err); // Logging error ke console
       }
     };
 
@@ -58,12 +45,8 @@ const Homepage = () => {
 
   return (
     <div className="homepage-container">
-      <Navbar />
-      <Sidebar />
-      <SidebarTablet />
       <div className="homepage-content">
         <div className="content">
-          {error && <p className="error">{error}</p>}
           {post.length > 0 ? (
             post.map((item, index) => (
               <PostContent key={index} post={item} profile={profile} />

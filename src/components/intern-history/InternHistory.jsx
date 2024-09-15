@@ -16,8 +16,6 @@ export default function InternHistory({ internship }) {
   };
 
   const handleSaveInternship = (newInternship) => {
-    // You would typically handle saving the new internship experience here
-    // For example, you might update the parent component's state or make an API call
     setIsModalOpen(false);
     console.log("New Internship Experience Saved", newInternship);
   };

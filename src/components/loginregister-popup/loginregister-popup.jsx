@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import "./loginregister-popup.css";
 
 const LoginRegisterPopup = ({ show, onClose }) => {
@@ -14,10 +14,10 @@ const LoginRegisterPopup = ({ show, onClose }) => {
         </button>
         <div className="login-regist-pop-up-bottom-area">
           <p>Already have an account?</p>
-          <button onClick={{}}>Login</button>
+          <Link to="/login">Login</Link>
         </div>
         <button className="login-regist-popup-close" onClick={onClose}>
-          &times;
+          <i className="fa-solid fa-xmark"></i>
         </button>
       </div>
     </div>
