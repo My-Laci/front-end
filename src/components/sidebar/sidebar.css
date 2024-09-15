@@ -20,6 +20,11 @@
   justify-content: center;
 }
 
+.sidebar-p {
+  margin: 0;
+  margin-left: 15px;
+}
+
 .sidebar button {
   width: 80%;
   padding: 15px;

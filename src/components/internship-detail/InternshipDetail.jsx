@@ -30,13 +30,15 @@ export default function InternshipDetail({ detail }) {
           {startDate ? formatDate(startDate) : "Start date unknown"} -{" "}
           {endDate ? formatDate(endDate) : "Ongoing"}
         </p>
-        <Link
-          to="/Certificate"
-          state={{ detail }}  // Mengirim data sebagai state
-          className="internship-certificate-link"
-        >
-          Certificate
-        </Link>
+        {endDate && (
+          <Link
+            to="/Certificate"
+            state={{ detail }}  // Mengirim data sebagai state
+            className="internship-certificate-link"
+          >
+            Certificate
+          </Link>
+        )}
       </div>
     </div>
   );

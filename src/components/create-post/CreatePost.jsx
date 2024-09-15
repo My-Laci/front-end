@@ -12,6 +12,7 @@ export default function CreatePost({ onClose }) {
   const [inputValue, setInputValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
   const [tags, setTags] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const onDrop = (acceptedFiles) => {
     setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
@@ -50,7 +51,6 @@ export default function CreatePost({ onClose }) {
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       e.preventDefault();
-      // Check if the tag already exists to avoid duplicates
       if (!tags.includes(inputValue.trim())) {
         setTags([...tags, inputValue.trim()]);
       }
@@ -64,11 +64,11 @@ export default function CreatePost({ onClose }) {
 
   const createPostHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const formData = new FormData();
     formData.append("caption", textareaValue);
     tags.forEach((tag) => formData.append("tag", tag));
-
     files.forEach((file) => formData.append("imageContent", file));
 
     try {
@@ -84,7 +84,6 @@ export default function CreatePost({ onClose }) {
       );
 
       console.log("Post successful:", response.data);
-      // Clear form state
       setFiles([]);
       setSelectedFile(null);
       setInputValue("");
@@ -96,6 +95,8 @@ export default function CreatePost({ onClose }) {
         "Error posting:",
         error.response ? error.response.data : error.message
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -215,7 +216,18 @@ export default function CreatePost({ onClose }) {
             </a>
           </div>
           <div className="publish-button-create-post">
-            <button type="submit">Publish</button>
+            <button type="submit" disabled={loading}>
+              {loading ? (
+                <>
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                  Publish
+                </>
+              ) : (
+                <>Publish</>
+              )}
+            </button>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,19 +8,21 @@ import Comment from "../../assets/comment.svg";
 import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
 import ImageModal from "../image-modal/image-modal.jsx";
-import GuestProfile from "../../assets/unknown-profile.svg"
-import { format, parseISO } from "date-fns"; // Import date-fns functions
+import GuestProfile from "../../assets/unknown-profile.svg";
+import { format, parseISO } from "date-fns";
+import { deletePost } from "../../apis/PostApis.jsx";
 
-const PostContent = ({ profile, post, showCommentSection = true }) => {
-  console.log("uini post", post);
+const PostContent = ({ profile, post, showCommentSection = true, canDelete = false, onDelete }) => {
   const [animateLike, setAnimateLike] = useState(false);
   const [animateBookmark, setAnimateBookmark] = useState(false);
   const [animateComment, setAnimateComment] = useState(false);
   const [animateRepost, setAnimateRepost] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState("");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const commentInputRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   const triggerLikeAnimation = () => {
     setAnimateLike(true);
@@ -74,19 +76,66 @@ const PostContent = ({ profile, post, showCommentSection = true }) => {
     return format(date, "dd MMM yyyy 'at' HH:mm");
   };
 
+  // Toggle dropdown visibility
+  const toggleDropdown = () => {
+    setDropdownVisible((prev) => !prev);
+  };
+
+  // Handle clicks outside of the dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleDeleteClick = async () => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      try {
+        await deletePost(post._id); 
+        if (onDelete) {
+          onDelete(post._id); 
+        }
+      } catch (error) {
+        console.error("Error deleting post:", error);
+      }
+    }
+  };
+
   return (
     <div className="content-card">
       <div className="post-info">
-        <div className="user-image">
-          <img src={post.profileImage} alt="User" />
-        </div>
-        <div className="details-post">
-          <div className="user-name">
-            {post.fullname}
-            <span className="divider"> | </span>
-            <span className="user-instance">{post.agencyOrigin}</span>
+        <div className="post-info-container">
+          <div className="user-image">
+            <img src={post.profileImage || GuestProfile} alt="User" />
           </div>
-          <div className="date-time-post">{formatDate(post.createdAt)}</div>
+          <div className="details-post">
+            <div className="user-name">
+              {post.fullname}
+              <span className="divider"> | </span>
+              <span className="user-instance">{post.agencyOrigin}</span>
+            </div>
+            <div className="date-time-post">{formatDate(post.createdAt)}</div>
+          </div>
+        </div>
+        <div className="post-info-drop-down" onClick={toggleDropdown}>
+          <i className="fa-solid fa-ellipsis-vertical"></i>
+          <div
+            className={`post-info-drop-down-menu ${dropdownVisible ? "visible" : ""}`}
+            ref={dropdownRef}
+          >
+            <button>Share</button>
+            <button>Report</button>
+            {canDelete && (
+              <button id="post-info-delete" onClick={handleDeleteClick}>
+                Delete
+              </button>
+            )}
+          </div>
         </div>
       </div>
       <div className="post-text">{post.caption}</div>
@@ -142,7 +191,7 @@ const PostContent = ({ profile, post, showCommentSection = true }) => {
           <hr />
           <div className="bottom-section">
             <div className="user-image">
-              <img src={profile.profileImg || GuestProfile } alt="User" />
+              <img src={profile.profileImg || GuestProfile} alt="User" />
             </div>
             <div className="comment-field">
               <input
