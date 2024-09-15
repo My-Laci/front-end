@@ -8,6 +8,8 @@ import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom"; // Import jwt-decode
 import "./account-info-page.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Spinner } from "react-bootstrap";
 import SaveChangesButton from "../../components/save-changes-button/save-changes-button.jsx";
 
 const AccountInfoPage = () => {
@@ -51,9 +53,15 @@ const AccountInfoPage = () => {
     }, [navigate]);
 
     if (!user) {
-        return <p>Loading...</p>;
+        return (
+            <div className="spinner-container">
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            </div>
+        );
     }
-    
+
 
     const handleVerifyEmail = () => {
         // Navigasi ke halaman OTP verification

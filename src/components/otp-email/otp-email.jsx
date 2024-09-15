@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import './otp-email.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,7 +9,20 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function OTPEmail({ user, token }) {
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const [error, setError] = useState(null);
+    const [isVerifying, setIsVerifying] = useState(false);
+    const [isResending, setIsResending] = useState(false);
+    const [resendTimer, setResendTimer] = useState(0);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        let timer;
+        if (resendTimer > 0) {
+            timer = setInterval(() => {
+                setResendTimer((prevTimer) => prevTimer - 1);
+            }, 1000);
+        }
+        return () => clearInterval(timer);
+    }, [resendTimer]);
 
     const handleOtpChange = (e, index) => {
         const value = e.target.value;
@@ -24,9 +37,10 @@ export default function OTPEmail({ user, token }) {
     };
 
     const handleVerify = async () => {
+        setIsVerifying(true);
+        setError(null);
+
         const otpCode = otp.join('');
-        console.log(otpCode);
-        console.log(user.email);
         try {
             const response = await axios.post(`http://localhost:8080/users/${user._id}/verifyEmail`,
                 {
@@ -40,20 +54,25 @@ export default function OTPEmail({ user, token }) {
                 }
             );
             if (response.data.verified) {
-                toast.success('Email verified successfully!'); // Tampilkan pesan sukses
+                toast.success('Email verified successfully!');
                 setTimeout(() => {
-                    navigate('/accountinfo'); // Redirect setelah beberapa detik
-                }, 2000); // Delay 2 detik untuk memungkinkan pengguna melihat pesan sukses
+                    navigate('/accountinfo');
+                }, 2000);
             } else {
                 setError('Verification failed. Please check the OTP and try again.');
             }
         } catch (error) {
             console.error('Error verifying OTP:', error);
             setError(error.response?.data?.message || 'An error occurred during OTP verification.');
+        } finally {
+            setIsVerifying(false);
         }
     };
 
     const handleResend = async () => {
+        setIsResending(true);
+        setError(null);
+
         try {
             await axios.post(`http://localhost:8080/users/${user._id}/sendEmailVerification`,
                 { email: user.email },
@@ -64,11 +83,13 @@ export default function OTPEmail({ user, token }) {
                     },
                 }
             );
-            // Notify user that email has been sent
-            alert('Verification email has been resent.');
+            toast.success('Verification email has been resent.');
+            setResendTimer(30); // Set timer ke 30 detik
         } catch (error) {
             console.error('Error sending OTP email:', error);
             setError(error.response?.data?.message || 'An error occurred while sending the verification email.');
+        } finally {
+            setIsResending(false);
         }
     };
 
@@ -97,10 +118,15 @@ export default function OTPEmail({ user, token }) {
                 </div>
                 {error && <p className="error-message">{error}</p>}
                 <div className="button-container">
-                    <button className="resend-button" onClick={handleResend}>Resend OTP</button>
-                    <button className="verify-button" onClick={handleVerify}>Verify</button>
+                    <button className="resend-button" onClick={handleResend} disabled={isResending || resendTimer > 0}>
+                        {isResending ? "Sending..." : resendTimer > 0 ? `Resend OTP (${resendTimer}s)` : "Resend OTP"}
+                    </button>
+                    <button className="verify-button" onClick={handleVerify} disabled={isVerifying}>
+                        {isVerifying ? "Verifying..." : "Verify"}
+                    </button>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }
