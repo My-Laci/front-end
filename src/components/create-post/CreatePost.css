@@ -271,6 +271,7 @@
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+  width: 120px;
 }
 
 .publish-button-create-post button:hover {
@@ -281,6 +282,13 @@
 .back-button-create-post i {
   color: #db7777;
   font-size: 30px;
+}
+
+.spinner-border {
+  width: 14px;  
+  height: 14px; 
+  border-width: 3px; 
+  margin-right: 10px;
 }
 
 @media (max-width: 1024px) {

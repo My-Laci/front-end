@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginBanner from "../../assets/Regist-banner.svg";
@@ -20,18 +20,10 @@ export default function Login() {
 
     try {
       Cookies.remove("token");
-      // Send data as JSON
       const response = await axios.post(
         "http://localhost:8080/signIn",
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
       );
 
       console.log("Login successful");
@@ -47,6 +39,12 @@ export default function Login() {
         console.error("Error:", error.message);
       }
     }
+  };
+
+  const viewAsGuestHandler = () => {
+    Cookies.remove("token"); 
+    axios.defaults.headers.common["Authorization"] = ""; 
+    window.location.href = "/"; 
   };
 
   return (
@@ -75,12 +73,12 @@ export default function Login() {
           </div>
           <BlueButton type="submit" label="Continue" />
           <p id="dont-have-account">
-            Don’t have an account?<Link to="/register">
-              Register Here
-            </Link>
+            Don’t have an account?<Link to="/register">Register Here</Link>
           </p>
           <p id="login-or">OR</p>
-          <GreenButton label="View As Guest" />
+          <Link onClick={viewAsGuestHandler}>
+            <GreenButton label="View As Guest" />
+          </Link>
         </form>
       </div>
       <div className="login-right-side">

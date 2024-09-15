@@ -47,7 +47,7 @@ export default function ProfileContent({ post, profile, article }) {
         <div className="profile-content-list">
           {post.length > 0 ? (
             post.map((item, index) => (
-              <PostContent key={index} post={item} profile={profile} />
+              <PostContent key={index} post={item} profile={profile} canDelete={true} />
             ))
           ) : (
             <p>No posts available</p>

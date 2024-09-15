@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import ProfileBanner from "../../components/profile-banner/ProfileBanner";
-import Navbar from "../../components/navbar/Navbar";
-import SideBar from "../../components/sidebar/sidebar";
 import InternHistory from "../../components/intern-history/InternHistory";
 import ProfileContent from "../../components/profile-content/ProfileContent";
 import axios from "axios";
@@ -14,6 +12,7 @@ function Profile() {
   const [internship, setInternship] = useState([]);
   const [post, setPost] = useState([]);
   const [article, setArticle] = useState([]);
+  const [userId, setUserId] = useState(null); // ID user yang sedang login
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -28,35 +27,27 @@ function Profile() {
       try {
         const decodedToken = JSON.parse(atob(token.split(".")[1]));
         const id = decodedToken.payload.id;
-        console.log("id user", id);
+        setUserId(id); // Simpan ID pengguna yang login
 
         const profileResponse = await axios.get(
           `http://localhost:8080/users/${id}`
         );
-
         setProfile(profileResponse.data);
-        console.log("profile user", profileResponse.data);
 
         const internshipResponse = await axios.get(
           `http://localhost:8080/internship/user/${id}`
         );
-
         setInternship(internshipResponse.data.getData ?? []);
-        console.log("intern anjjjing", internshipResponse.data.getData);
 
         const postResponse = await axios.get(
           `http://localhost:8080/post/${id}`
         );
-
         setPost(postResponse.data.getUserPost ?? []);
-        console.log(postResponse.data.getUserPost);
 
         const articleResponse = await axios.get(
           `http://localhost:8080/articles/user/${id}`
         );
-
         setArticle(articleResponse.data);
-        console.log("Ini artikel ", articleResponse.data);
       } catch (err) {
         setError(err.message);
         console.error("Error fetching user data", err);
@@ -66,16 +57,8 @@ function Profile() {
     fetchUserData();
   }, []);
 
-  // Determine the last internship item
-  const lastInternship =
-    internship.length > 0 ? internship[internship.length - 1] : null;
-
-  console.log("last inter", lastInternship);
-
   return (
-    <div className="container">
-      <Navbar />
-      <SideBar />
+    <div className="profile-container">
       <div className="profile">
         {error ? (
           <p className="error">{error}</p>
@@ -86,14 +69,19 @@ function Profile() {
                 <ProfileBanner
                   name={profile.name}
                   campus={profile.agencyOrigin}
-                  position={lastInternship ? lastInternship.positions : ""}
+                  position={
+                    internship.length > 0
+                      ? internship[internship.length - 1].positions
+                      : ""
+                  }
                   image={profile.profileImg}
-                />{" "}
+                />
                 <InternHistory internship={internship} />
                 <ProfileContent
                   post={post}
                   profile={profile}
                   article={article}
+                  userId={userId} // Kirimkan userId ke ProfileContent
                 />
               </>
             ) : (

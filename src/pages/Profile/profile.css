@@ -1,6 +1,7 @@
 .profile {
   width: 50%;
   margin-top: 90px;
+  margin-left: 25%;
 }
 
 .container {
@@ -11,6 +12,7 @@
 @media (max-width: 426px) {
   .profile {
     width: 100%;
+    margin-left: 0;
   }
 }
 

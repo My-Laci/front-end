@@ -10,6 +10,10 @@ body {
   padding: 0;
 }
 
+.homepage-content {
+  display: flex;
+}
+
 .content {
   display: flex;
   flex-direction: column;
