@@ -12,7 +12,7 @@ const AdminListVoucher = () => {
     const fetchVouchers = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/vouchers/batch/${batchName}`
+          `https://laci-api-owihrlqaza-et.a.run.app/vouchers/batch/${batchName}`
         );
         setVouchers(response.data);
       } catch (error) {
