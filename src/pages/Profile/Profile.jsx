@@ -48,6 +48,7 @@ function Profile() {
           `http://localhost:8080/articles/user/${id}`
         );
         setArticle(articleResponse.data);
+        console.log("ini artikelmu mbot", articleResponse.data)
       } catch (err) {
         setError(err.message);
         console.error("Error fetching user data", err);
