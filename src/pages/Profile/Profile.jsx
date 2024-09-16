@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProfileBanner from "../../components/profile-banner/ProfileBanner";
 import InternHistory from "../../components/intern-history/InternHistory";
 import ProfileContent from "../../components/profile-content/ProfileContent";
+import Aside from "../../components/aside/aside.jsx";
 import axios from "axios";
 import Cookies from "js-cookie";
 import "../Profile/profile.css";
@@ -48,7 +49,7 @@ function Profile() {
           `http://localhost:8080/articles/user/${id}`
         );
         setArticle(articleResponse.data);
-        console.log("ini artikelmu mbot", articleResponse.data)
+        console.log("ini artikelmu mbot", articleResponse.data);
       } catch (err) {
         setError(err.message);
         console.error("Error fetching user data", err);
@@ -91,6 +92,7 @@ function Profile() {
           </>
         )}
       </div>
+      <Aside />
     </div>
   );
 }

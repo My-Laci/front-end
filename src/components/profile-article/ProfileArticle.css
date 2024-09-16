@@ -15,11 +15,13 @@
 
 .article-dropdown i {
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .article-dropdown-menu {
+  position: absolute;
   display: block;
-  padding-top: 5px;
+  padding-top: 20px;
 }
 
 .article-dropdown-menu button {
@@ -62,7 +64,6 @@
 }
 
 .articles-detail h5 {
-  margin-top: 10px;
   margin-bottom: 0;
   color: black;
 }
@@ -71,6 +72,7 @@
   font-style: italic;
   font-size: 14px;
   margin-top: 4px;
+  margin-bottom: 0px;
   color: black;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -102,7 +104,6 @@
 
   .articles-detail h5 {
     font-size: 15px;
-    margin-top: 3px;
   }
 }
 
@@ -116,7 +117,6 @@
 
   .articles-detail h5 {
     font-size: 15px;
-    margin-top: 3px;
   }
 
   .articles-detail p {

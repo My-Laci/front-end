@@ -53,7 +53,7 @@ export default function ArticleProfile({ article, userId }) {
           <img src={article.image.url} alt={article.title} />
           <div className="articles-detail">
             <h5>{article.title}</h5>
-            <p>{article.content}</p>
+            <p dangerouslySetInnerHTML={{ __html: article.content.substring(0, 300) + "..." }} />
           </div>
         </div>
       </Link>
@@ -67,6 +67,7 @@ export default function ArticleProfile({ article, userId }) {
           <div className="article-dropdown-menu">
             <button>Share</button>
             <button>Report</button>
+            <button>Edit</button>
             {userId === article.author._id && (
               <button id="article-dropdown-delete" onClick={handleDelete}>
                 Delete
