@@ -9,10 +9,17 @@ import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
 import ImageModal from "../image-modal/image-modal.jsx";
 import GuestProfile from "../../assets/unknown-profile.svg";
+import CreatePost from "../create-post/CreatePost.jsx";
 import { format, parseISO } from "date-fns";
 import { deletePost } from "../../apis/PostApis.jsx";
 
-const PostContent = ({ profile, post, showCommentSection = true, canDelete = false, onDelete }) => {
+const PostContent = ({
+  profile,
+  post,
+  showCommentSection = true,
+  canDelete = false,
+  onDelete,
+}) => {
   const [animateLike, setAnimateLike] = useState(false);
   const [animateBookmark, setAnimateBookmark] = useState(false);
   const [animateComment, setAnimateComment] = useState(false);
@@ -20,6 +27,8 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [popupType, setPopupType] = useState(null);
+  const [isCreatePostOpen, setIsCreatePostOpen] = useState(false); // New state for CreatePost popup
 
   const commentInputRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -61,6 +70,14 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
     setModalImageSrc("");
   };
 
+  const openCreatePostPopup = () => {
+    setIsCreatePostOpen(true);
+  };
+
+  const closeCreatePostPopup = () => {
+    setIsCreatePostOpen(false);
+  };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -96,9 +113,9 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
   const handleDeleteClick = async () => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
-        await deletePost(post._id); 
+        await deletePost(post._id);
         if (onDelete) {
-          onDelete(post._id); 
+          onDelete(post._id);
         }
       } catch (error) {
         console.error("Error deleting post:", error);
@@ -125,11 +142,14 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
         <div className="post-info-drop-down" onClick={toggleDropdown}>
           <i className="fa-solid fa-ellipsis-vertical"></i>
           <div
-            className={`post-info-drop-down-menu ${dropdownVisible ? "visible" : ""}`}
+            className={`post-info-drop-down-menu ${
+              dropdownVisible ? "visible" : ""
+            }`}
             ref={dropdownRef}
           >
             <button>Share</button>
             <button>Report</button>
+            <button onClick={openCreatePostPopup}>Edit</button>
             {canDelete && (
               <button id="post-info-delete" onClick={handleDeleteClick}>
                 Delete
@@ -208,6 +228,13 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
         imageSrc={modalImageSrc}
         onClose={closeImageModal}
       />
+      {isCreatePostOpen && (
+        <div className="edit-post-popup" onClick={closeCreatePostPopup}>
+          <div className="edit-post-content" onClick={(e) => e.stopPropagation()}>
+            <CreatePost onClose={closeCreatePostPopup} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

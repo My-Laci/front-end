@@ -83,7 +83,7 @@ function Profile() {
                   post={post}
                   profile={profile}
                   article={article}
-                  userId={userId} // Kirimkan userId ke ProfileContent
+                  userId={userId} 
                 />
               </>
             ) : (
