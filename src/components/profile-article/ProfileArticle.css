@@ -1,31 +1,78 @@
 .article img {
   border-radius: 0;
-  width: 130px;
-  height: 100px;
+  min-width: 150px;
+  max-width: 150px;
+  height: 90px;
   border-radius: 5px;
   object-fit: cover;
+}
+
+.article-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.article-dropdown i {
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.article-dropdown-menu {
+  position: absolute;
+  display: block;
+  padding-top: 20px;
+}
+
+.article-dropdown-menu button {
+  font-size: 11px;
+  width: 70px;
+  background-color: #ffffff;
+  color: #01baf2;
+  border: none;
+  padding: 3px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+  display: block;
+}
+
+#article-dropdown-delete {
+  background-color: #ffffff;
+  color: #ff6b6b;
+  border: none;
+  padding: 3px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+  display: block;
 }
 
 .article {
   display: flex;
   flex-direction: row;
-  /* padding: 15px 15px 7.5px 15px; */
+  justify-content: space-between;
+}
+
+.article-thumbnail {
+  display: flex;
+  gap: 15px;
 }
 
 .articles-detail {
-  margin-left: 15px;
   box-sizing: border-box;
 }
 
-.articles-detail h3 {
-  font-size: 14px;
-  margin-top: 1px;
+.articles-detail h5 {
+  margin-bottom: 0;
   color: black;
 }
 
 .articles-detail p {
+  font-style: italic;
   font-size: 14px;
   margin-top: 4px;
+  margin-bottom: 0px;
   color: black;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -37,29 +84,39 @@
   text-decoration: none;
 }
 
+.article-drop-down {
+  margin-left: 5px;
+}
+
 @media (max-width: 426px) {
   .article img {
-    border-radius: 0;
-    width: 100px;
+    border-radius: 7px;
+    min-width: 100px;
+    max-width: 100px;
     height: 70px;
     object-fit: cover;
   }
 
   .articles-detail p {
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 3;
+    font-size: 13px;
+  }
+
+  .articles-detail h5 {
+    font-size: 15px;
   }
 }
 
 @media (min-width: 427px) and (max-width: 768px) {
   .article img {
-    width: 85px;
-    height: 65px;
-    border-radius: 3px;
+    min-width: 120px;
+    max-width: 120px;
+    height: 75px;
+    border-radius: 7px;
   }
 
-  .articles-detail h3 {
-    font-size: 13px;
-    margin-top: 1px;
+  .articles-detail h5 {
+    font-size: 15px;
   }
 
   .articles-detail p {

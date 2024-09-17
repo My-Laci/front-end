@@ -132,8 +132,8 @@
 .ql-editor {
   width: 100%;
   height: 180px;
-  padding-left: 3%;
-  padding-right: 3%;
+  padding-left: 3.4%;
+  padding-right: 3.4%;
   margin: 0;
   font-size: 14px;
 }
@@ -182,12 +182,13 @@
 }
 
 .create-article-upload-icon img {
-  width: 50%;
+  width: 80%;
 }
 
 .create-article-upload-icon h3 {
   color: #a0a0a0;
   text-align: center;
+  font-size: 12px;
   font-weight: 500;
 }
 

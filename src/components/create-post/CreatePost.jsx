@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import UploudIcon from "../../assets/Upload-icon.svg";
 import CancleButton from "../../assets/remove-button.svg";
@@ -6,13 +6,37 @@ import WhiteBackButton from "../../assets/white-xmark.svg";
 import "./CreatePost.css";
 import axios from "axios";
 
-export default function CreatePost({ onClose }) {
+export default function CreatePost({ onClose, post }) {
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (post) {
+      axios
+        .get(`http://localhost:8080/post/detail/${post._id}`)
+        .then((response) => {
+          const post = response.data.getData;
+          setTextareaValue(post.caption || "");
+          setTags(post.tag || []);
+          const fetchedFiles = post.imageContent || [];
+          setFiles(fetchedFiles);
+          if (fetchedFiles.length > 0) {
+            setSelectedFile(fetchedFiles[0]);
+          }
+          setIsEditing(true);
+        })
+        .catch((error) => {
+          console.error("Error fetching post data:", error);
+        });
+    } else {
+      setIsEditing(false);
+    }
+  }, [post]);
 
   const onDrop = (acceptedFiles) => {
     setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
@@ -25,11 +49,12 @@ export default function CreatePost({ onClose }) {
     onDrop,
     multiple: true,
     accept: "image/*,video/*",
+    disabled: isEditing,
   });
 
   const handleRemove = (index, event) => {
     event.stopPropagation();
-    const newFiles = files.filter((file, i) => i !== index);
+    const newFiles = files.filter((_, i) => i !== index);
     setFiles(newFiles);
     if (selectedFile === files[index]) {
       setSelectedFile(newFiles[0] || null);
@@ -62,28 +87,42 @@ export default function CreatePost({ onClose }) {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
 
-  const createPostHandler = async (e) => {
+  const createOrUpdatePostHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     const formData = new FormData();
     formData.append("caption", textareaValue);
     tags.forEach((tag) => formData.append("tag", tag));
-    files.forEach((file) => formData.append("imageContent", file));
+    files.forEach((file) => {
+      if (file instanceof File) {
+        formData.append("imageContent", file);
+      } else {
+        formData.append("imageContent", file);
+      }
+    });
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/post",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
+      const url = isEditing
+        ? `http://localhost:8080/post/${post._id}`
+        : "http://localhost:8080/post";
 
-      console.log("Post successful:", response.data);
+      const method = isEditing ? "put" : "post";
+
+      const response = await axios({
+        method,
+        url,
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
+
+      console.log(
+        `${isEditing ? "Update" : "Post"} successful:`,
+        response.data
+      );
       setFiles([]);
       setSelectedFile(null);
       setInputValue("");
@@ -92,7 +131,7 @@ export default function CreatePost({ onClose }) {
       onClose();
     } catch (error) {
       console.error(
-        "Error posting:",
+        `Error ${isEditing ? "updating" : "posting"}:`,
         error.response ? error.response.data : error.message
       );
     } finally {
@@ -100,8 +139,17 @@ export default function CreatePost({ onClose }) {
     }
   };
 
+  const getFileType = (file) => {
+    if (typeof file === "string") {
+      return file.endsWith(".mp4") || file.endsWith(".webm") ? "video" : "image";
+    } else if (file instanceof File) {
+      return file.type.startsWith("image/") ? "image" : "video";
+    }
+    return "unknown";
+  };
+
   return (
-    <form className="create-post-form" onSubmit={createPostHandler}>
+    <form className="create-post-form" onSubmit={createOrUpdatePostHandler}>
       <div className="create-post-content">
         <div className="create-post-content-left-side">
           <div {...getRootProps({ className: "create-post-uploud-box" })}>
@@ -119,19 +167,19 @@ export default function CreatePost({ onClose }) {
               <div className="create-post-uploaded-content">
                 {selectedFile && (
                   <div className="detail-post-content">
-                    {selectedFile.type.startsWith("image/") ? (
+                    {getFileType(selectedFile) === "image" ? (
                       <img
-                        src={URL.createObjectURL(selectedFile)}
+                        src={typeof selectedFile === "string" ? selectedFile : URL.createObjectURL(selectedFile)}
                         alt="detail"
                         className="detail-post-image"
                       />
-                    ) : (
+                    ) : getFileType(selectedFile) === "video" ? (
                       <video
-                        src={URL.createObjectURL(selectedFile)}
+                        src={typeof selectedFile === "string" ? selectedFile : URL.createObjectURL(selectedFile)}
                         controls
                         className="detail-post-video"
                       />
-                    )}
+                    ) : null}
                   </div>
                 )}
               </div>
@@ -142,30 +190,30 @@ export default function CreatePost({ onClose }) {
             {files.map((file, index) => (
               <div
                 key={index}
-                className={`post-file-preview ${
-                  file === selectedFile ? "selected" : ""
-                }`}
+                className={`post-file-preview ${file === selectedFile ? "selected" : ""}`}
                 onClick={() => handleSelect(file)}
               >
-                {file.type.startsWith("image/") ? (
+                {getFileType(file) === "image" ? (
                   <img
-                    src={URL.createObjectURL(file)}
+                    src={typeof file === "string" ? file : URL.createObjectURL(new File([file], "file"))}
                     alt="preview"
                     className="file-thumbnail-create-post"
                   />
-                ) : (
+                ) : getFileType(file) === "video" ? (
                   <video
-                    src={URL.createObjectURL(file)}
+                    src={typeof file === "string" ? file : URL.createObjectURL(new File([file], "file"))}
                     controls
                     className="file-thumbnail-create-post"
                   />
+                ) : null}
+                {!isEditing && (
+                  <button
+                    onClick={(event) => handleRemove(index, event)}
+                    className="remove-button-create-post"
+                  >
+                    <img src={CancleButton} alt="Remove" />
+                  </button>
                 )}
-                <button
-                  onClick={(event) => handleRemove(index, event)}
-                  className="remove-button-create-post"
-                >
-                  <img src={CancleButton} alt="" />
-                </button>
               </div>
             ))}
           </div>
@@ -188,7 +236,7 @@ export default function CreatePost({ onClose }) {
                       <p>{tag}</p>
                       <img
                         src={WhiteBackButton}
-                        alt=""
+                        alt="Remove Tag"
                         onClick={() => handleTagRemove(tag)}
                       />
                     </div>
@@ -217,16 +265,7 @@ export default function CreatePost({ onClose }) {
           </div>
           <div className="publish-button-create-post">
             <button type="submit" disabled={loading}>
-              {loading ? (
-                <>
-                  <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                  Publish
-                </>
-              ) : (
-                <>Publish</>
-              )}
+              {loading ? "Submitting..." : isEditing ? "Update Post" : "Create Post"}
             </button>
           </div>
         </div>

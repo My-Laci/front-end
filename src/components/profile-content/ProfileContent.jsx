@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "../profile-content/ProfileContent.css";
-import Article from "../profile-article/ProfileArticle";
+import ArticleProfile from "../profile-article/ProfileArticle";
 import PostContent from "../post-content/post-content";
 
-export default function ProfileContent({ post, profile, article }) {
+export default function ProfileContent({ post, profile, article, userId }) {
   const [activeTab, setActiveTab] = useState("posts");
 
   const handleTabClick = (tab) => {
@@ -37,7 +37,13 @@ export default function ProfileContent({ post, profile, article }) {
       {activeTab === "articles" && (
         <div className="profile-content-list">
           {article.length > 0 ? (
-            article.map((item) => <Article key={item._id} {...item} />)
+            article.map((item) => (
+              <ArticleProfile
+                key={item._id}
+                article={item}
+                userId={userId} // Pass userId to ArticleProfile
+              />
+            ))
           ) : (
             <p>No articles available</p>
           )}
@@ -47,7 +53,12 @@ export default function ProfileContent({ post, profile, article }) {
         <div className="profile-content-list">
           {post.length > 0 ? (
             post.map((item, index) => (
-              <PostContent key={index} post={item} profile={profile} canDelete={true} />
+              <PostContent
+                key={index}
+                post={item}
+                profile={profile}
+                canDelete={true}
+              />
             ))
           ) : (
             <p>No posts available</p>

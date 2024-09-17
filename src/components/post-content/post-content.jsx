@@ -9,10 +9,16 @@ import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
 import ImageModal from "../image-modal/image-modal.jsx";
 import GuestProfile from "../../assets/unknown-profile.svg";
+import CreatePost from "../create-post/CreatePost.jsx";
 import { format, parseISO } from "date-fns";
 import { deletePost } from "../../apis/PostApis.jsx";
 
-const PostContent = ({ profile, post, showCommentSection = true, canDelete = false, onDelete }) => {
+const PostContent = ({
+  profile,
+  post,
+  showCommentSection = true,
+  onDelete,
+}) => {
   const [animateLike, setAnimateLike] = useState(false);
   const [animateBookmark, setAnimateBookmark] = useState(false);
   const [animateComment, setAnimateComment] = useState(false);
@@ -20,9 +26,13 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
 
   const commentInputRef = useRef(null);
   const dropdownRef = useRef(null);
+  const popupRef = useRef(null);
+
+  const canEditOrDelete = profile.isAdmin || post.author === profile._id;
 
   const triggerLikeAnimation = () => {
     setAnimateLike(true);
@@ -61,6 +71,14 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
     setModalImageSrc("");
   };
 
+  const openCreatePostPopup = () => {
+    setIsCreatePostOpen(true);
+  };
+
+  const closeCreatePostPopup = () => {
+    setIsCreatePostOpen(false);
+  };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -70,22 +88,22 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
     adaptiveHeight: true,
   };
 
-  // Format the post date
   const formatDate = (dateString) => {
     const date = parseISO(dateString);
     return format(date, "dd MMM yyyy 'at' HH:mm");
   };
 
-  // Toggle dropdown visibility
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
   };
 
-  // Handle clicks outside of the dropdown to close it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownVisible(false);
+      }
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setIsCreatePostOpen(false);
       }
     };
 
@@ -96,9 +114,9 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
   const handleDeleteClick = async () => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
-        await deletePost(post._id); 
+        await deletePost(post._id);
         if (onDelete) {
-          onDelete(post._id); 
+          onDelete(post._id);
         }
       } catch (error) {
         console.error("Error deleting post:", error);
@@ -125,27 +143,43 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
         <div className="post-info-drop-down" onClick={toggleDropdown}>
           <i className="fa-solid fa-ellipsis-vertical"></i>
           <div
-            className={`post-info-drop-down-menu ${dropdownVisible ? "visible" : ""}`}
+            className={`post-info-drop-down-menu ${
+              dropdownVisible ? "visible" : ""
+            }`}
             ref={dropdownRef}
           >
             <button>Share</button>
             <button>Report</button>
-            {canDelete && (
-              <button id="post-info-delete" onClick={handleDeleteClick}>
-                Delete
-              </button>
+            {canEditOrDelete && (
+              <>
+                <button onClick={openCreatePostPopup}>Edit</button>
+                <button id="post-info-delete" onClick={handleDeleteClick}>
+                  Delete
+                </button>
+              </>
             )}
           </div>
         </div>
       </div>
       <div className="post-text">{post.caption}</div>
+      <div className="post-tags">
+        {post.tag && post.tag.length > 0
+          ? post.tag.map((item, index) => (
+              <React.Fragment key={index}>
+                <span className="tag">#{item}</span>
+                {index < post.tag.length - 1 && " "}{" "}
+              </React.Fragment>
+            ))
+          : null}{" "}
+      </div>
+
       <div className="post-img">
         <Slider {...settings}>
           {post.imageContent && post.imageContent.length > 0 ? (
             post.imageContent.map((item, index) => (
               <div key={index}>
                 <img
-                  src={item} // Use `item` as the src for each image
+                  src={item}
                   alt={`Post Image ${index + 1}`}
                   onClick={() => openImageModal(item)}
                 />
@@ -208,6 +242,13 @@ const PostContent = ({ profile, post, showCommentSection = true, canDelete = fal
         imageSrc={modalImageSrc}
         onClose={closeImageModal}
       />
+      {isCreatePostOpen && (
+        <div className="edit-post-popup" ref={popupRef}>
+          <div className="edit-post-content">
+            <CreatePost onClose={closeCreatePostPopup} post={post} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

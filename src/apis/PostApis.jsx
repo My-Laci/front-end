@@ -11,3 +11,5 @@ export const deletePost = async (postId) => {
     throw new Error("Failed to delete post");
   }
 };
+
+
