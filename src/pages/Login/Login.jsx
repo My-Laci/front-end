@@ -22,7 +22,7 @@ export default function Login() {
     try {
       Cookies.remove("token");
       const response = await axios.post(
-        "https://laci-api-owihrlqaza-et.a.run.app/signIn",
+        "https://laci-api-46818093185.asia-southeast2.run.app/signIn",
         {
           email,
           password,

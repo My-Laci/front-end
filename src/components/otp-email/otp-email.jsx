@@ -42,7 +42,7 @@ export default function OTPEmail({ user, token }) {
 
         const otpCode = otp.join('');
         try {
-            const response = await axios.post(`https://laci-api-owihrlqaza-et.a.run.app/users/${user._id}/verifyEmail`,
+            const response = await axios.post(`https://laci-api-46818093185.asia-southeast2.run.app/users/${user._id}/verifyEmail`,
                 {
                     otp: otpCode
                 },

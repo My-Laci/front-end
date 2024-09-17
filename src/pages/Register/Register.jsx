@@ -51,7 +51,7 @@ export default function Register() {
     setIsLoading(true); // Menampilkan spinner saat loading
 
     try {
-      const response = await axios.post("https://laci-api-owihrlqaza-et.a.run.app/signup", {
+      const response = await axios.post("https://laci-api-46818093185.asia-southeast2.run.app/signup", {
         name: fullName,
         email,
         password,
