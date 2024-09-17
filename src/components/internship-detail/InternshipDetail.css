@@ -22,3 +22,15 @@
   font-style: italic;
   color: #01baf2;
 }
+
+.intern-time p {
+  margin-bottom: 0;
+}
+
+.internship-certificate-link {
+  text-align: underline;
+  color: #F18931;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+}

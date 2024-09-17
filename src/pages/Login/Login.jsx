@@ -20,7 +20,6 @@ export default function Login() {
 
     try {
       Cookies.remove("token");
-      // Send data as JSON
       const response = await axios.post(
         "https://laci-api-owihrlqaza-et.a.run.app/signIn",
         {
@@ -49,6 +48,12 @@ export default function Login() {
     }
   };
 
+  const viewAsGuestHandler = () => {
+    Cookies.remove("token"); 
+    axios.defaults.headers.common["Authorization"] = ""; 
+    window.location.href = "/"; 
+  };
+
   return (
     <div className="login-container">
       <div className="login-left-side">
@@ -75,12 +80,12 @@ export default function Login() {
           </div>
           <BlueButton type="submit" label="Continue" />
           <p id="dont-have-account">
-            Don’t have an account?<Link to="/register">
-              Register Here
-            </Link>
+            Don’t have an account?<Link to="/register">Register Here</Link>
           </p>
           <p id="login-or">OR</p>
-          <GreenButton label="View As Guest" />
+          <Link onClick={viewAsGuestHandler}>
+            <GreenButton label="View As Guest" />
+          </Link>
         </form>
       </div>
       <div className="login-right-side">

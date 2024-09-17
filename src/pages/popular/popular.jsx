@@ -17,8 +17,6 @@ const Popular = () => {
   return (
     <>
       <body>
-        <Navbar />
-        <Sidebar />
         <div className="container">
           <div className="content">
             <FaceSwitch onSwitch={handleSwitch} />

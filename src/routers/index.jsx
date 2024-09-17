@@ -19,72 +19,18 @@ import AdminValidate from "../pages/admin/admin-validate.jsx";
 import Certificate from "../pages/certificate-generator/CertificateGenarator.jsx";
 import Article from "../pages/article-page/Article.jsx";
 
+import UserLayout from "../layouts/UserLayout.jsx";
+import AdminLayout from "../layouts/AdminLayout.jsx";
+
 export const router = createBrowserRouter([
+  // Public routes
   {
     path: "/Register",
     element: <Register />,
   },
-
   {
     path: "/Login",
     element: <Login />,
-  },
-
-  {
-    path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "/Popular",
-    element: <Popular />,
-  },
-  {
-    path: "/Profile",
-    element: <Profile />,
-  },
-  {
-    path: "/AdminCreateVoucher",
-    element: <AdminCreateVoucher />,
-  },
-  {
-    path: "/AdminListVoucher",
-    element: <AdminListVoucher />,
-  },
-  {
-    path: "/AdminListBatch",
-    element: <AdminListBatch />,
-  },
-  {
-    path: "/PostDetail",
-    element: <PostDetail />,
-  },
-  {
-    path: "/AccountInfo",
-    element: <AccountInfoPage />,
-  },
-  {
-    path: "/ChangeName",
-    element: <ChangeNamePage />,
-  },
-  {
-    path: "/ChangeEmail",
-    element: <ChangeEmailPage />,
-  },
-  {
-    path: "/ChangePassword",
-    element: <ChangePasswordPage />,
-  },
-  {
-    path: "/EmailVerification",
-    element: <OtpEmailPage />,
-  },
-  {
-    path: "/SearchResult",
-    element: <SearchResultPage />,
-  },
-  {
-    path: "/AdminValidate",
-    element: <AdminValidate />,
   },
   {
     path: "/Certificate",
@@ -94,6 +40,80 @@ export const router = createBrowserRouter([
     path: "/Article",
     element: <Article />,
   },
+  
+  // User layout routes
+  {
+    path: "/",
+    element: <UserLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Homepage />,
+      },
+      {
+        path: "/Profile",
+        element: <Profile />,
+      },
+      {
+        path: "/Popular",
+        element: <Popular />,
+      },
+      {
+        path: "/PostDetail",
+        element: <PostDetail />,
+      },
+      {
+        path: "/AccountInfo",
+        element: <AccountInfoPage />,
+      },
+      {
+        path: "/ChangeName",
+        element: <ChangeNamePage />,
+      },
+      {
+        path: "/ChangeEmail",
+        element: <ChangeEmailPage />,
+      },
+      {
+        path: "/ChangePassword",
+        element: <ChangePasswordPage />,
+      },
+      {
+        path: "/EmailVerification",
+        element: <OtpEmailPage />,
+      },
+      {
+        path: "/SearchResult",
+        element: <SearchResultPage />,
+      },
+    ],
+  },
+
+  // Admin layout routes
+  {
+    path: "/Admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "CreateVoucher", 
+        element: <AdminCreateVoucher />,
+      },
+      {
+        path: "ListVoucher", // Correct the path
+        element: <AdminListVoucher />,
+      },
+      {
+        path: "ListBatch", // Correct the path
+        element: <AdminListBatch />,
+      },
+      {
+        path: "Validate", // Correct the path
+        element: <AdminValidate />,
+      },
+    ],
+  },
+
+  // Fallback for undefined routes
   {
     path: "*",
     element: <NotFoundPage />,
