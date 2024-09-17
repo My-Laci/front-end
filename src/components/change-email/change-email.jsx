@@ -23,7 +23,7 @@ export default function ChangeEmail() {
             const decodedToken = jwtDecode(token);
             const userId = decodedToken.payload.id;
 
-            const response = await axios.patch(`https://laci-api-owihrlqaza-et.a.run.app/users/${userId}/updateEmail`, {
+            const response = await axios.patch(`https://laci-api-46818093185.asia-southeast2.run.app/users/${userId}/updateEmail`, {
                 newEmail,
             }, {
                 headers: {

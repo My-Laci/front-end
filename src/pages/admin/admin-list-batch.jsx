@@ -14,7 +14,7 @@ const AdminListBatch = () => {
     const fetchVouchers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://laci-api-owihrlqaza-et.a.run.app/vouchers", {
+        const response = await axios.get("https://laci-api-46818093185.asia-southeast2.run.app/vouchers", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
