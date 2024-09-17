@@ -17,7 +17,6 @@ const PostContent = ({
   profile,
   post,
   showCommentSection = true,
-  canDelete = false,
   onDelete,
 }) => {
   const [animateLike, setAnimateLike] = useState(false);
@@ -27,11 +26,13 @@ const PostContent = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [popupType, setPopupType] = useState(null);
-  const [isCreatePostOpen, setIsCreatePostOpen] = useState(false); // New state for CreatePost popup
+  const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
 
   const commentInputRef = useRef(null);
   const dropdownRef = useRef(null);
+  const popupRef = useRef(null);
+
+  const canEditOrDelete = profile.isAdmin || post.author === profile._id;
 
   const triggerLikeAnimation = () => {
     setAnimateLike(true);
@@ -87,22 +88,22 @@ const PostContent = ({
     adaptiveHeight: true,
   };
 
-  // Format the post date
   const formatDate = (dateString) => {
     const date = parseISO(dateString);
     return format(date, "dd MMM yyyy 'at' HH:mm");
   };
 
-  // Toggle dropdown visibility
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
   };
 
-  // Handle clicks outside of the dropdown to close it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownVisible(false);
+      }
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setIsCreatePostOpen(false);
       }
     };
 
@@ -149,23 +150,36 @@ const PostContent = ({
           >
             <button>Share</button>
             <button>Report</button>
-            <button onClick={openCreatePostPopup}>Edit</button>
-            {canDelete && (
-              <button id="post-info-delete" onClick={handleDeleteClick}>
-                Delete
-              </button>
+            {canEditOrDelete && (
+              <>
+                <button onClick={openCreatePostPopup}>Edit</button>
+                <button id="post-info-delete" onClick={handleDeleteClick}>
+                  Delete
+                </button>
+              </>
             )}
           </div>
         </div>
       </div>
       <div className="post-text">{post.caption}</div>
+      <div className="post-tags">
+        {post.tag && post.tag.length > 0
+          ? post.tag.map((item, index) => (
+              <React.Fragment key={index}>
+                <span className="tag">#{item}</span>
+                {index < post.tag.length - 1 && " "}{" "}
+              </React.Fragment>
+            ))
+          : null}{" "}
+      </div>
+
       <div className="post-img">
         <Slider {...settings}>
           {post.imageContent && post.imageContent.length > 0 ? (
             post.imageContent.map((item, index) => (
               <div key={index}>
                 <img
-                  src={item} // Use `item` as the src for each image
+                  src={item}
                   alt={`Post Image ${index + 1}`}
                   onClick={() => openImageModal(item)}
                 />
@@ -229,9 +243,9 @@ const PostContent = ({
         onClose={closeImageModal}
       />
       {isCreatePostOpen && (
-        <div className="edit-post-popup" onClick={closeCreatePostPopup}>
-          <div className="edit-post-content" onClick={(e) => e.stopPropagation()}>
-            <CreatePost onClose={closeCreatePostPopup} />
+        <div className="edit-post-popup" ref={popupRef}>
+          <div className="edit-post-content">
+            <CreatePost onClose={closeCreatePostPopup} post={post} />
           </div>
         </div>
       )}
