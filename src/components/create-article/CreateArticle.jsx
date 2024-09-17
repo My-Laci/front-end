@@ -8,13 +8,13 @@ import UploadIcon from "../../assets/Upload-icon.svg";
 
 export default function CreateArticle({ onClose, article }) {
   const [thumbnail, setThumbnail] = useState(null);
-  const [thumbnailUrl, setThumbnailUrl] = useState(""); // For existing image URL
+  const [thumbnailUrl, setThumbnailUrl] = useState(""); // Untuk gambar yang sudah ada
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [notification, setNotification] = useState(null);
   const fileInputRef = useRef(null);
 
-  // Fetch article details if editing
+  // Mengambil detail artikel jika sedang mengedit
   useEffect(() => {
     if (article && article._id) {
       const fetchArticle = async () => {
@@ -26,7 +26,7 @@ export default function CreateArticle({ onClose, article }) {
           setTitle(title);
           setContent(content);
           if (image) {
-            setThumbnailUrl(image); // Set URL for the existing image
+            setThumbnailUrl(image); // Setel URL untuk gambar yang ada
           }
         } catch (error) {
           console.error("Error fetching article:", error);
@@ -36,11 +36,12 @@ export default function CreateArticle({ onClose, article }) {
     }
   }, [article]);
 
+  // Fungsi saat file didrop atau diunggah
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
       setThumbnail(file);
-      setThumbnailUrl(""); // Clear URL if a new image is uploaded
+      setThumbnailUrl(""); // Kosongkan URL jika thumbnail baru diunggah
     }
   };
 
@@ -50,22 +51,26 @@ export default function CreateArticle({ onClose, article }) {
     multiple: false,
   });
 
+  // Hapus thumbnail
   const handleDeleteThumbnail = (e) => {
     e.stopPropagation();
     setThumbnail(null);
-    setThumbnailUrl(""); // Clear both the file and the URL
+    setThumbnailUrl(""); // Hapus file dan URL
     fileInputRef.current.value = null;
   };
 
+  // Kembali ke halaman sebelumnya
   const handleBackButtonClick = (e) => {
     e.stopPropagation();
     onClose();
   };
 
+  // Menangani perubahan pada input judul
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
+  // Fungsi untuk mempublish atau mengupdate artikel
   const handlePublish = async () => {
     if (!title || !content) {
       setNotification({
@@ -82,10 +87,16 @@ export default function CreateArticle({ onClose, article }) {
       formData.append("image", thumbnail);
     }
 
+    // Cek data yang dikirim
+    for (let [key, value] of formData.entries()) {
+      console.log(("Ini data yang kau update"),key, value);
+    }
+
     try {
-      const url = article && article._id
-        ? `http://localhost:8080/articles/${article._id}` // Update existing article
-        : "http://localhost:8080/articles"; // Create new article
+      const url =
+        article && article._id
+          ? `http://localhost:8080/articles/${article._id}`
+          : "http://localhost:8080/articles";
 
       const method = article && article._id ? "put" : "post";
 
@@ -98,16 +109,19 @@ export default function CreateArticle({ onClose, article }) {
         },
       });
 
+      console.log("Response from server:", response.data);
+
       setNotification({
         type: "success",
-        message: `Article ${article && article._id ? "updated" : "created"} successfully!`,
+        message: `Article ${
+          article && article._id ? "updated" : "created"
+        } successfully!`,
       });
 
       setTitle("");
       setContent("");
       setThumbnail(null);
-      setThumbnailUrl(""); // Reset after submission
-
+      setThumbnailUrl("");
       onClose();
     } catch (error) {
       console.error(
@@ -116,7 +130,9 @@ export default function CreateArticle({ onClose, article }) {
       );
       setNotification({
         type: "error",
-        message: `Failed to ${article && article._id ? "update" : "create"} article. Please try again.`,
+        message: `Failed to ${
+          article && article._id ? "update" : "create"
+        } article. Please try again.`,
       });
     }
   };
