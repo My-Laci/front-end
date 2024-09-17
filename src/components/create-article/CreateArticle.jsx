@@ -26,7 +26,8 @@ export default function CreateArticle({ onClose, article }) {
           setTitle(title);
           setContent(content);
           if (image) {
-            setThumbnailUrl(image); // Setel URL untuk gambar yang ada
+            setThumbnailUrl(image.url); // Setel URL untuk gambar yang ada
+            console.log("ini thumbnail u", image.url);
           }
         } catch (error) {
           console.error("Error fetching article:", error);
@@ -89,7 +90,7 @@ export default function CreateArticle({ onClose, article }) {
 
     // Cek data yang dikirim
     for (let [key, value] of formData.entries()) {
-      console.log(("Ini data yang kau update"),key, value);
+      console.log("Ini data yang kau update", key, value);
     }
 
     try {
@@ -168,7 +169,6 @@ export default function CreateArticle({ onClose, article }) {
               <img
                 src={URL.createObjectURL(thumbnail)}
                 alt="Thumbnail"
-                className="create-article-thumbnail"
               />
               <button onClick={handleDeleteThumbnail}>Remove Thumbnail</button>
             </div>
@@ -177,9 +177,13 @@ export default function CreateArticle({ onClose, article }) {
               <img
                 src={thumbnailUrl}
                 alt="Thumbnail"
-                className="create-article-thumbnail"
               />
-              <button onClick={handleDeleteThumbnail}>Remove Thumbnail</button>
+              {/* Sembunyikan tombol Remove saat dalam mode edit */}
+              {!article._id && (
+                <button onClick={handleDeleteThumbnail}>
+                  Remove Thumbnail
+                </button>
+              )}
             </div>
           ) : (
             <div className="create-article-upload-icon">
@@ -188,6 +192,7 @@ export default function CreateArticle({ onClose, article }) {
             </div>
           )}
         </div>
+
         <input
           type="text"
           className="create-article-title-input"
