@@ -32,7 +32,7 @@ const PostContent = ({
   const dropdownRef = useRef(null);
   const popupRef = useRef(null);
 
-  const canEditOrDelete = profile.isAdmin || post.author === profile._id;
+  const canEditOrDelete = profile.isAdmin == true || post.author === profile._id;
 
   const triggerLikeAnimation = () => {
     setAnimateLike(true);
