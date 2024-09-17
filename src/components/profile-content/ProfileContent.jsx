@@ -3,7 +3,7 @@ import "../profile-content/ProfileContent.css";
 import ArticleProfile from "../profile-article/ProfileArticle";
 import PostContent from "../post-content/post-content";
 
-export default function ProfileContent({ post, profile, article, userId }) {
+export default function ProfileContent({ post, profile, article }) {
   const [activeTab, setActiveTab] = useState("posts");
 
   const handleTabClick = (tab) => {
@@ -41,7 +41,7 @@ export default function ProfileContent({ post, profile, article, userId }) {
               <ArticleProfile
                 key={item._id}
                 article={item}
-                userId={userId} // Pass userId to ArticleProfile
+                profile={profile} // Pass userId to ArticleProfile
               />
             ))
           ) : (

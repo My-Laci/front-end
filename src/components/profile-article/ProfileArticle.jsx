@@ -2,10 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import "../profile-article/ProfileArticle.css";
 import { Link } from "react-router-dom";
 import { deleteArticle } from "../../apis/ArticleApis";
+import CreateArticle from "../create-article/CreateArticle";
 
-export default function ArticleProfile({ article, userId }) {
+export default function ArticleProfile({ article, profile }) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false); // State for popup visibility
   const dropdownRef = useRef(null);
+
+  // Check if the logged-in user is the author or an admin
+  const isAuthorOrAdmin =
+    profile._id === article.author._id || profile.isAdmin === true;
 
   // Toggle dropdown visibility
   const handleDropdownToggle = () => {
@@ -14,16 +20,16 @@ export default function ArticleProfile({ article, userId }) {
 
   // Handle delete button click
   const handleDelete = async () => {
-    // Ask for confirmation
-    const isConfirmed = window.confirm("Are you sure you want to delete this article?");
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this article?"
+    );
     if (!isConfirmed) {
-      return; // Do nothing if the user cancels
+      return;
     }
 
     try {
       await deleteArticle(article._id);
       alert("Article deleted successfully");
-      // Optionally, you can add logic here to refresh the list or redirect the user
     } catch (error) {
       alert("Failed to delete article");
     }
@@ -41,9 +47,8 @@ export default function ArticleProfile({ article, userId }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Check if article and article.image are defined
   if (!article || !article.image) {
-    return <div>Loading...</div>; // or any other placeholder you prefer
+    return <div>Loading...</div>;
   }
 
   return (
@@ -53,7 +58,11 @@ export default function ArticleProfile({ article, userId }) {
           <img src={article.image.url} alt={article.title} />
           <div className="articles-detail">
             <h5>{article.title}</h5>
-            <p dangerouslySetInnerHTML={{ __html: article.content.substring(0, 300) + "..." }} />
+            <p
+              dangerouslySetInnerHTML={{
+                __html: article.content.substring(0, 300) + "...",
+              }}
+            />
           </div>
         </div>
       </Link>
@@ -67,15 +76,30 @@ export default function ArticleProfile({ article, userId }) {
           <div className="article-dropdown-menu">
             <button>Share</button>
             <button>Report</button>
-            <button>Edit</button>
-            {userId === article.author._id && (
-              <button id="article-dropdown-delete" onClick={handleDelete}>
-                Delete
-              </button>
+            {isAuthorOrAdmin && (
+              <>
+                <button onClick={() => setPopupVisible(true)}>Edit</button>
+                <button id="article-dropdown-delete" onClick={handleDelete}>
+                  Delete
+                </button>
+              </>
             )}
           </div>
         )}
       </div>
+
+      {/* Popup for CreateArticle component */}
+      {popupVisible && (
+        <div className="popup-overlay" onClick={() => setPopupVisible(false)}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            {/* Pass article as a prop to CreateArticle */}
+            <CreateArticle
+              onClose={() => setPopupVisible(false)}
+              article={article} // Pass article data for editing
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
