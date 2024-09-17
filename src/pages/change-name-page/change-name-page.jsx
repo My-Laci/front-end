@@ -8,7 +8,6 @@ import Navbar from "../../components/navbar/Navbar.jsx";
 import Sidebar from "../../components/sidebar/sidebar.jsx";
 import "./change-name-page.css";
 import ChangeName from "../../components/change-name/change-name.jsx";
-import SaveChangesButton from "../../components/save-changes-button/save-changes-button.jsx";
 
 const ChangeNamePage = () => {
 
@@ -29,7 +28,7 @@ const ChangeNamePage = () => {
         const decodedToken = jwtDecode(token);
         const userId = decodedToken.payload.id;
 
-        const response = await axios.get(`http://localhost:8080/users/${userId}`, {
+        const response = await axios.get(`https://laci-api-owihrlqaza-et.a.run.app/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -53,14 +52,14 @@ const ChangeNamePage = () => {
 
   return (
     <>
-        <Navbar />
-        <div className="changeName-container">
-          <Sidebar />
-          <div className="changeName-content">
-            <ChangeName />
-          </div>
-
+      <Navbar />
+      <div className="changeName-container">
+        <Sidebar />
+        <div className="changeName-content">
+          <ChangeName />
         </div>
+
+      </div>
     </>
   );
 };

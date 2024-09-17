@@ -3,7 +3,7 @@ import './otp-email.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function OTPEmail({ user, token }) {
@@ -42,7 +42,7 @@ export default function OTPEmail({ user, token }) {
 
         const otpCode = otp.join('');
         try {
-            const response = await axios.post(`http://localhost:8080/users/${user._id}/verifyEmail`,
+            const response = await axios.post(`https://laci-api-owihrlqaza-et.a.run.app/users/${user._id}/verifyEmail`,
                 {
                     otp: otpCode
                 },

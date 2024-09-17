@@ -153,6 +153,13 @@
   margin: 7px 0 20px 0;
 }
 
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 0.2em;
+  color: #ffffff;
+}
+
 @media (max-width: 426px) {
   .register-left-side {
     display: none;

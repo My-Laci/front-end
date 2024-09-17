@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -21,9 +22,16 @@ export default function Login() {
     try {
       Cookies.remove("token");
       const response = await axios.post(
-        "http://localhost:8080/signIn",
-        { email, password },
-        { headers: { "Content-Type": "application/json" } }
+        "https://laci-api-owihrlqaza-et.a.run.app/signIn",
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       console.log("Login successful");
@@ -42,9 +50,9 @@ export default function Login() {
   };
 
   const viewAsGuestHandler = () => {
-    Cookies.remove("token"); 
-    axios.defaults.headers.common["Authorization"] = ""; 
-    window.location.href = "/"; 
+    Cookies.remove("token");
+    axios.defaults.headers.common["Authorization"] = "";
+    window.location.href = "/";
   };
 
   return (

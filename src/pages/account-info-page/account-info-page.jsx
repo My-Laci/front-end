@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom"; // Import jwt-decode
 import "./account-info-page.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from "react-bootstrap";
-import SaveChangesButton from "../../components/save-changes-button/save-changes-button.jsx";
 
 const AccountInfoPage = () => {
     const [user, setUser] = useState(null);
@@ -30,7 +29,7 @@ const AccountInfoPage = () => {
                 const decodedToken = jwtDecode(token);
                 const userId = decodedToken.payload.id;
 
-                const response = await axios.get(`http://localhost:8080/users/${userId}`, {
+                const response = await axios.get(`https://laci-api-owihrlqaza-et.a.run.app/users/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

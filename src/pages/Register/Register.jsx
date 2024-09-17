@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Spinner } from 'react-bootstrap'; // Import Spinner dari react-bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from "../../components/input-form/InputFrom.jsx";
 import RegistBanner from "../../assets/Regist-banner.svg";
@@ -18,6 +18,7 @@ export default function Register() {
   const [agencyOrigin, setAgencyOrigin] = useState('');
   const [code, setCode] = useState('');
 
+  const [isLoading, setIsLoading] = useState(false); // Menambahkan state untuk loading
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
@@ -47,8 +48,10 @@ export default function Register() {
       return;
     }
 
+    setIsLoading(true); // Menampilkan spinner saat loading
+
     try {
-      const response = await axios.post("http://localhost:8080/signup", {
+      const response = await axios.post("https://laci-api-owihrlqaza-et.a.run.app/signup", {
         name: fullName,
         email,
         password,
@@ -64,6 +67,8 @@ export default function Register() {
       const errorMessage = error.response?.data?.message || "Registration failed.";
       toast.error(`${errorMessage}`);
       console.error("Registration error:", error);
+    } finally {
+      setIsLoading(false); // Menghentikan spinner setelah selesai
     }
   };
 
@@ -146,8 +151,9 @@ export default function Register() {
                 boxShadow: '0 3px 3px rgba(0, 0, 0, 0.3)',
                 cursor: 'pointer',
               }}
+              disabled={isLoading} // Menonaktifkan tombol saat loading
             >
-              Continue
+              {isLoading ? <Spinner animation="border" role="status" /> : "Continue"}
             </button>
           </form>
           <p>
@@ -160,12 +166,11 @@ export default function Register() {
       </div>
       <ToastContainer />
 
-      {/* Modal for successful registration */}
       <Modal
         show={showModal}
         onHide={handleModalClose}
-        size="lg" // Set the size of the modal
-        centered // Center the modal vertically
+        size="lg"
+        centered
       >
         <Modal.Header closeButton>
           <Modal.Title>Registration Successful</Modal.Title>
