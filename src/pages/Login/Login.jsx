@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginBanner from "../../assets/Regist-banner.svg";
@@ -22,7 +22,7 @@ export default function Login() {
       Cookies.remove("token");
       // Send data as JSON
       const response = await axios.post(
-        "http://localhost:8080/signIn",
+        "https://laci-api-owihrlqaza-et.a.run.app/signIn",
         {
           email,
           password,
