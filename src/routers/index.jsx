@@ -98,7 +98,7 @@ export const router = createBrowserRouter([
         element: <DetailVoucher />,
       },
       {
-        path: "/SearchResult",
+        path: "/Search",
         element: <SearchResultPage />,
       },
     ],

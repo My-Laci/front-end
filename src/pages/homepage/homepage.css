@@ -1,15 +1,3 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  background-color: #f1f2f6;
-  padding: 0;
-}
-
 .homepage-content {
   display: flex;
 }

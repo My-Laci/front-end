@@ -11,13 +11,13 @@
 }
 
 .login-regist-popup-content {
-  align-content: center ;
+  align-content: center;
   background-color: white !important;
   padding: 20px !important;
   border-radius: 15px !important;
   text-align: center !important;
   position: relative !important;
-  width: 30%;
+  width: 50%;
   height: 300px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
 }
@@ -35,6 +35,7 @@
 
 .login-regist-pop-up-bottom-area {
   display: flex !important;
+  flex-direction: row;
   justify-content: center !important;
   gap: 5px !important;
 }
@@ -91,7 +92,7 @@
 
 @media (max-width: 1024px) {
   .login-regist-popup-content {
-    width: 30%;
+    width: 50%;
   }
 
   .login-regist-popup-content h2 {
@@ -111,4 +112,16 @@
   .login-regist-pop-up-bottom-area p {
     font-size: 16px !important;
   }
+}
+
+@media (max-width: 768px) {
+  .login-regist-popup-content {
+    width: 75%;
+  }
+
+  /* .login-regist-pop-up-bottom-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  } */
 }

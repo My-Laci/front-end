@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import "./Navbar.css";
@@ -14,6 +14,8 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState(null); // State to hold user info
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -27,8 +29,10 @@ const Navbar = () => {
           const userId = decodedToken.payload.id;
 
           // Fetch user profile
-          const profileResponse = await axios.get(`http://localhost:8080/users/${userId}`);
-          console.log("iki profilemu navbar su", profileResponse.data)
+          const profileResponse = await axios.get(
+            `http://localhost:8080/users/${userId}`
+          );
+          console.log("iki profilemu navbar su", profileResponse.data);
           setUser(profileResponse.data); // Set profile data
         } else {
           // No token means guest
@@ -42,6 +46,17 @@ const Navbar = () => {
 
     checkUser();
   }, []);
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchKeyPress = (e) => {
+    if (e.key === "Enter" && searchQuery.trim() !== "") {
+      // Navigate to search results page with the query
+      navigate(`/search?q=${searchQuery}`);
+    }
+  };
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -83,7 +98,13 @@ const Navbar = () => {
         <div className="navbar-section-2">
           <div className="navbar-search-container">
             <img src={searchInIcon} alt="Search Icon" />
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              onKeyPress={handleSearchKeyPress} // Trigger search on Enter
+            />
           </div>
         </div>
         <div className="navbar-section-3">
@@ -107,7 +128,9 @@ const Navbar = () => {
                   <img src={addPostIcon} alt="Add Post Icon" />
                 </button>
                 {dropdownOpen && (
-                  <div className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}>
+                  <div
+                    className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}
+                  >
                     <div className="create-article-a">
                       <a href="/createarticle">Create Article</a>
                     </div>
@@ -120,7 +143,10 @@ const Navbar = () => {
             </div>
             <div className="navbar-user-image">
               <Link to="/Profile">
-                <img src={user && user.profileImg ? user.profileImg : GuestProfile} alt="User Image" />
+                <img
+                  src={user && user.profileImg ? user.profileImg : GuestProfile}
+                  alt="User Image"
+                />
               </Link>
             </div>
           </div>

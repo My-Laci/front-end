@@ -81,6 +81,7 @@ const AccountInfoPage = () => {
                             <div>
                                 {/* <p className="email-verify-text">Your email is not verified</p> */}
                                 <button onClick={handleVerifyEmail} className="email-verify-button">Verify your email</button>
+                                <button onClick={({})} className="log-out-button">Log Out</button>
                             </div>
                         )}
                     </div>
