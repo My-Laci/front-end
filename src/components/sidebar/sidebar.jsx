@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./sidebar.css";
-import homeIcon from "../../assets/home.svg";
-import profileIcon from "../../assets/profile.svg";
-import popularIcon from "../../assets/popular.svg";
-import bookmarkIcon from "../../assets/bookmark.svg";
 
 export default function Sidebar() {
   const location = useLocation(); // Get current location
@@ -22,7 +18,13 @@ export default function Sidebar() {
       case "/Popular":
         setActiveButton("Popular");
         break;
-      // Add other cases for additional routes if needed
+      case "/Voucher":
+        setActiveButton("Voucher");
+        break;
+      case "/Validate":
+        setActiveButton("Validate User");
+        break;
+      
       default:
         setActiveButton(""); // Default or empty if not matched
     }
@@ -36,7 +38,7 @@ export default function Sidebar() {
           className={activeButton === "Home" ? "active" : ""}
           onClick={() => setActiveButton("Home")}
         >
-          <img src={homeIcon} alt="Home" className="edit-icon" />
+          <i className="fa-solid fa-house"></i>
           Home
         </button>
       </Link>
@@ -46,7 +48,7 @@ export default function Sidebar() {
           className={activeButton === "Profile" ? "active" : ""}
           onClick={() => setActiveButton("Profile")}
         >
-          <img src={profileIcon} alt="Profile" className="edit-icon" />
+          <i className="fa-solid fa-user"></i>
           Profile
         </button>
       </Link>
@@ -56,20 +58,30 @@ export default function Sidebar() {
           className={activeButton === "Popular" ? "active" : ""}
           onClick={() => setActiveButton("Popular")}
         >
-          <img src={popularIcon} alt="Popular" className="edit-icon" />
+          <i className="fa-solid fa-fire"></i>
           Popular
         </button>
       </Link>
-      {/* <Link>
+      <Link to="/Voucher">
         <button
           id="side-button-sidebar"
-          className={activeButton === "Bookmarks" ? "active" : ""}
-          onClick={() => setActiveButton("Bookmarks")}
+          className={activeButton === "Voucher" ? "active" : ""}
+          onClick={() => setActiveButton("Voucher")}
         >
-          <img src={bookmarkIcon} alt="Bookmarks" className="edit-icon" />
-          Bookmarks
+          <i className="fa-solid fa-ticket"></i>
+          Voucher
         </button>
-      </Link> */}
+      </Link>
+      <Link to="/Validate">
+        <button
+          id="side-button-sidebar"
+          className={activeButton === "Validate User" ? "active" : ""}
+          onClick={() => setActiveButton("Validate User")}
+        >
+          <i className="fa-solid fa-circle-check"></i>
+          Validate User
+        </button>
+      </Link>
     </div>
   );
 }

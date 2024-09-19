@@ -13,7 +13,6 @@ function Profile() {
   const [internship, setInternship] = useState([]);
   const [post, setPost] = useState([]);
   const [article, setArticle] = useState([]);
-  const [userId, setUserId] = useState(null); // ID user yang sedang login
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -28,7 +27,6 @@ function Profile() {
       try {
         const decodedToken = JSON.parse(atob(token.split(".")[1]));
         const id = decodedToken.payload.id;
-        setUserId(id); // Simpan ID pengguna yang login
 
         const profileResponse = await axios.get(
           `http://localhost:8080/users/${id}`
@@ -78,12 +76,11 @@ function Profile() {
                   }
                   image={profile.profileImg}
                 />
-                <InternHistory internship={internship} />
+                <InternHistory internship={internship} profile={profile} />
                 <ProfileContent
                   post={post}
                   profile={profile}
                   article={article}
-                  userId={userId} 
                 />
               </>
             ) : (
