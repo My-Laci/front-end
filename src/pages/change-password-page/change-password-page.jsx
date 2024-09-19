@@ -49,7 +49,6 @@ export default function ChangePasswordPage() {
     return (
         <>
             <body>
-                <Navbar />
                 <div className="changePassword-container">
                     <Sidebar />
                     <div className="changePassword-content">

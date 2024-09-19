@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 import "./InternHistory.css";
-import editIcon from '../../assets/editIcon.svg';
+import editIcon from "../../assets/editIcon.svg";
 import AddInternExperience from "../add-intern-experience/add-intern-experience";
 import InternshipDetail from "../internship-detail/InternshipDetail";
 
-export default function InternHistory({ internship }) {
+export default function InternHistory({ internship, profile }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEditClick = () => {
@@ -43,6 +43,7 @@ export default function InternHistory({ internship }) {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onSave={handleSaveInternship}
+        profile={profile}
       />
     </div>
   );

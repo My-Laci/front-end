@@ -76,7 +76,7 @@ function Profile() {
                   }
                   image={profile.profileImg}
                 />
-                <InternHistory internship={internship} />
+                <InternHistory internship={internship} profile={profile} />
                 <ProfileContent
                   post={post}
                   profile={profile}

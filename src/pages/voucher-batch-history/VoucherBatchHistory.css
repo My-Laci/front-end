@@ -1,0 +1,74 @@
+.voucher-batch-content {
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin-top: 15px;
+}
+
+.voucher-batch-content h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.voucher-batch-search {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.voucher-batch-search input {
+  background-color: transparent;
+  color: #000000;
+  border: #ddd solid 1px;
+  width: 100%;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.voucher-batch-search i {
+  margin-left: 5px;
+}
+
+.voucher-batch-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.voucher-batch-label {
+  display: flex;
+  flex-direction: row;
+  background-color: #D7ECF3;
+  border-radius: 7px;
+  align-items: center;
+}
+
+.voucher-batch-label a {
+  text-decoration: none;
+  width: 100%;
+}
+
+.voucher-batch-label-text {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  padding: 3px 10px;
+}
+
+.voucher-batch-label p {
+  margin: 0;
+  color: #049AC7;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500
+}
+
+.voucher-batch-delete {
+  padding: 3px 10px;
+  background-color: #049AC7;
+  border-radius: 0 7px 7px 0;
+  color: #D7ECF3;
+}

@@ -1,27 +1,42 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
+import axios from 'axios';
 import './add-intern-experience.css';
 
-// eslint-disable-next-line no-unused-vars
-const AddInternExperience = ({ isOpen, onClose, onSave }) => {
+// Configure Axios to use the authorization token
+const token = 'your-authentication-token'; // Replace with actual token
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+const AddInternExperience = ({ isOpen, onClose, onSave, profile }) => {
     const [internRole, setInternRole] = useState('');
     const [internStartDate, setInternStartDate] = useState('');
     const [internEndDate, setInternEndDate] = useState('');
     const [internJobdesk, setInternJobdesk] = useState('');
+    console.log("mau nambah internship",profile)
 
     if (!isOpen) return null;
 
-    const handleSave = () => {
-        // const newInternship = {
-        //     role: internRole,
-        //     startDate: internStartDate,
-        //     endDate: internEndDate,
-        //     jobdesk: internJobdesk,
-        // };
-        // onSave(newInternship);
-        // onClose();
+    const handleSave = async () => {
+        const newInternship = {
+            fullname : profile.name,
+            positions : internRole,
+            startDate: internStartDate,
+            endDate: internEndDate,
+            jobdesk: internJobdesk,
+        };
 
-        //back end disini?
+        // Log the data to be sent
+        console.log('Sending data:', newInternship);
+
+        try {
+            const response = await axios.post('http://localhost:8080/internship', newInternship);
+
+            console.log('Success:', response.data);
+            onSave(newInternship);
+            onClose();
+        } catch (error) {
+            console.error('Error:', error.response ? error.response.data : error.message);
+        }
     };
 
     return (

@@ -1,0 +1,41 @@
+.create-voucher-content {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+}
+.create-voucher-content h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.create-voucher-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-voucher-input input {
+  background-color: #f1f2f6;
+  margin-top: 10px;
+  outline: none;
+  border: none;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  color: #000000;
+}
+
+.create-voucher-content button {
+    margin-top: 25px;
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #9acb3d;
+  background-color: #e5efd3;
+  border: 1px solid #9acb3d;
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
