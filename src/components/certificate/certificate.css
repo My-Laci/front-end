@@ -6,9 +6,29 @@
   box-shadow: 0 4px 10px #00000033;
 }
 
+.certificate-number {
+  background: linear-gradient(to right, #f71123, #ff9d0d);
+  width: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0px 5px 0px;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 23px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+.certificate-number p {
+  margin: 0;
+}
+
 .outer-outline-left-side-certificate {
   display: flex;
   align-items: center;
+  /* padding: 20px 0 20px 20px; */
   /* margin-left: 45px; */
 }
 
@@ -18,6 +38,7 @@
 
 .outline-left-side-certificate {
   width: 90%;
+  margin-left: 30px;
   padding-top: 8px;
   padding-left: 8px;
   padding-bottom: 8px;
@@ -90,6 +111,7 @@
 
 #certificate-aside {
   width: auto;
+  height: 600px;
 }
 
 #hand-sign-positions {

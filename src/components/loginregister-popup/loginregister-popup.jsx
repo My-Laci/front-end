@@ -7,6 +7,9 @@ const LoginRegisterPopup = ({ show, onClose }) => {
   return (
     <div className="login-regist-popup-overlay">
       <div className="login-regist-popup-content">
+        <button className="login-regist-popup-close" onClick={onClose}>
+          <i className="fa-solid fa-xmark"></i>
+        </button>
         <h2>Welcome!</h2>
         <p>Please log in or register to continue.</p>
         <button className="login-regist-popup-button" onClick={onClose}>
@@ -16,11 +19,8 @@ const LoginRegisterPopup = ({ show, onClose }) => {
           <p>Already have an account?</p>
           <Link to="/login">Login</Link>
         </div>
-        </div>
-        <button className="login-regist-popup-close" onClick={onClose}>
-          <i className="fa-solid fa-xmark"></i>
-        </button>
       </div>
+    </div>
   );
 };
 

@@ -16,16 +16,22 @@ export default function Certificate({ detail }) {
   if (!detail) {
     return <p>Data sertifikat tidak tersedia</p>;
   }
+
   return (
     <div id="certificate-content" className="certificate-content">
       <div className="outer-outline-left-side-certificate">
         <div className="outline-left-side-certificate">
           <div className="left-side-certificate">
             <h1>SERTIFIKAT</h1>
-            <div className="left-side-kelulusan-magang-box">
+            {/* <div className="left-side-kelulusan-magang-box">
               <h4>KELULUSAN MAGANG</h4>
+            </div> */}
+            <div className="certificate-number">
+              <p>
+                NO:{" "}
+                {detail.certificateNumber || "Nomor sertifikat tidak tersedia"}
+              </p>
             </div>
-
             <p id="certificate-diberikan-kepada">Diberikan kepada :</p>
             <h2>{detail.fullname || "Nama tidak tersedia"}</h2>
             <div className="creatificate-position">
@@ -34,7 +40,6 @@ export default function Certificate({ detail }) {
                 {detail.positions || "Posisi tidak tersedia"}
               </p>
             </div>
-
             <div className="certificate-hand-sign">
               <p>{formatDate(detail.updatedAt)}</p> {/* Format tanggal */}
               <img src={TTD} alt="Signature" />
