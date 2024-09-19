@@ -24,7 +24,7 @@ export default function Sidebar() {
       case "/Validate":
         setActiveButton("Validate User");
         break;
-
+      
       default:
         setActiveButton(""); // Default or empty if not matched
     }

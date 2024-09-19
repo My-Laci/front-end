@@ -1,5 +1,5 @@
 import CreateVoucher from "../../components/create-voucher/CreateVoucher";
-import VoucherBatchHistory from "../voucher-batch-history/VoucherBatchHistory";
+import VoucherBatchHistory from "../../components/voucher-batch-history/VoucherBatchHistory";
 
 
 import "./voucher.css";

@@ -4,8 +4,10 @@ import "./ValidateUser.css";
 
 export default function ValidateUser() {
   const [internships, setInternships] = useState([]);
+  const [filteredInternships, setFilteredInternships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
   const [validationStatus, setValidationStatus] = useState({}); // State for validation status
 
   useEffect(() => {
@@ -13,6 +15,7 @@ export default function ValidateUser() {
       try {
         const response = await axios.get("http://localhost:8080/internship/");
         setInternships(response.data.getAllData); // Set the fetched internships
+        setFilteredInternships(response.data.getAllData); // Initialize filtered internships
       } catch (err) {
         setError("Failed to load internship data.");
       } finally {
@@ -22,6 +25,18 @@ export default function ValidateUser() {
 
     fetchInternships();
   }, []);
+
+  useEffect(() => {
+    if (searchTerm) {
+      const filtered = internships.filter((internship) =>
+        internship.fullname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        internship.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredInternships(filtered);
+    } else {
+      setFilteredInternships(internships);
+    }
+  }, [searchTerm, internships]);
 
   // Function to format date
   const formatDate = (dateString) => {
@@ -33,12 +48,10 @@ export default function ValidateUser() {
   const handleValidate = async (internshipId) => {
     const internship = internships.find((i) => i._id === internshipId);
     const newVerifiedStatus = !internship.verified; // Toggle the verification status
-    const currentDate = new Date().toISOString(); // Get the current date in ISO format
 
     try {
       await axios.put(`http://localhost:8080/internship/${internshipId}`, {
-        verified: newVerifiedStatus,
-        endDate: newVerifiedStatus ? currentDate : null, // Update endDate only if verified
+        verified: newVerifiedStatus
       });
       setValidationStatus((prev) => ({
         ...prev,
@@ -48,7 +61,14 @@ export default function ValidateUser() {
       setInternships(prev =>
         prev.map(internship =>
           internship._id === internshipId
-            ? { ...internship, verified: newVerifiedStatus, endDate: newVerifiedStatus ? currentDate : internship.endDate }
+            ? { ...internship, verified: newVerifiedStatus }
+            : internship
+        )
+      );
+      setFilteredInternships(prev =>
+        prev.map(internship =>
+          internship._id === internshipId
+            ? { ...internship, verified: newVerifiedStatus }
             : internship
         )
       );
@@ -66,16 +86,21 @@ export default function ValidateUser() {
         <h2>Validate User</h2>
         <hr />
         <div className="validate-user-search">
-          <input type="text" placeholder="Search by name or email" />
+          <input
+            type="text"
+            placeholder="Search by name or email"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <i className="fa-solid fa-magnifying-glass"></i>
         </div>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         <div className="validate-user-list">
-          {internships.length === 0 ? (
+          {filteredInternships.length === 0 ? (
             <p>No internship data available.</p>
           ) : (
-            internships.map((internship) => (
+            filteredInternships.map((internship) => (
               <div className="validate-user-detail" key={internship._id}>
                 <p>
                   <strong>Name:</strong> {internship.fullname}
@@ -92,6 +117,9 @@ export default function ValidateUser() {
                 </p>
                 <p>
                   <strong>Position:</strong> {internship.positions}
+                </p>
+                <p>
+                  <strong>Verified:</strong> {internship.verified ? "Yes" : "No"}
                 </p>
                 <button 
                   onClick={() => handleValidate(internship._id)}

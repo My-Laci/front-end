@@ -5,8 +5,10 @@ import "./VoucherBatchHistory.css";
 
 export default function VoucherBatchHistory() {
   const [batchList, setBatchList] = useState([]);
+  const [filteredBatchList, setFilteredBatchList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchBatches = async () => {
@@ -26,6 +28,7 @@ export default function VoucherBatchHistory() {
         );
 
         setBatchList(groupedVouchers);
+        setFilteredBatchList(groupedVouchers);
       } catch (err) {
         setError("Failed to load voucher batches.");
       } finally {
@@ -35,6 +38,17 @@ export default function VoucherBatchHistory() {
 
     fetchBatches();
   }, []);
+
+  useEffect(() => {
+    if (searchTerm) {
+      const filtered = batchList.filter((batch) =>
+        batch.batchName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredBatchList(filtered);
+    } else {
+      setFilteredBatchList(batchList);
+    }
+  }, [searchTerm, batchList]);
 
   const handleDelete = async (batchName) => {
     const isConfirmed = window.confirm(
@@ -56,6 +70,9 @@ export default function VoucherBatchHistory() {
         setBatchList((prevList) =>
           prevList.filter((batch) => batch.batchName !== batchName)
         );
+        setFilteredBatchList((prevList) =>
+          prevList.filter((batch) => batch.batchName !== batchName)
+        );
       } catch (err) {
         setError("Failed to delete the voucher batch.");
       }
@@ -71,19 +88,21 @@ export default function VoucherBatchHistory() {
           type="text"
           id="voucher-batch-search"
           placeholder="Search batches..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <i className="fa-solid fa-magnifying-glass"></i>
       </div>
       <div className="voucher-batch-container">
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
-        {!loading && !error && batchList.length === 0 && (
+        {!loading && !error && filteredBatchList.length === 0 && (
           <p>No voucher batches found.</p>
         )}
         {!loading &&
           !error &&
-          batchList.length > 0 &&
-          batchList.map((batch) => (
+          filteredBatchList.length > 0 &&
+          filteredBatchList.map((batch) => (
             <div className="voucher-batch-label" key={batch.index}>
               <Link to="/DetailVoucher" state={{ batchName: batch.batchName }}>
                 <div className="voucher-batch-label-text">
