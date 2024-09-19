@@ -16,11 +16,11 @@ const LoginRegisterPopup = ({ show, onClose }) => {
           <p>Already have an account?</p>
           <Link to="/login">Login</Link>
         </div>
+        </div>
         <button className="login-regist-popup-close" onClick={onClose}>
           <i className="fa-solid fa-xmark"></i>
         </button>
       </div>
-    </div>
   );
 };
 

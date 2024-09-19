@@ -13,40 +13,43 @@ const formatDate = (date) => {
 };
 
 export default function Certificate({ detail }) {
+  if (!detail) {
+    return <p>Data sertifikat tidak tersedia</p>;
+  }
   return (
-    <>
-      <div id="certificate-content" className="certificate-content">
-        <div className="outer-outline-left-side-certificate">
-          <div className="outline-left-side-certificate">
-            <div className="left-side-certificate">
-              <h1>SERTIFIKAT</h1>
-              <div className="left-side-kelulusan-magang-box">
-                <h4>KELULUSAN MAGANG</h4>
-              </div>
+    <div id="certificate-content" className="certificate-content">
+      <div className="outer-outline-left-side-certificate">
+        <div className="outline-left-side-certificate">
+          <div className="left-side-certificate">
+            <h1>SERTIFIKAT</h1>
+            <div className="left-side-kelulusan-magang-box">
+              <h4>KELULUSAN MAGANG</h4>
+            </div>
 
-              <p id="certificate-diberikan-kepada">Diberikan kepada :</p>
-              <h2>{detail.fullname}</h2>
-              <div className="creatificate-position">
-                <p>Atas kelulusan magang telkomsel sebagai</p>
-                <p className="certificate-jobdesk">{detail.positions}</p>
-              </div>
+            <p id="certificate-diberikan-kepada">Diberikan kepada :</p>
+            <h2>{detail.fullname || "Nama tidak tersedia"}</h2>
+            <div className="creatificate-position">
+              <p>Atas kelulusan magang telkomsel sebagai</p>
+              <p className="certificate-jobdesk">
+                {detail.positions || "Posisi tidak tersedia"}
+              </p>
+            </div>
 
-              <div className="certificate-hand-sign">
-                <p>{formatDate(detail.updatedAt)}</p> {/* Format tanggal */}
-                <img src={TTD} alt="Signature" />
-                <p>Nugroho</p>
-                <p id="hand-sign-positions">Direktur Utama Telkomsel</p>
-              </div>
+            <div className="certificate-hand-sign">
+              <p>{formatDate(detail.updatedAt)}</p> {/* Format tanggal */}
+              <img src={TTD} alt="Signature" />
+              <p>Nugroho</p>
+              <p id="hand-sign-positions">Direktur Utama Telkomsel</p>
             </div>
           </div>
         </div>
-
-        <img
-          id="certificate-aside"
-          src={CertificateRightSide}
-          alt="Certificate Design"
-        />
       </div>
-    </>
+
+      <img
+        id="certificate-aside"
+        src={CertificateRightSide}
+        alt="Certificate Design"
+      />
+    </div>
   );
 }

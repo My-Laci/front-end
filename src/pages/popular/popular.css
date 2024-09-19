@@ -1,24 +1,11 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  background-color: #f1f2f6;
-  padding: 0;
-}
-
-.container {
+.popular-content {
   display: flex;
-  min-height: 100vh;
-  width: 100%;
 }
-
-
 
 .content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   margin-left: 25%;
   width: 50%;
   padding: 20px;
@@ -40,7 +27,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
   html,
   body {
     background-color: #f1f2f6;

@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
     path: "/Article",
     element: <Article />,
   },
-  
+
   // User layout routes
   {
     path: "/",
@@ -83,7 +83,7 @@ export const router = createBrowserRouter([
         element: <OtpEmailPage />,
       },
       {
-        path: "/SearchResult",
+        path: "/search",
         element: <SearchResultPage />,
       },
     ],
@@ -95,7 +95,7 @@ export const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-        path: "CreateVoucher", 
+        path: "CreateVoucher",
         element: <AdminCreateVoucher />,
       },
       {
