@@ -38,6 +38,9 @@
 
 .validate-user-list {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .validate-user-detail {
@@ -60,4 +63,8 @@
   border-radius: 5px;
   background-color: #01baf2;
   margin-top: 10px;
+}
+
+.validate-user-detail button.validated {
+  background-color: #9ACB3D;
 }

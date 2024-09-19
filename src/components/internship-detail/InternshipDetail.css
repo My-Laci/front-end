@@ -52,7 +52,9 @@
 
 .intern-time {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: right;
   font-size: 14px;
   font-weight: bold;
   font-style: italic;
@@ -62,6 +64,11 @@
 
 .intern-time p {
   margin-bottom: 0;
+}
+
+.intern-time a {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .internship-certificate-link {

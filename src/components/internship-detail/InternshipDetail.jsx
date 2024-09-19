@@ -1,13 +1,21 @@
 import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 import "./InternshipDetail.css";
-import { Link } from "react-router-dom";
 import AddInternExperience from "../add-intern-experience/add-intern-experience";
+import { Link, useNavigate } from "react-router-dom";
+
+// Set default Authorization header for all requests
+const token = Cookies.get("authToken"); // Replace 'authToken' with your actual cookie name if different
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 export default function InternshipDetail({ detail }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isPopupOpen, setPopupOpen] = useState(false); // State for popup visibility
   const dropdownRef = useRef(null);
+  const navigate = useNavigate(); // Hook for programmatic navigation
 
-  const { positions, jobdesk, startDate, endDate } = detail;
+  const { positions, jobdesk, startDate, endDate, _id, verified } = detail; // Ensure the detail object includes `_id` and `verified`
 
   // Function to format date to "Month YYYY"
   const formatDate = (date) => {
@@ -36,6 +44,31 @@ export default function InternshipDetail({ detail }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Function to handle internship deletion
+  const deleteInternship = async () => {
+    if (!_id) {
+      console.error("Internship ID is undefined.");
+      return;
+    }
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/internship/${_id}`
+      );
+      console.log("Internship deleted successfully:", response.data);
+    } catch (error) {
+      console.error(
+        "Error deleting internship:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  // Function to toggle popup visibility
+  const togglePopup = () => {
+    setPopupOpen((prev) => !prev);
+  };
+
   return (
     <div className="internship-detail">
       <div className="intern-job-desk">
@@ -54,10 +87,10 @@ export default function InternshipDetail({ detail }) {
             {startDate ? formatDate(startDate) : "Start date unknown"} -{" "}
             {endDate ? formatDate(endDate) : "Ongoing"}
           </p>
-          {endDate && (
+          {verified && endDate && (
             <Link
               to="/Certificate"
-              state={{ detail }} // Mengirim data sebagai state
+              state={{ detail }}
               className="internship-certificate-link"
             >
               Certificate
@@ -65,15 +98,27 @@ export default function InternshipDetail({ detail }) {
           )}
         </div>
         <div className="internship-dropdown" ref={dropdownRef}>
-          <i className="fa-solid fa-ellipsis-vertical" onClick={handleDropdownToggle}></i>
+          <i
+            className="fa-solid fa-ellipsis-vertical"
+            onClick={handleDropdownToggle}
+          ></i>
           {isDropdownOpen && (
             <div className="internship-dropdown-menu">
-              <button>Edit</button>
-              <button>Delete</button>
+              <button onClick={togglePopup}>Edit</button>
+              <button onClick={deleteInternship}>Delete</button>
             </div>
           )}
         </div>
       </div>
+
+      {/* Popup for AddInternExperience */}
+      {isPopupOpen && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <AddInternExperience detail={detail} onClose={togglePopup} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

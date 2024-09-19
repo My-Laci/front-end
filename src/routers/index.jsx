@@ -88,9 +88,6 @@ export const router = createBrowserRouter([
       {
         path: "/Voucher",
         element: <Voucher />,
-        children: [
-          
-        ],
       },
       {
         path: "/Validate",
