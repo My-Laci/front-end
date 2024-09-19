@@ -18,6 +18,9 @@ import PostDetail from "../pages/post-detail-page/post-detail-page.jsx";
 import AdminValidate from "../pages/admin/admin-validate.jsx";
 import Certificate from "../pages/certificate-generator/CertificateGenarator.jsx";
 import Article from "../pages/article-page/Article.jsx";
+import Voucher from "../pages/voucher/voucher.jsx";
+import ValidateUser from "../pages/validate-user/ValidateUser.jsx";
+import DetailVoucher from "../pages/detail-voucher/DetailVoucher.jsx";
 
 import UserLayout from "../layouts/UserLayout.jsx";
 import AdminLayout from "../layouts/AdminLayout.jsx";
@@ -40,7 +43,7 @@ export const router = createBrowserRouter([
     path: "/Article",
     element: <Article />,
   },
-  
+
   // User layout routes
   {
     path: "/",
@@ -83,6 +86,18 @@ export const router = createBrowserRouter([
         element: <OtpEmailPage />,
       },
       {
+        path: "/Voucher",
+        element: <Voucher />,
+      },
+      {
+        path: "/Validate",
+        element: <ValidateUser />,
+      },
+      {
+        path: "/DetailVoucher",
+        element: <DetailVoucher />,
+      },
+      {
         path: "/SearchResult",
         element: <SearchResultPage />,
       },
@@ -95,7 +110,7 @@ export const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-        path: "CreateVoucher", 
+        path: "CreateVoucher",
         element: <AdminCreateVoucher />,
       },
       {
