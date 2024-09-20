@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
         element: <Popular />,
       },
       {
-        path: "/PostDetail",
+        path: "/post/:postId",
         element: <PostDetail />,
       },
       {

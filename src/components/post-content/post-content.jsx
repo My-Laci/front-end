@@ -12,6 +12,7 @@ import GuestProfile from "../../assets/unknown-profile.svg";
 import CreatePost from "../create-post/CreatePost.jsx";
 import { format, parseISO } from "date-fns";
 import { deletePost } from "../../apis/PostApis.jsx";
+import { useNavigate } from "react-router-dom";
 
 const PostContent = ({
   profile,
@@ -32,7 +33,14 @@ const PostContent = ({
   const dropdownRef = useRef(null);
   const popupRef = useRef(null);
 
-  const canEditOrDelete = profile.isAdmin == true || post.author === profile._id;
+  const navigate = useNavigate();
+
+  const goToPostDetail = () => {
+    navigate(`/post/${post._id}`);
+  };
+
+  const canEditOrDelete =
+    profile?.isAdmin == true || post?.author === profile?._id;
 
   const triggerLikeAnimation = () => {
     setAnimateLike(true);
@@ -125,7 +133,7 @@ const PostContent = ({
   };
 
   return (
-    <div className="content-card">
+    <div className="content-card" onClick={goToPostDetail}>
       <div className="post-info">
         <div className="post-info-container">
           <div className="user-image">
