@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom"; // Impor Link dari react-router-dom
 import UserImage from "../../assets/test-profile.svg"; // Default image
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
@@ -7,12 +8,11 @@ import Bookmark from "../../assets/post-bookmark.svg";
 
 import "./article-content.css";
 
-const ArticleContent = ({ articles , profile }) => {
+const ArticleContent = ({ articles, profile }) => {
   const [animateLike, setAnimateLike] = useState(null);
   const [animateBookmark, setAnimateBookmark] = useState(null);
   const [animateComment, setAnimateComment] = useState(null);
   const [animateRepost, setAnimateRepost] = useState(null);
-  console.log("ini artikel untuk dibaca", articles)
 
   const commentInputRefs = useRef([]);
 
@@ -50,9 +50,9 @@ const ArticleContent = ({ articles , profile }) => {
           <div className="content-card" key={article._id}>
             <div className="article-info">
               <div className="user-image">
-                {/* Use profile image from article data, fallback to UserImage */}
                 <img src={article.author?.profileImg || UserImage} alt="User" />
               </div>
+              {/* Tambahkan Link di sini */}
               <div className="details-article">
                 <div className="user-name">
                   {article.author?.name || "Unknown Author"}
@@ -66,35 +66,48 @@ const ArticleContent = ({ articles , profile }) => {
                 </div>
               </div>
             </div>
-            <div className="article-img">
-              <img src={article.image?.url || UserImage} alt="Article" />
-            </div>
-            <div className="article-title">{article.title}</div>
-            <div className="article-text">{article.content}</div>
+            <Link to="/Article" state={{ article }}>
+              <div className="article-img">
+                <img src={article.image?.url || UserImage} alt="Article" />
+              </div>
+              <div className="article-title">{article.title}</div>
+              <div
+                className="article-text"
+                dangerouslySetInnerHTML={{ __html: article.content }}
+              />
+            </Link>
             <div className="post-interactions">
               <button
-                className={`interaction ${animateLike === index ? "animate" : ""}`}
+                className={`interaction ${
+                  animateLike === index ? "animate" : ""
+                }`}
                 onClick={() => triggerLikeAnimation(index)}
               >
                 <img src={Like} alt="Like" />
                 <div className="text-interaction">Like</div>
               </button>
               <button
-                className={`interaction ${animateComment === index ? "animate" : ""}`}
+                className={`interaction ${
+                  animateComment === index ? "animate" : ""
+                }`}
                 onClick={() => triggerCommentAnimation(index)}
               >
                 <img src={Comment} alt="Comment" />
                 <div className="text-interaction">Comment</div>
               </button>
               <button
-                className={`interaction ${animateRepost === index ? "animate" : ""}`}
+                className={`interaction ${
+                  animateRepost === index ? "animate" : ""
+                }`}
                 onClick={() => triggerRepostAnimation(index)}
               >
                 <img src={Repost} alt="Repost" />
                 <div className="text-interaction">Repost</div>
               </button>
               <button
-                className={`interaction ${animateBookmark === index ? "animate" : ""}`}
+                className={`interaction ${
+                  animateBookmark === index ? "animate" : ""
+                }`}
                 onClick={() => triggerBookmarkAnimation(index)}
               >
                 <img src={Bookmark} alt="Bookmark" />

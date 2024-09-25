@@ -137,13 +137,13 @@ const PostContent = ({
       <div className="post-info">
         <div className="post-info-container">
           <div className="user-image">
-            <img src={post.profileImage || GuestProfile} alt="User" />
+            <img src={post.author.profileImg || GuestProfile} alt="User" />
           </div>
           <div className="details-post">
             <div className="user-name">
-              {post.fullname}
+              {post.author.name}
               <span className="divider"> | </span>
-              <span className="user-instance">{post.agencyOrigin}</span>
+              <span className="user-instance">{post.author.agencyOrigin}</span>
             </div>
             <div className="date-time-post">{formatDate(post.createdAt)}</div>
           </div>

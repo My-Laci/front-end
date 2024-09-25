@@ -52,9 +52,7 @@ const ChangeNamePage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="changeName-container">
-        <Sidebar />
         <div className="changeName-content">
           <ChangeName />
         </div>

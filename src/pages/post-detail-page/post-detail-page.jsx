@@ -36,8 +36,6 @@ const PostDetailPage = () => {
 
   return (
     <>
-      <Navbar />
-      <Sidebar />
       <div className="container">
         <div className="content">
           <div className="return-section">

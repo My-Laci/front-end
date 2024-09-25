@@ -5,6 +5,7 @@ import "./sidebar.css";
 export default function Sidebar({ userData }) {
   const location = useLocation(); // Get current location
   const [activeButton, setActiveButton] = useState("Home");
+
   console.log("ini user data di sidebar", userData);
 
   // Determine if the user is an admin; default to false if userData or isAdmin is undefined
@@ -28,11 +29,17 @@ export default function Sidebar({ userData }) {
       case "/Validate":
         setActiveButton("Validate User");
         break;
-
       default:
         setActiveButton(""); // Default or empty if not matched
     }
   }, [location.pathname]); // Update when location changes
+
+  // Hide the sidebar if the route is /Article or /Certificate
+  const hideSidebar = location.pathname === "/Article" || location.pathname === "/Certificate";
+
+  if (hideSidebar) {
+    return null; // Don't render the sidebar
+  }
 
   return (
     <div className="sidebar">
@@ -66,7 +73,7 @@ export default function Sidebar({ userData }) {
           Popular
         </button>
       </Link>
-      
+
       {/* Show Voucher and Validate buttons if the user is an admin */}
       {isAdmin && (
         <>

@@ -49,9 +49,7 @@ const ChangeEmailPage = () => {
     return (
         <>
             <div>
-                <Navbar />
                 <div className="changeEmail-container">
-                    <Sidebar />
                     <div className="changeEmail-content">
                         <ChangeEmail />
                     </div>

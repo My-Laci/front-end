@@ -20,7 +20,7 @@ const Navbar = ({ userData }) => {
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
   };
-
+  
   const handleSearchKeyPress = (e) => {
     if (e.key === "Enter" && searchQuery.trim() !== "") {
       // Navigate to search results page with the query
@@ -78,55 +78,70 @@ const Navbar = ({ userData }) => {
           </div>
         </div>
         <div className="navbar-section-3">
-          <div className="navbar-user-section">
-            <div className="navbar-user-info">
-              <div className="navbar-user-name">
-                {userData ? userData.name : "Guest"}
+          {userData ? (
+            <div className="navbar-user-section">
+              <div className="navbar-user-info">
+                <div className="navbar-user-name">
+                  {userData ? userData.name : "Guest"}
+                </div>
+                <div className="navbar-user-university">
+                  {userData ? userData.agencyOrigin : "Guest Campus"}
+                </div>
               </div>
-              <div className="navbar-user-university">
-                {userData ? userData.agencyOrigin : "Guest Campus"}
+              <div className="navbar-search-icon">
+                <a href="/search">
+                  <img src={searchIcon} alt="Search Icon" />
+                </a>
               </div>
-            </div>
-            <div className="navbar-search-icon">
-              <a href="/search">
-                <img src={searchIcon} alt="Search Icon" />
-              </a>
-            </div>
-            <div className="navbar-add-post-article">
-              <div className="dropdown-container" ref={dropdownRef}>
-                <button className="dropdown-toggle" onClick={toggleDropdown}>
-                  <img src={addPostIcon} alt="Add Post Icon" />
-                </button>
-                {dropdownOpen && (
-                  <div
-                    className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}
-                  >
-                    <div className="create-article-a">
-                      <a href="/createarticle">Create Article</a>
+              <div className="navbar-add-post-article">
+                <div className="dropdown-container" ref={dropdownRef}>
+                  <button className="dropdown-toggle" onClick={toggleDropdown}>
+                    <img src={addPostIcon} alt="Add Post Icon" />
+                  </button>
+                  {dropdownOpen && (
+                    <div
+                      className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}
+                    >
+                      <div className="create-article-a">
+                        <a href="/createarticle">Create Article</a>
+                      </div>
+                      <div className="create-post-a">
+                        <a href="/createpost">Create Post</a>
+                      </div>
                     </div>
-                    <div className="create-post-a">
-                      <a href="/createpost">Create Post</a>
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
+              </div>
+              <div className="navbar-user-image">
+                <Link to="/Profile">
+                  <img
+                    src={
+                      userData && userData.profileImg
+                        ? userData.profileImg
+                        : GuestProfile
+                    }
+                    alt="User Image"
+                  />
+                </Link>
               </div>
             </div>
-            <div className="navbar-user-image">
-              <Link to="/Profile">
-                <img
-                  src={
-                    userData && userData.profileImg
-                      ? userData.profileImg
-                      : GuestProfile
-                  }
-                  alt="User Image"
-                />
+          ) : (
+            <div className="navbar-login-register">
+              <Link id="navbar-login" to="/Login">
+                Login
+              </Link>
+              <Link id="navbar-regist" to="/Register">
+                Register
               </Link>
             </div>
-          </div>
+          )}
         </div>
       </header>
-      <SidebarPhone isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <SidebarPhone
+        isOpen={sidebarOpen}
+        toggleSidebar={toggleSidebar}
+        userData={userData}
+      />
     </>
   );
 };

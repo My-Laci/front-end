@@ -76,6 +76,29 @@
   width: 100%;
 }
 
+.navbar-login-register {
+  display: flex;
+  align-items: center;
+}
+
+#navbar-login {
+  text-decoration: none;
+  color: #01baf2;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#navbar-regist {
+  text-decoration: none;
+  background-color: #01baf2;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
 .navbar-section-3 {
   width: 25%;
   display: flex;

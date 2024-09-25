@@ -1,17 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./sidebar-tablet.css";
-import homeIcon from "../../assets/home.svg";
-import profileIcon from "../../assets/profile.svg";
-import popularIcon from "../../assets/popular.svg";
-import bookmarkIcon from "../../assets/bookmark.svg";
 
-export default function SidebarTablet() {
+export default function SidebarTablet({ userData }) {
   const location = useLocation();
   const [activeButton, setActiveButton] = useState("Home");
 
+  // Determine if the user is an admin; default to false if userData or isAdmin is undefined
+  const isAdmin = userData ? userData.isAdmin : false;
+
   useEffect(() => {
-    // Update the active button based on the current location pathname
     switch (location.pathname) {
       case "/":
         setActiveButton("Home");
@@ -22,54 +20,77 @@ export default function SidebarTablet() {
       case "/Popular":
         setActiveButton("Popular");
         break;
-      // Add cases for other routes if needed
+      case "/Voucher":
+        setActiveButton("Voucher");
+        break;
+      case "/Validate":
+        setActiveButton("Validate User");
+        break;
       default:
         setActiveButton("");
     }
   }, [location.pathname]);
 
-  const handleButtonClick = (buttonName) => {
-    setActiveButton(buttonName);
-  };
+  // Hide the sidebar if the route is /Article or /Certificate
+  const hideSidebar = location.pathname === "/Article" || location.pathname === "/Certificate";
+
+  if (hideSidebar) {
+    return null; // Don't render the sidebar
+  }
 
   return (
     <div className="sidebar-tablet">
       <Link to="/">
         <button
           className={activeButton === "Home" ? "active" : ""}
-          onClick={() => handleButtonClick("Home")}
+          onClick={() => setActiveButton("Home")}
           data-title="Home"
         >
-          <img src={homeIcon} alt="Home" className="edit-icon" />
+          <i className="fa-solid fa-house"></i>
         </button>
       </Link>
       <Link to="/Profile">
         <button
           className={activeButton === "Profile" ? "active" : ""}
-          onClick={() => handleButtonClick("Profile")}
+          onClick={() => setActiveButton("Profile")}
           data-title="Profile"
         >
-          <img src={profileIcon} alt="Profile" className="edit-icon" />
+          <i className="fa-solid fa-user"></i>
         </button>
       </Link>
       <Link to="/Popular">
         <button
           className={activeButton === "Popular" ? "active" : ""}
-          onClick={() => handleButtonClick("Popular")}
+          onClick={() => setActiveButton("Popular")}
           data-title="Popular"
         >
-          <img src={popularIcon} alt="Popular" className="edit-icon" />
+          <i className="fa-solid fa-fire"></i>
         </button>
       </Link>
-      {/* <Link to="">
-        <button
-          className={activeButton === "Bookmarks" ? "active" : ""}
-          onClick={() => handleButtonClick("Bookmarks")}
-          data-title="Bookmarks"
-        >
-          <img src={bookmarkIcon} alt="Bookmarks" className="edit-icon" />
-        </button>
-      </Link> */}
+
+      {/* Show Voucher and Validate buttons if the user is an admin */}
+      {isAdmin && (
+        <>
+          <Link to="/Voucher">
+            <button
+              className={activeButton === "Voucher" ? "active" : ""}
+              onClick={() => setActiveButton("Voucher")}
+              data-title="Voucher"
+            >
+              <i className="fa-solid fa-ticket"></i>
+            </button>
+          </Link>
+          <Link to="/Validate">
+            <button
+              className={activeButton === "Validate User" ? "active" : ""}
+              onClick={() => setActiveButton("Validate User")}
+              data-title="Validate User"
+            >
+              <i className="fa-solid fa-circle-check"></i>
+            </button>
+          </Link>
+        </>
+      )}
     </div>
   );
 }
