@@ -29,7 +29,7 @@ export default function Login() {
     try {
       Cookies.remove("token");
       const response = await axios.post(
-        "https://laci-api-46818093185.asia-southeast2.run.app/signIn",
+        "http://localhost:8080/signIn",
         {
           email,
           password,
@@ -49,11 +49,12 @@ export default function Login() {
       navigate("/");
     } catch (error) {
       if (error.response) {
-        toast.error("Login failed: " + error.response.data.message);
-        setValidation(error.response.data);
+        const errorMessage = error.response?.data?.message || " Please try again.";
+        toast.error("Login failed: " + errorMessage);
+        setValidation(error.response.data.error);
       } else {
         toast.error("An error occurred. Please try again.");
-        console.error("Error:", error.message);
+        console.error("Error:", error.message); 
       }
     } finally {
       setIsLoading(false); // Menghentikan spinner setelah selesai
