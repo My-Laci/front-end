@@ -10,47 +10,17 @@ import addPostIcon from "../../assets/add.svg";
 import SidebarPhone from "../sidebar-phone/sidebar-phone.jsx";
 import GuestProfile from "../../assets/unknown-profile.svg"; // Ensure this path is correct
 
-const Navbar = () => {
+const Navbar = ({ userData }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [user, setUser] = useState(null); // State to hold user info
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const token = Cookies.get("token");
-
-        if (token) {
-          // Token exists, decode and fetch user profile
-          const decodedToken = JSON.parse(atob(token.split(".")[1]));
-          const userId = decodedToken.payload.id;
-
-          // Fetch user profile
-          const profileResponse = await axios.get(
-            `http://localhost:8080/users/${userId}`
-          );
-          console.log("iki profilemu navbar su", profileResponse.data);
-          setUser(profileResponse.data); // Set profile data
-        } else {
-          // No token means guest
-          setUser({ name: "Guest", agencyOrigin: "Guest Campus" }); // Adjust agencyOrigin if needed
-        }
-      } catch (error) {
-        console.error("Failed to check user", error);
-        setUser({ name: "Guest", agencyOrigin: "Guest Campus" }); // Fallback for errors
-      }
-    };
-
-    checkUser();
-  }, []);
-
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
   };
-
+  
   const handleSearchKeyPress = (e) => {
     if (e.key === "Enter" && searchQuery.trim() !== "") {
       // Navigate to search results page with the query
@@ -108,51 +78,70 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-section-3">
-          <div className="navbar-user-section">
-            <div className="navbar-user-info">
-              <div className="navbar-user-name">
-                {user ? user.name : "Guest"}
+          {userData ? (
+            <div className="navbar-user-section">
+              <div className="navbar-user-info">
+                <div className="navbar-user-name">
+                  {userData ? userData.name : "Guest"}
+                </div>
+                <div className="navbar-user-university">
+                  {userData ? userData.agencyOrigin : "Guest Campus"}
+                </div>
               </div>
-              <div className="navbar-user-university">
-                {user ? user.agencyOrigin : "Guest Campus"}
+              <div className="navbar-search-icon">
+                <a href="/search">
+                  <img src={searchIcon} alt="Search Icon" />
+                </a>
               </div>
-            </div>
-            <div className="navbar-search-icon">
-              <a href="/search">
-                <img src={searchIcon} alt="Search Icon" />
-              </a>
-            </div>
-            <div className="navbar-add-post-article">
-              <div className="dropdown-container" ref={dropdownRef}>
-                <button className="dropdown-toggle" onClick={toggleDropdown}>
-                  <img src={addPostIcon} alt="Add Post Icon" />
-                </button>
-                {dropdownOpen && (
-                  <div
-                    className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}
-                  >
-                    <div className="create-article-a">
-                      <a href="/createarticle">Create Article</a>
+              <div className="navbar-add-post-article">
+                <div className="dropdown-container" ref={dropdownRef}>
+                  <button className="dropdown-toggle" onClick={toggleDropdown}>
+                    <img src={addPostIcon} alt="Add Post Icon" />
+                  </button>
+                  {dropdownOpen && (
+                    <div
+                      className={`dropdown-menu ${dropdownOpen ? "" : "exit"}`}
+                    >
+                      <div className="create-article-a">
+                        <a href="/createarticle">Create Article</a>
+                      </div>
+                      <div className="create-post-a">
+                        <a href="/createpost">Create Post</a>
+                      </div>
                     </div>
-                    <div className="create-post-a">
-                      <a href="/createpost">Create Post</a>
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
+              </div>
+              <div className="navbar-user-image">
+                <Link to="/Profile">
+                  <img
+                    src={
+                      userData && userData.profileImg
+                        ? userData.profileImg
+                        : GuestProfile
+                    }
+                    alt="User Image"
+                  />
+                </Link>
               </div>
             </div>
-            <div className="navbar-user-image">
-              <Link to="/Profile">
-                <img
-                  src={user && user.profileImg ? user.profileImg : GuestProfile}
-                  alt="User Image"
-                />
+          ) : (
+            <div className="navbar-login-register">
+              <Link id="navbar-login" to="/Login">
+                Login
+              </Link>
+              <Link id="navbar-regist" to="/Register">
+                Register
               </Link>
             </div>
-          </div>
+          )}
         </div>
       </header>
-      <SidebarPhone isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <SidebarPhone
+        isOpen={sidebarOpen}
+        toggleSidebar={toggleSidebar}
+        userData={userData}
+      />
     </>
   );
 };

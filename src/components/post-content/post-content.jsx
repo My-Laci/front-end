@@ -139,7 +139,7 @@ const PostContent = ({
   };
 
   return (
-    <div className="content-card" onClick={goToPostDetail}>
+    <div className="content-card" >
       <div className="post-info">
         <div className="post-info-container">
           <div className="user-image">
@@ -147,9 +147,9 @@ const PostContent = ({
           </div>
           <div className="details-post">
             <div className="user-name">
-              {post.fullname}
+              {post.author.name}
               <span className="divider"> | </span>
-              <span className="user-instance">{post.agencyOrigin}</span>
+              <span className="user-instance">{post.author.agencyOrigin}</span>
             </div>
             <div className="date-time-post">{formatDate(post.createdAt)}</div>
           </div>

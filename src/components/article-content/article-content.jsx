@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom"; // Impor Link dari react-router-dom
 import UserImage from "../../assets/test-profile.svg"; // Default image
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
@@ -8,28 +8,13 @@ import Bookmark from "../../assets/post-bookmark.svg";
 
 import "./article-content.css";
 
-const ArticleContent = () => {
-  const [articles, setArticles] = useState([]);
+const ArticleContent = ({ articles, profile }) => {
   const [animateLike, setAnimateLike] = useState(null);
   const [animateBookmark, setAnimateBookmark] = useState(null);
   const [animateComment, setAnimateComment] = useState(null);
   const [animateRepost, setAnimateRepost] = useState(null);
 
   const commentInputRefs = useRef([]);
-
-  useEffect(() => {
-    // Fetch articles from the API
-    const fetchArticles = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/articles");
-        setArticles(response.data);
-      } catch (error) {
-        console.error("Error fetching articles:", error);
-      }
-    };
-
-    fetchArticles();
-  }, []);
 
   const triggerLikeAnimation = (index) => {
     setAnimateLike(index);
@@ -65,9 +50,9 @@ const ArticleContent = () => {
           <div className="content-card" key={article._id}>
             <div className="article-info">
               <div className="user-image">
-                {/* Menggunakan gambar profil dari data artikel, fallback ke UserImage */}
                 <img src={article.author?.profileImg || UserImage} alt="User" />
               </div>
+              {/* Tambahkan Link di sini */}
               <div className="details-article">
                 <div className="user-name">
                   {article.author?.name || "Unknown Author"}
@@ -81,11 +66,16 @@ const ArticleContent = () => {
                 </div>
               </div>
             </div>
-            <div className="article-img">
-              <img src={article.image?.url || UserImage} alt="Article Image" />
-            </div>
-            <div className="article-title">{article.title}</div>
-            <div className="article-text">{article.content}</div>
+            <Link to="/Article" state={{ article }}>
+              <div className="article-img">
+                <img src={article.image?.url || UserImage} alt="Article" />
+              </div>
+              <div className="article-title">{article.title}</div>
+              <div
+                className="article-text"
+                dangerouslySetInnerHTML={{ __html: article.content }}
+              />
+            </Link>
             <div className="post-interactions">
               <button
                 className={`interaction ${
@@ -127,7 +117,7 @@ const ArticleContent = () => {
             <hr />
             <div className="bottom-section">
               <div className="user-image">
-                <img src={article.author?.profileImg || UserImage} alt="User" />
+                <img src={profile.profileImg || UserImage} alt="User" />
               </div>
               <div className="comment-field">
                 <input

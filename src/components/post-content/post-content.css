@@ -113,6 +113,7 @@
   font-size: 14px !important;
   color: #263238 !important;
   margin-bottom: 10px !important;
+  cursor: pointer;
 }
 
 .post-tags {
@@ -121,6 +122,7 @@
   font-style: italic;
   font-weight: 500;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .post-img {

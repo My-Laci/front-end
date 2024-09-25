@@ -24,18 +24,14 @@ const Popular = () => {
         const postResponse = await axios.get(`http://localhost:8080/posts`);
         setPosts(postResponse.data.getAllPost || []);
 
-        const articleResponse = await axios.get(
-          `http://localhost:8080/articles`
-        );
-        setArticles(articleResponse.data || []);
+        const articleResponse = await axios.get(`http://localhost:8080/articles`);
+        setArticles(articleResponse.data || []);  // Store articles data
 
         const token = Cookies.get("token");
         if (token) {
           const decodedToken = JSON.parse(atob(token.split(".")[1]));
           const id = decodedToken.payload.id;
-          const profileResponse = await axios.get(
-            `http://localhost:8080/users/${id}`
-          );
+          const profileResponse = await axios.get(`http://localhost:8080/users/${id}`);
           setProfile(profileResponse.data);
         }
       } catch (err) {
@@ -66,13 +62,10 @@ const Popular = () => {
               <p>No posts available</p>
             )
           ) : view === "articles" ? (
-            articles.length > 0 ? (
-              articles.map((article, index) => (
-                <ArticleContent key={index} article={article} />
-              ))
-            ) : (
-              <p>No articles available</p>
-            )
+            <ArticleContent
+              articles={articles} 
+              profile={profile}
+            />
           ) : null}
           {/* <AccountInfo /> */}
         </div>

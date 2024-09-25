@@ -35,14 +35,6 @@ export const router = createBrowserRouter([
     path: "/Login",
     element: <Login />,
   },
-  {
-    path: "/Certificate",
-    element: <Certificate />,
-  },
-  {
-    path: "/Article",
-    element: <Article />,
-  },
 
   // User layout routes
   {
@@ -100,6 +92,14 @@ export const router = createBrowserRouter([
       {
         path: "/Search",
         element: <SearchResultPage />,
+      },
+      {
+        path: "/Certificate",
+        element: <Certificate />,
+      },
+      {
+        path: "/Article",
+        element: <Article />,
       },
     ],
   },
