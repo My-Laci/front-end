@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
+import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./post-content.css";
 import Like from "../../assets/like.svg";
+import Liked from "../../assets/liked.svg";  // Icon untuk like aktif
 import Comment from "../../assets/comment.svg";
 import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
@@ -29,11 +32,19 @@ const PostContent = ({
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
 
+  const [isLiked, setIsLiked] = useState(post.likes.includes(profile._id)); // Cek apakah user sudah like
+  const [likeCount, setLikeCount] = useState(post.likes.length); // Menyimpan jumlah likes
+
   const commentInputRef = useRef(null);
   const dropdownRef = useRef(null);
   const popupRef = useRef(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsLiked(post.likes.includes(profile._id)); // Cek apakah user sudah like
+    setLikeCount(post.likes.length); // Set jumlah likes
+  }, [post.likes, profile._id]);
 
   const goToPostDetail = () => {
     navigate(`/post/${post._id}`);
@@ -42,9 +53,32 @@ const PostContent = ({
   const canEditOrDelete =
     profile?.isAdmin == true || post?.author === profile?._id;
 
+  const handleLikeClick = async () => {
+    try {
+      if (isLiked) {
+        // Unlike post
+        await axios.post(`http://localhost:8080/posts/${post._id}/unlike`, {
+          userId: profile._id,
+        });
+        setIsLiked(false);
+        setLikeCount(likeCount - 1);
+      } else {
+        // Like post
+        await axios.post(`http://localhost:8080/posts/${post._id}/like`, {
+          userId: profile._id,
+        });
+        setIsLiked(true);
+        setLikeCount(likeCount + 1);
+      }
+    } catch (error) {
+      console.error("Error liking post:", error);
+    }
+  };
+
   const triggerLikeAnimation = () => {
     setAnimateLike(true);
     setTimeout(() => setAnimateLike(false), 300);
+    handleLikeClick(); // Panggil fungsi handleLikeClick saat user menekan like
   };
 
   const triggerBookmarkAnimation = () => {
@@ -139,7 +173,7 @@ const PostContent = ({
   };
 
   return (
-    <div className="content-card" >
+    <div className="content-card">
       <div className="post-info">
         <div className="post-info-container">
           <div className="user-image">
@@ -157,9 +191,8 @@ const PostContent = ({
         <div className="post-info-drop-down" onClick={toggleDropdown}>
           <i className="fa-solid fa-ellipsis-vertical"></i>
           <div
-            className={`post-info-drop-down-menu ${
-              dropdownVisible ? "visible" : ""
-            }`}
+            className={`post-info-drop-down-menu ${dropdownVisible ? "visible" : ""
+              }`}
             ref={dropdownRef}
           >
             <button>Share</button>
@@ -179,11 +212,11 @@ const PostContent = ({
       <div className="post-tags">
         {post.tag && post.tag.length > 0
           ? post.tag.map((item, index) => (
-              <React.Fragment key={index}>
-                <span className="tag">#{item}</span>
-                {index < post.tag.length - 1 && " "}{" "}
-              </React.Fragment>
-            ))
+            <React.Fragment key={index}>
+              <span className="tag">#{item}</span>
+              {index < post.tag.length - 1 && " "}{" "}
+            </React.Fragment>
+          ))
           : null}{" "}
       </div>
 
@@ -209,8 +242,8 @@ const PostContent = ({
           className={`interaction ${animateLike ? "animate" : ""}`}
           onClick={triggerLikeAnimation}
         >
-          <img src={Like} alt="Like" />
-          <div className="text-interaction">Like</div>
+          <img src={isLiked ? Liked : Like} alt="Like" />
+          <div className="text-interaction">{likeCount} Likes</div>
         </button>
         <button
           className={`interaction ${animateComment ? "animate" : ""}`}
@@ -231,38 +264,21 @@ const PostContent = ({
           onClick={triggerBookmarkAnimation}
         >
           <img src={Bookmark} alt="Bookmark" />
-          <div className="text-interaction">Bookmark</div>
         </button>
       </div>
-      {showCommentSection && (
-        <>
-          <hr />
-          <div className="bottom-section">
-            <div className="user-image">
-              <img src={profile.profileImg || GuestProfile} alt="User" />
-            </div>
-            <div className="comment-field">
-              <input
-                type="text"
-                placeholder="Write your comment here"
-                ref={commentInputRef}
-              />
-            </div>
-          </div>
-        </>
+      {isCreatePostOpen && (
+        <CreatePost
+          isOpen={isCreatePostOpen}
+          onClose={closeCreatePostPopup}
+          post={post}
+          isEditing={true}
+        />
       )}
       <ImageModal
         isOpen={isModalOpen}
-        imageSrc={modalImageSrc}
         onClose={closeImageModal}
+        src={modalImageSrc}
       />
-      {isCreatePostOpen && (
-        <div className="edit-post-popup" ref={popupRef}>
-          <div className="edit-post-content">
-            <CreatePost onClose={closeCreatePostPopup} post={post} />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
