@@ -11,7 +11,6 @@ export default function Article() {
 
   return (
     <div className="article-container">
-      <Navbar />
       <div className="article-content">
         {/* Gunakan article di sini */}
         <ArticleDetail article={article} />

@@ -1,16 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./sidebar-phone.css";
-import homeIcon from "../../assets/home.svg";
-import profileIcon from "../../assets/profile.svg";
-import popularIcon from "../../assets/popular.svg";
-import bookmarkIcon from "../../assets/bookmark.svg";
 
-const SidebarPhone = ({ isOpen, toggleSidebar }) => {
+const SidebarPhone = ({ isOpen, toggleSidebar, userData }) => {
   const [activeButton, setActiveButton] = useState("Home");
+  const navigate = useNavigate(); // Hook to handle navigation
 
-  const handleButtonClick = (buttonName) => {
+  // Determine if the user is an admin; default to false if userData or isAdmin is undefined
+  const isAdmin = userData ? userData.isAdmin : false;
+
+  const handleButtonClick = (buttonName, path) => {
     setActiveButton(buttonName);
+    navigate(path); // Navigate to the given path
   };
+
   const sidebarRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -35,40 +38,47 @@ const SidebarPhone = ({ isOpen, toggleSidebar }) => {
     <div ref={sidebarRef} className={`sidebar-phone ${isOpen ? "open" : ""}`}>
       <div className="sidebar-phone-logo">Laci</div>
       <div className="sidebar-phone-content">
-        {/* <button
-          onClick={() => toggleSidebar()}
-          className="sidebar-phone-close-button"
-        >
-          &times;
-        </button> */}
         <button
           className={activeButton === "Home" ? "active" : ""}
-          onClick={() => handleButtonClick("Home")}
+          onClick={() => handleButtonClick("Home", "/")}
         >
-          <img src={homeIcon} alt="Home" className="edit-icon" />
+          <i className="fa-solid fa-house"></i>
           Home
         </button>
         <button
           className={activeButton === "Profile" ? "active" : ""}
-          onClick={() => handleButtonClick("Profile")}
+          onClick={() => handleButtonClick("Profile", "/Profile")}
         >
-          <img src={profileIcon} alt="Profile" className="edit-icon" />
+          <i className="fa-solid fa-user"></i>
           Profile
         </button>
         <button
           className={activeButton === "Popular" ? "active" : ""}
-          onClick={() => handleButtonClick("Popular")}
+          onClick={() => handleButtonClick("Popular", "/Popular")}
         >
-          <img src={popularIcon} alt="Popular" className="edit-icon" />
+          <i className="fa-solid fa-fire"></i>
           Popular
         </button>
-        <button
-          className={activeButton === "Bookmarks" ? "active" : ""}
-          onClick={() => handleButtonClick("Bookmarks")}
-        >
-          <img src={bookmarkIcon} alt="Bookmarks" className="edit-icon" />
-          Bookmarks
-        </button>
+
+        {/* Show Voucher and Validate buttons only if the user is an admin */}
+        {isAdmin && (
+          <>
+            <button
+              className={activeButton === "Voucher" ? "active" : ""}
+              onClick={() => handleButtonClick("Voucher", "/Voucher")}
+            >
+              <i className="fa-solid fa-ticket"></i>
+              Voucher
+            </button>
+            <button
+              className={activeButton === "Validate" ? "active" : ""}
+              onClick={() => handleButtonClick("Validate", "/Validate")}
+            >
+              <i className="fa-solid fa-circle-check"></i>
+              Validate User
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

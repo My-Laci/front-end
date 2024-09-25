@@ -49,7 +49,6 @@ export default function CertificateGenerator() {
 
   return (
     <div className="certificate-master-container">
-      <Navbar />
       <div className="certificate-generator-container">
         <div
           id="certificate"

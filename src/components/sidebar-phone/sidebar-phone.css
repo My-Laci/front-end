@@ -63,7 +63,7 @@
   position: relative;
 }
 
-.sidebar-phone-content img {
+.sidebar-phone-content i {
   margin-right: 20px;
   width: 20px;
   height: auto;
@@ -84,7 +84,7 @@
     box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.sidebar-phone-content button.active img {
+.sidebar-phone-content button.active i {
   filter: brightness(0) invert(1);
 }
 
@@ -101,7 +101,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.sidebar-phone-item img {
+.sidebar-phone-item i {
   margin-right: 15px;
 }
 

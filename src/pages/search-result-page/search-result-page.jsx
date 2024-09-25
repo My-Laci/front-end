@@ -42,8 +42,6 @@ export default function SearchResultPage() {
 
   return (
     <div className="searchpage-container">
-      <Navbar />
-      <Sidebar />
       <div className="searchpage-content">
         <div className="content">
           {loading && <p>Loading...</p>}

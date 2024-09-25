@@ -126,7 +126,7 @@ const Navbar = ({ userData }) => {
           </div>
         </div>
       </header>
-      <SidebarPhone isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <SidebarPhone isOpen={sidebarOpen} toggleSidebar={toggleSidebar} userData={userData} />
     </>
   );
 };

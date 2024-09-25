@@ -5,6 +5,7 @@ import PostContent from "../post-content/post-content";
 
 export default function ProfileContent({ post, profile, article }) {
   const [activeTab, setActiveTab] = useState("posts");
+  console.log("ini post dari profile content", post)
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);

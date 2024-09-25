@@ -43,7 +43,7 @@ export default function UserLayout() {
     <div className="user-layout-container">
       <Navbar userData={user} /> 
       <Sidebar userData={user} />
-      <SidebarTablet />
+      <SidebarTablet userData={user} />
       <Outlet />
     </div>
   );

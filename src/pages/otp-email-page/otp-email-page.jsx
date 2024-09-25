@@ -52,9 +52,8 @@ const OtpEmailPage = () => {
 
     return (
         <>
-            <Navbar />
+
             <div className="changeEmail-container">
-                <Sidebar />
                 <div className="changeEmail-content">
                     <OtpEmail user={user} token={token} />
                 </div>
