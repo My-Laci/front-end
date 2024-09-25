@@ -72,6 +72,26 @@ const AccountInfoPage = () => {
     navigate("/EmailVerification");
   };
 
+  const handleLogOut = async () => {
+    try {
+      // Optionally call the sign-out API to perform any server-side cleanup
+      await axios.post("https://laci-api-46818093185.asia-southeast2.run.app/signout", null, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
+
+      // Remove the token from cookies
+      Cookies.remove("token");
+
+      // Redirect the user to the login page
+      navigate("/login"); // Redirect to /login after logout
+    } catch (error) {
+      console.error("Error during logout:", error);
+      // Handle any errors if necessary
+    }
+  };
+
   return (
     <>
       <div className="account-container">
@@ -86,14 +106,13 @@ const AccountInfoPage = () => {
               <p>Your email is verified</p>
             ) : (
               <div>
-                {/* <p className="email-verify-text">Your email is not verified</p> */}
                 <button
                   onClick={handleVerifyEmail}
                   className="email-verify-button"
                 >
                   Verify your email
                 </button>
-                <button onClick={{}} className="log-out-button">
+                <button onClick={handleLogOut} className="log-out-button">
                   Log Out
                 </button>
               </div>
