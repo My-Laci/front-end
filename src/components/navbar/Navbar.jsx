@@ -10,42 +10,12 @@ import addPostIcon from "../../assets/add.svg";
 import SidebarPhone from "../sidebar-phone/sidebar-phone.jsx";
 import GuestProfile from "../../assets/unknown-profile.svg"; // Ensure this path is correct
 
-const Navbar = () => {
+const Navbar = ({ userData }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [user, setUser] = useState(null); // State to hold user info
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const token = Cookies.get("token");
-
-        if (token) {
-          // Token exists, decode and fetch user profile
-          const decodedToken = JSON.parse(atob(token.split(".")[1]));
-          const userId = decodedToken.payload.id;
-
-          // Fetch user profile
-          const profileResponse = await axios.get(
-            `http://localhost:8080/users/${userId}`
-          );
-          console.log("iki profilemu navbar su", profileResponse.data);
-          setUser(profileResponse.data); // Set profile data
-        } else {
-          // No token means guest
-          setUser({ name: "Guest", agencyOrigin: "Guest Campus" }); // Adjust agencyOrigin if needed
-        }
-      } catch (error) {
-        console.error("Failed to check user", error);
-        setUser({ name: "Guest", agencyOrigin: "Guest Campus" }); // Fallback for errors
-      }
-    };
-
-    checkUser();
-  }, []);
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -111,10 +81,10 @@ const Navbar = () => {
           <div className="navbar-user-section">
             <div className="navbar-user-info">
               <div className="navbar-user-name">
-                {user ? user.name : "Guest"}
+                {userData ? userData.name : "Guest"}
               </div>
               <div className="navbar-user-university">
-                {user ? user.agencyOrigin : "Guest Campus"}
+                {userData ? userData.agencyOrigin : "Guest Campus"}
               </div>
             </div>
             <div className="navbar-search-icon">
@@ -144,7 +114,11 @@ const Navbar = () => {
             <div className="navbar-user-image">
               <Link to="/Profile">
                 <img
-                  src={user && user.profileImg ? user.profileImg : GuestProfile}
+                  src={
+                    userData && userData.profileImg
+                      ? userData.profileImg
+                      : GuestProfile
+                  }
                   alt="User Image"
                 />
               </Link>

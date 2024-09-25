@@ -133,7 +133,7 @@ const PostContent = ({
   };
 
   return (
-    <div className="content-card" onClick={goToPostDetail}>
+    <div className="content-card" >
       <div className="post-info">
         <div className="post-info-container">
           <div className="user-image">

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import React, { useState, useRef } from "react";
 import UserImage from "../../assets/test-profile.svg"; // Default image
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
@@ -8,28 +7,14 @@ import Bookmark from "../../assets/post-bookmark.svg";
 
 import "./article-content.css";
 
-const ArticleContent = () => {
-  const [articles, setArticles] = useState([]);
+const ArticleContent = ({ articles , profile }) => {
   const [animateLike, setAnimateLike] = useState(null);
   const [animateBookmark, setAnimateBookmark] = useState(null);
   const [animateComment, setAnimateComment] = useState(null);
   const [animateRepost, setAnimateRepost] = useState(null);
+  console.log("ini artikel untuk dibaca", articles)
 
   const commentInputRefs = useRef([]);
-
-  useEffect(() => {
-    // Fetch articles from the API
-    const fetchArticles = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/articles");
-        setArticles(response.data);
-      } catch (error) {
-        console.error("Error fetching articles:", error);
-      }
-    };
-
-    fetchArticles();
-  }, []);
 
   const triggerLikeAnimation = (index) => {
     setAnimateLike(index);
@@ -65,7 +50,7 @@ const ArticleContent = () => {
           <div className="content-card" key={article._id}>
             <div className="article-info">
               <div className="user-image">
-                {/* Menggunakan gambar profil dari data artikel, fallback ke UserImage */}
+                {/* Use profile image from article data, fallback to UserImage */}
                 <img src={article.author?.profileImg || UserImage} alt="User" />
               </div>
               <div className="details-article">
@@ -82,42 +67,34 @@ const ArticleContent = () => {
               </div>
             </div>
             <div className="article-img">
-              <img src={article.image?.url || UserImage} alt="Article Image" />
+              <img src={article.image?.url || UserImage} alt="Article" />
             </div>
             <div className="article-title">{article.title}</div>
             <div className="article-text">{article.content}</div>
             <div className="post-interactions">
               <button
-                className={`interaction ${
-                  animateLike === index ? "animate" : ""
-                }`}
+                className={`interaction ${animateLike === index ? "animate" : ""}`}
                 onClick={() => triggerLikeAnimation(index)}
               >
                 <img src={Like} alt="Like" />
                 <div className="text-interaction">Like</div>
               </button>
               <button
-                className={`interaction ${
-                  animateComment === index ? "animate" : ""
-                }`}
+                className={`interaction ${animateComment === index ? "animate" : ""}`}
                 onClick={() => triggerCommentAnimation(index)}
               >
                 <img src={Comment} alt="Comment" />
                 <div className="text-interaction">Comment</div>
               </button>
               <button
-                className={`interaction ${
-                  animateRepost === index ? "animate" : ""
-                }`}
+                className={`interaction ${animateRepost === index ? "animate" : ""}`}
                 onClick={() => triggerRepostAnimation(index)}
               >
                 <img src={Repost} alt="Repost" />
                 <div className="text-interaction">Repost</div>
               </button>
               <button
-                className={`interaction ${
-                  animateBookmark === index ? "animate" : ""
-                }`}
+                className={`interaction ${animateBookmark === index ? "animate" : ""}`}
                 onClick={() => triggerBookmarkAnimation(index)}
               >
                 <img src={Bookmark} alt="Bookmark" />
@@ -127,7 +104,7 @@ const ArticleContent = () => {
             <hr />
             <div className="bottom-section">
               <div className="user-image">
-                <img src={article.author?.profileImg || UserImage} alt="User" />
+                <img src={profile.profileImg || UserImage} alt="User" />
               </div>
               <div className="comment-field">
                 <input
