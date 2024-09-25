@@ -28,11 +28,11 @@ export default function UserLayout() {
           setUser(profileResponse.data); // Set profile data
         } else {
           // No token means guest
-          setUser({ name: "Guest", agencyOrigin: "Guest Campus" });
+          setUser(null);
         }
       } catch (error) {
         console.error("Failed to check user", error);
-        setUser({ name: "Guest", agencyOrigin: "Guest Campus" }); // Fallback for errors
+        setUser(null); // Fallback for errors
       }
     };
 
