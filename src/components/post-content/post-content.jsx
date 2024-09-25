@@ -125,8 +125,14 @@ const PostContent = ({
   };
 
   const formatDate = (dateString) => {
-    const date = parseISO(dateString);
-    return format(date, "dd MMM yyyy 'at' HH:mm");
+    if (!dateString) return "Unknown Date"; // Jika dateString undefined atau null, kembalikan teks default
+    try {
+      const date = parseISO(dateString);
+      return format(date, "dd MMM yyyy 'at' HH:mm");
+    } catch (error) {
+      console.error("Invalid date format:", error);
+      return "Invalid Date";
+    }
   };
 
   const toggleDropdown = () => {
@@ -165,7 +171,7 @@ const PostContent = ({
       <div className="post-info">
         <div className="post-info-container">
           <div className="user-image">
-            <img src={post.author.profileImg || GuestProfile} alt="User" />
+            <img src={post.author?.profileImage || GuestProfile} alt="User" />
           </div>
           <div className="details-post">
             <div className="user-name">
