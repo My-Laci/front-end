@@ -34,7 +34,10 @@ const Homepage = () => {
             `http://localhost:8080/users/${id}`
           );
           setProfile(profileResponse.data); // Set profil jika login
-          console.log(`paham?`, profileResponse.data)
+
+          // Jika pengguna sudah login, tutup pop-up
+          setShowPopup(false);
+          console.log(`paham?`, profileResponse.data);
         }
       } catch (err) {
         console.error("Error fetching data", err); // Logging error ke console
@@ -58,7 +61,7 @@ const Homepage = () => {
         </div>
         <Aside />
       </div>
-      <LoginRegisterPopup show={showPopup} onClose={closePopup} />
+      {showPopup && <LoginRegisterPopup show={showPopup} onClose={closePopup} />}
     </div>
   );
 };
