@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import axios from "axios";
@@ -39,6 +40,11 @@ const PostContent = ({
   const popupRef = useRef(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsLiked(post.likes.includes(profile._id)); // Cek apakah user sudah like
+    setLikeCount(post.likes.length); // Set jumlah likes
+  }, [post.likes, profile._id]);
 
   const goToPostDetail = () => {
     navigate(`/post/${post._id}`);
@@ -185,9 +191,8 @@ const PostContent = ({
         <div className="post-info-drop-down" onClick={toggleDropdown}>
           <i className="fa-solid fa-ellipsis-vertical"></i>
           <div
-            className={`post-info-drop-down-menu ${
-              dropdownVisible ? "visible" : ""
-            }`}
+            className={`post-info-drop-down-menu ${dropdownVisible ? "visible" : ""
+              }`}
             ref={dropdownRef}
           >
             <button>Share</button>
@@ -207,11 +212,11 @@ const PostContent = ({
       <div className="post-tags">
         {post.tag && post.tag.length > 0
           ? post.tag.map((item, index) => (
-              <React.Fragment key={index}>
-                <span className="tag">#{item}</span>
-                {index < post.tag.length - 1 && " "}{" "}
-              </React.Fragment>
-            ))
+            <React.Fragment key={index}>
+              <span className="tag">#{item}</span>
+              {index < post.tag.length - 1 && " "}{" "}
+            </React.Fragment>
+          ))
           : null}{" "}
       </div>
 
