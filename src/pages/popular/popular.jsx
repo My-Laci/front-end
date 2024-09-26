@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import LoginRegisterPopup from "../../components/loginregister-popup/loginregister-popup.jsx";
 import SidebarTablet from "../../components/sidebar-tablet/sidebar-tablet.jsx";
 import PostContent from "../../components/post-content/post-content.jsx";
 import Aside from "../../components/aside/aside.jsx";
@@ -13,6 +14,11 @@ const Popular = () => {
   const [posts, setPosts] = useState([]);
   const [articles, setArticles] = useState([]);
   const [profile, setProfile] = useState({});
+  const [showPopup, setShowPopup] = useState(false); // Default popup closed
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
   const handleSwitch = (type) => {
     setView(type);
@@ -24,14 +30,18 @@ const Popular = () => {
         const postResponse = await axios.get(`http://localhost:8080/posts`);
         setPosts(postResponse.data.getAllPost || []);
 
-        const articleResponse = await axios.get(`http://localhost:8080/articles`);
-        setArticles(articleResponse.data || []);  // Store articles data
+        const articleResponse = await axios.get(
+          `http://localhost:8080/articles`
+        );
+        setArticles(articleResponse.data || []); // Store articles data
 
         const token = Cookies.get("token");
         if (token) {
           const decodedToken = JSON.parse(atob(token.split(".")[1]));
           const id = decodedToken.payload.id;
-          const profileResponse = await axios.get(`http://localhost:8080/users/${id}`);
+          const profileResponse = await axios.get(
+            `http://localhost:8080/users/${id}`
+          );
           setProfile(profileResponse.data);
         }
       } catch (err) {
@@ -62,15 +72,15 @@ const Popular = () => {
               <p>No posts available</p>
             )
           ) : view === "articles" ? (
-            <ArticleContent
-              articles={articles} 
-              profile={profile}
-            />
+            <ArticleContent articles={articles} profile={profile} />
           ) : null}
           {/* <AccountInfo /> */}
         </div>
-        <Aside />
+        <Aside profile={profile} onOpenPopup={setShowPopup} />
       </div>
+      {showPopup && (
+        <LoginRegisterPopup show={showPopup} onClose={closePopup} />
+      )}
       <SidebarTablet />
     </div>
   );
