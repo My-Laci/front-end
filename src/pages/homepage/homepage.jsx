@@ -9,7 +9,7 @@ import "./homepage.css";
 const Homepage = () => {
   const [post, setPost] = useState([]);
   const [profile, setProfile] = useState({});
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   // Tutup popup setelah pengguna melihatnya
   const closePopup = () => {
@@ -37,7 +37,7 @@ const Homepage = () => {
 
           // Jika pengguna sudah login, tutup pop-up
           setShowPopup(false);
-          console.log(`paham?`, profileResponse.data);
+          // console.log(`paham?`, profileResponse.data);
         }
       } catch (err) {
         console.error("Error fetching data", err); // Logging error ke console
@@ -59,9 +59,11 @@ const Homepage = () => {
             <p>No posts available</p>
           )}
         </div>
-        <Aside />
+        <Aside profile={profile} onOpenPopup={setShowPopup} />
       </div>
-      {showPopup && <LoginRegisterPopup show={showPopup} onClose={closePopup} />}
+      {showPopup && (
+        <LoginRegisterPopup show={showPopup} onClose={closePopup} />
+      )}
     </div>
   );
 };
