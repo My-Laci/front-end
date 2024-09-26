@@ -4,14 +4,13 @@ import CreatePost from "../create-post/CreatePost";
 import CreateArticle from "../create-article/CreateArticle";
 
 export default function Aside({ profile, onOpenPopup }) {
-  const [popupType, setPopupType] = useState(null); // `null` means no popup is open
+  const [popupType, setPopupType] = useState(null);
 
   const handleOpenPopup = (type) => {
-    // Jika pengguna belum login, tampilkan popup LoginRegisterPopup
-    if (!profile?.id) {
-      onOpenPopup(true); // Buka LoginRegisterPopup
+    if (!profile?._id) {
+      onOpenPopup(true); 
     } else {
-      setPopupType(type); // Buka popup post atau article jika sudah login
+      setPopupType(type); 
     }
   };
 

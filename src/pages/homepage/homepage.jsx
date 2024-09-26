@@ -8,10 +8,9 @@ import "./homepage.css";
 
 const Homepage = () => {
   const [post, setPost] = useState([]);
-  const [profile, setProfile] = useState({});
-  const [showPopup, setShowPopup] = useState(false);
+  const [profile, setProfile] = useState({}); // Default profile as empty object
+  const [showPopup, setShowPopup] = useState(false); // Default popup closed
 
-  // Tutup popup setelah pengguna melihatnya
   const closePopup = () => {
     setShowPopup(false);
   };
@@ -19,13 +18,11 @@ const Homepage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Ambil semua post tanpa memeriksa token
         const postResponse = await axios.get(`http://localhost:8080/posts`);
         setPost(postResponse.data.getAllPost || []); // Set postingan
 
         const token = Cookies.get("token");
 
-        // Jika token ada, ambil data profil
         if (token) {
           const decodedToken = JSON.parse(atob(token.split(".")[1]));
           const id = decodedToken.payload.id;
@@ -33,11 +30,7 @@ const Homepage = () => {
           const profileResponse = await axios.get(
             `http://localhost:8080/users/${id}`
           );
-          setProfile(profileResponse.data); // Set profil jika login
-
-          // Jika pengguna sudah login, tutup pop-up
-          setShowPopup(false);
-          // console.log(`paham?`, profileResponse.data);
+          setProfile(profileResponse.data); // Set profile jika login
         }
       } catch (err) {
         console.error("Error fetching data", err); // Logging error ke console
