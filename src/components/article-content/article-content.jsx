@@ -16,50 +16,63 @@ const ArticleContent = ({ articles = [], profile }) => {
   const [animateComment, setAnimateComment] = useState(null);
   const [animateRepost, setAnimateRepost] = useState(null);
 
-  const [isLiked, setIsLiked] = useState(
-    articles.likes?.includes(profile._id) || false
-  );
-  const [likeCount, setLikeCount] = useState(articles.likes?.length || 0);
-
+  const [likeStatus, setLikeStatus] = useState({}); // To manage like state per article
   const commentInputRefs = useRef([]);
 
   useEffect(() => {
-    setIsLiked(articles.likes?.includes(profile._id) || false); // Check if user has liked
-    setLikeCount(articles.likes?.length || 0); // Set like count
-  }, [articles.likes, profile._id]);
+    const initialLikeStatus = articles.reduce((acc, article) => {
+      acc[article._id] = {
+        isLiked: article.likes?.includes(profile._id) || false,
+        likeCount: article.likes?.length || 0,
+      };
+      return acc;
+    }, {});
+    setLikeStatus(initialLikeStatus);
+  }, [articles, profile._id]);
 
-  const handleLikeClick = async () => {
+  const handleLikeClick = async (articleId) => {
+    const currentStatus = likeStatus[articleId];
     try {
-      if (isLiked) {
+      if (currentStatus.isLiked) {
         // Unlike post
         await axios.post(
-          `http://localhost:8080/articles/${articles._id}/unlike`,
+          `http://localhost:8080/articles/${articleId}/unlike`,
           {
             userId: profile._id,
           }
         );
-        setIsLiked(false);
-        setLikeCount(likeCount - 1);
+        setLikeStatus((prevStatus) => ({
+          ...prevStatus,
+          [articleId]: {
+            isLiked: false,
+            likeCount: prevStatus[articleId].likeCount - 1,
+          },
+        }));
       } else {
         // Like post
         await axios.post(
-          `http://localhost:8080/articles/${articles._id}/like`,
+          `http://localhost:8080/articles/${articleId}/like`,
           {
             userId: profile._id,
           }
         );
-        setIsLiked(true);
-        setLikeCount(likeCount + 1);
+        setLikeStatus((prevStatus) => ({
+          ...prevStatus,
+          [articleId]: {
+            isLiked: true,
+            likeCount: prevStatus[articleId].likeCount + 1,
+          },
+        }));
       }
     } catch (error) {
       console.error("Error liking post:", error);
     }
   };
 
-  const triggerLikeAnimation = (index) => {
+  const triggerLikeAnimation = (index, articleId) => {
     setAnimateLike(index);
     setTimeout(() => setAnimateLike(null), 300);
-    handleLikeClick();
+    handleLikeClick(articleId);
   };
 
   const triggerBookmarkAnimation = (index) => {
@@ -122,10 +135,10 @@ const ArticleContent = ({ articles = [], profile }) => {
                 className={`interaction ${
                   animateLike === index ? "animate" : ""
                 }`}
-                onClick={() => triggerLikeAnimation(index)}
+                onClick={() => triggerLikeAnimation(index, article._id)}
               >
-                <img src={isLiked ? Liked : Like} alt="Like" />
-                <div className="text-interaction">{likeCount} Likes</div>
+                <img src={likeStatus[article._id]?.isLiked ? Liked : Like} alt="Like" />
+                <div className="text-interaction">{likeStatus[article._id]?.likeCount} Likes</div>
               </button>
               <button
                 className={`interaction ${
