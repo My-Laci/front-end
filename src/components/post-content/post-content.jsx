@@ -51,7 +51,7 @@ const PostContent = ({
   };
 
   const canEditOrDelete =
-    profile?.isAdmin == true || post?.author === profile?._id;
+    profile?.isAdmin == true || post?.author._id === profile?._id;
 
   const handleLikeClick = async () => {
     try {
@@ -177,7 +177,7 @@ const PostContent = ({
       <div className="post-info">
         <div className="post-info-container">
           <div className="user-image">
-            <img src={post.author?.profileImage || GuestProfile} alt="User" />
+            <img src={post.author?.profileImg || GuestProfile} alt="User" />
           </div>
           <div className="details-post">
             <div className="user-name">
@@ -265,6 +265,7 @@ const PostContent = ({
           onClick={triggerBookmarkAnimation}
         >
           <img src={Bookmark} alt="Bookmark" />
+          <div className="text-interaction">Bookmark</div>
         </button>
       </div>
       {isCreatePostOpen && (
