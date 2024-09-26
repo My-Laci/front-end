@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./post-content.css";
 import Like from "../../assets/like.svg";
-import Liked from "../../assets/liked.svg";  // Icon untuk like aktif
+import Liked from "../../assets/liked.svg"; // Icon untuk like aktif
 import Comment from "../../assets/comment.svg";
 import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
@@ -191,8 +191,9 @@ const PostContent = ({
         <div className="post-info-drop-down" onClick={toggleDropdown}>
           <i className="fa-solid fa-ellipsis-vertical"></i>
           <div
-            className={`post-info-drop-down-menu ${dropdownVisible ? "visible" : ""
-              }`}
+            className={`post-info-drop-down-menu ${
+              dropdownVisible ? "visible" : ""
+            }`}
             ref={dropdownRef}
           >
             <button>Share</button>
@@ -212,11 +213,11 @@ const PostContent = ({
       <div className="post-tags">
         {post.tag && post.tag.length > 0
           ? post.tag.map((item, index) => (
-            <React.Fragment key={index}>
-              <span className="tag">#{item}</span>
-              {index < post.tag.length - 1 && " "}{" "}
-            </React.Fragment>
-          ))
+              <React.Fragment key={index}>
+                <span className="tag">#{item}</span>
+                {index < post.tag.length - 1 && " "}{" "}
+              </React.Fragment>
+            ))
           : null}{" "}
       </div>
 
@@ -277,7 +278,7 @@ const PostContent = ({
       <ImageModal
         isOpen={isModalOpen}
         onClose={closeImageModal}
-        src={modalImageSrc}
+        imageSrc={modalImageSrc}
       />
     </div>
   );

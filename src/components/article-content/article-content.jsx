@@ -1,24 +1,65 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom"; // Impor Link dari react-router-dom
 import UserImage from "../../assets/test-profile.svg"; // Default image
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
 import Repost from "../../assets/repost.svg";
 import Bookmark from "../../assets/post-bookmark.svg";
+import Liked from "../../assets/liked.svg";
 
 import "./article-content.css";
 
-const ArticleContent = ({ articles, profile }) => {
+const ArticleContent = ({ articles = [], profile }) => {
   const [animateLike, setAnimateLike] = useState(null);
   const [animateBookmark, setAnimateBookmark] = useState(null);
   const [animateComment, setAnimateComment] = useState(null);
   const [animateRepost, setAnimateRepost] = useState(null);
 
+  const [isLiked, setIsLiked] = useState(
+    articles.likes?.includes(profile._id) || false
+  );
+  const [likeCount, setLikeCount] = useState(articles.likes?.length || 0);
+
   const commentInputRefs = useRef([]);
+
+  useEffect(() => {
+    setIsLiked(articles.likes?.includes(profile._id) || false); // Check if user has liked
+    setLikeCount(articles.likes?.length || 0); // Set like count
+  }, [articles.likes, profile._id]);
+
+  const handleLikeClick = async () => {
+    try {
+      if (isLiked) {
+        // Unlike post
+        await axios.post(
+          `http://localhost:8080/articles/${articles._id}/unlike`,
+          {
+            userId: profile._id,
+          }
+        );
+        setIsLiked(false);
+        setLikeCount(likeCount - 1);
+      } else {
+        // Like post
+        await axios.post(
+          `http://localhost:8080/articles/${articles._id}/like`,
+          {
+            userId: profile._id,
+          }
+        );
+        setIsLiked(true);
+        setLikeCount(likeCount + 1);
+      }
+    } catch (error) {
+      console.error("Error liking post:", error);
+    }
+  };
 
   const triggerLikeAnimation = (index) => {
     setAnimateLike(index);
     setTimeout(() => setAnimateLike(null), 300);
+    handleLikeClick();
   };
 
   const triggerBookmarkAnimation = (index) => {
@@ -83,8 +124,8 @@ const ArticleContent = ({ articles, profile }) => {
                 }`}
                 onClick={() => triggerLikeAnimation(index)}
               >
-                <img src={Like} alt="Like" />
-                <div className="text-interaction">Like</div>
+                <img src={isLiked ? Liked : Like} alt="Like" />
+                <div className="text-interaction">{likeCount} Likes</div>
               </button>
               <button
                 className={`interaction ${
