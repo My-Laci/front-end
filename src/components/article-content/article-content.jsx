@@ -35,12 +35,9 @@ const ArticleContent = ({ articles = [], profile }) => {
     try {
       if (currentStatus.isLiked) {
         // Unlike post
-        await axios.post(
-          `http://localhost:8080/articles/${articleId}/unlike`,
-          {
-            userId: profile._id,
-          }
-        );
+        await axios.post(`http://localhost:8080/articles/${articleId}/unlike`, {
+          userId: profile._id,
+        });
         setLikeStatus((prevStatus) => ({
           ...prevStatus,
           [articleId]: {
@@ -50,12 +47,9 @@ const ArticleContent = ({ articles = [], profile }) => {
         }));
       } else {
         // Like post
-        await axios.post(
-          `http://localhost:8080/articles/${articleId}/like`,
-          {
-            userId: profile._id,
-          }
-        );
+        await axios.post(`http://localhost:8080/articles/${articleId}/like`, {
+          userId: profile._id,
+        });
         setLikeStatus((prevStatus) => ({
           ...prevStatus,
           [articleId]: {
@@ -137,8 +131,13 @@ const ArticleContent = ({ articles = [], profile }) => {
                 }`}
                 onClick={() => triggerLikeAnimation(index, article._id)}
               >
-                <img src={likeStatus[article._id]?.isLiked ? Liked : Like} alt="Like" />
-                <div className="text-interaction">{likeStatus[article._id]?.likeCount} Likes</div>
+                <img
+                  src={likeStatus[article._id]?.isLiked ? Liked : Like}
+                  alt="Like"
+                />
+                <div className="text-interaction">
+                  {likeStatus[article._id]?.likeCount} Likes
+                </div>
               </button>
               <button
                 className={`interaction ${
