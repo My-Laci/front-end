@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.edit-post-content  {
+.edit-post-content {
   width: 80%;
 }
 
@@ -255,6 +255,19 @@
   display: flex !important;
   margin-top: 15px !important;
   gap: 10px !important;
+}
+
+.post-content-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 @media (max-width: 768px) {

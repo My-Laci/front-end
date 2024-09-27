@@ -11,7 +11,8 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 export default function InternshipDetail({ detail }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [isPopupOpen, setPopupOpen] = useState(false); // State for popup visibility
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isPopupEditOpen, setPopupEditOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate(); // Hook for programmatic navigation
 
@@ -69,6 +70,18 @@ export default function InternshipDetail({ detail }) {
     setPopupOpen((prev) => !prev);
   };
 
+  const handleEditClick = () => {
+    setPopupEditOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSaveInternship = () => {
+    setPopupEditOpen(false);
+  };
+
   return (
     <div className="internship-detail">
       <div className="intern-job-desk">
@@ -111,14 +124,11 @@ export default function InternshipDetail({ detail }) {
         </div>
       </div>
 
-      {/* Popup for AddInternExperience */}
-      {isPopupOpen && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <AddInternExperience detail={detail} onClose={togglePopup} />
-          </div>
-        </div>
-      )}
+      <AddInternExperience
+        isOpen={isPopupEditOpen}
+        onClose={handleCloseModal}
+        onSave={handleSaveInternship}
+      />
     </div>
   );
 }

@@ -268,12 +268,14 @@ const PostContent = ({
         </button>
       </div>
       {isCreatePostOpen && (
-        <CreatePost
-          isOpen={isCreatePostOpen}
-          onClose={closeCreatePostPopup}
-          post={post}
-          isEditing={true}
-        />
+        <div className="post-content-popup-overlay">
+          <CreatePost
+            isOpen={isCreatePostOpen}
+            onClose={closeCreatePostPopup}
+            post={post}
+            isEditing={true}
+          />
+        </div>
       )}
       <ImageModal
         isOpen={isModalOpen}
