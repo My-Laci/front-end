@@ -10,8 +10,8 @@ const LoginRegisterPopup = ({ show, onClose }) => {
         <button className="login-regist-popup-close" onClick={onClose}>
           <i className="fa-solid fa-xmark"></i>
         </button>
-        <h2>Welcome!</h2>
-        <p>Please log in or register to continue.</p>
+        {/* <h2>Welcome!</h2> */}
+        <h2>Please log in or register to continue.</h2>
         <button className="login-regist-popup-button" onClick={onClose}>
           Register
         </button>

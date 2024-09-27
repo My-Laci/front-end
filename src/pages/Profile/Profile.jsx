@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProfileBanner from "../../components/profile-banner/ProfileBanner";
+import LoginRegisterPopup from "../../components/loginregister-popup/loginregister-popup.jsx";
 import InternHistory from "../../components/intern-history/InternHistory";
 import ProfileContent from "../../components/profile-content/ProfileContent";
 import Aside from "../../components/aside/aside.jsx";
@@ -13,6 +14,11 @@ function Profile() {
   const [internship, setInternship] = useState([]);
   const [post, setPost] = useState([]);
   const [article, setArticle] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -89,7 +95,10 @@ function Profile() {
           </>
         )}
       </div>
-      <Aside />
+      <Aside profile={profile} onOpenPopup={setShowPopup} />
+      {showPopup && (
+        <LoginRegisterPopup show={showPopup} onClose={closePopup} />
+      )}
     </div>
   );
 }
