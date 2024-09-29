@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Impor Link dari react-router-dom
+import { Link } from "react-router-dom";
 import UserImage from "../../assets/test-profile.svg"; // Default image
 import Like from "../../assets/like.svg";
 import Comment from "../../assets/comment.svg";
@@ -16,57 +16,85 @@ const ArticleContent = ({ articles = [], profile }) => {
   const [animateComment, setAnimateComment] = useState(null);
   const [animateRepost, setAnimateRepost] = useState(null);
 
-  const [likeStatus, setLikeStatus] = useState({}); // To manage like state per article
+  const [likeStatuses, setLikeStatuses] = useState({}); // Store like status per article
+  const [likeCounts, setLikeCounts] = useState({});
+
   const commentInputRefs = useRef([]);
 
   useEffect(() => {
-    const initialLikeStatus = articles.reduce((acc, article) => {
-      acc[article._id] = {
-        isLiked: article.likes?.includes(profile._id) || false,
-        likeCount: article.likes?.length || 0,
-      };
-      return acc;
-    }, {});
-    setLikeStatus(initialLikeStatus);
-  }, [articles, profile._id]);
+    // Fetch like status and like count for each article when component mounts
+    articles.forEach((article) => {
+      checkIfLiked(article._id);
+      setLikeCounts((prevState) => ({
+        ...prevState,
+        [article._id]: article.likeCount || 0,
+      }));
+    });
+  }, [articles]);
 
-  const handleLikeClick = async (articleId) => {
-    const currentStatus = likeStatus[articleId];
+  const checkIfLiked = async (articleId) => {
     try {
-      if (currentStatus.isLiked) {
-        // If already liked, unlike the post
-        await axios.post(`http://localhost:8080/articles/${articleId}/unlike`, {
-          userId: profile._id,
-        });
-        setLikeStatus((prevStatus) => ({
-          ...prevStatus,
-          [articleId]: {
-            isLiked: false,
-            likeCount: prevStatus[articleId].likeCount - 1,
-          },
-        }));
-      } else {
-        // If not liked, like the post
-        await axios.post(`http://localhost:8080/articles/${articleId}/like`, {
-          userId: profile._id,
-        });
-        setLikeStatus((prevStatus) => ({
-          ...prevStatus,
-          [articleId]: {
-            isLiked: true,
-            likeCount: prevStatus[articleId].likeCount + 1,
-          },
-        }));
-      }
+      const response = await axios.post(
+        `http://localhost:8080/articles/${articleId}/isLiked`,
+        { credentials: "include" }
+      );
+      const data = await response.json();
+      setLikeStatuses((prevState) => ({
+        ...prevState,
+        [articleId]: data.isLiked, // Set isLiked from API response
+      }));
     } catch (error) {
-      console.error("Error liking post:", error);
+      console.error("Failed to check like status", error);
     }
   };
 
   const triggerLikeAnimation = (index, articleId) => {
+    const isLiked = likeStatuses[articleId];
+    if (isLiked) {
+      unlikeArticle(articleId);
+    } else {
+      likeArticle(articleId);
+    }
     setAnimateLike(index);
     setTimeout(() => setAnimateLike(null), 300);
-    handleLikeClick(articleId);
+  };
+
+  const likeArticle = async (articleId) => {
+    try {
+      await axios.post(`http://localhost:8080/articles/${articleId}/like`, {
+        method: "POST",
+        credentials: "include",
+      });
+      setLikeStatuses((prevState) => ({
+        ...prevState,
+        [articleId]: true, // Set liked state
+      }));
+      setLikeCounts((prevState) => ({
+        ...prevState,
+        [articleId]: prevState[articleId] + 1,
+      }));
+    } catch (error) {
+      console.error("Failed to like article", error);
+    }
+  };
+
+  const unlikeArticle = async (articleId) => {
+    try {
+      await axios.post(`http://localhost:8080/articles/${articleId}/unlike`, {
+        method: "POST",
+        credentials: "include",
+      });
+      setLikeStatuses((prevState) => ({
+        ...prevState,
+        [articleId]: false, // Set unliked state
+      }));
+      setLikeCounts((prevState) => ({
+        ...prevState,
+        [articleId]: prevState[articleId] - 1,
+      }));
+    } catch (error) {
+      console.error("Failed to unlike article", error);
+    }
   };
 
   const triggerBookmarkAnimation = (index) => {
@@ -100,7 +128,6 @@ const ArticleContent = ({ articles = [], profile }) => {
               <div className="user-image">
                 <img src={article.author?.profileImg || UserImage} alt="User" />
               </div>
-              {/* Tambahkan Link di sini */}
               <div className="details-article">
                 <div className="user-name">
                   {article.author?.name || "Unknown Author"}
@@ -132,12 +159,17 @@ const ArticleContent = ({ articles = [], profile }) => {
                 onClick={() => triggerLikeAnimation(index, article._id)}
               >
                 <img
-                  src={likeStatus[article._id]?.isLiked ? Liked : Like}
-                  alt={likeStatus[article._id]?.isLiked ? "Unlike" : "Like"}
+                  src={likeStatuses[article._id] ? Liked : Like}
+                  alt={likeStatuses[article._id] ? "Liked" : "Like"}
                 />
                 <div className="text-interaction">
-                  {likeStatus[article._id]?.likeCount} Likes
+                  {likeCounts[article._id] || 0}
+                  {/* <div className="space"></div> */}
+                  {likeStatuses[article._id] ? " Liked" : " Like"}
                 </div>
+                {/* <span className="like-count">
+                  {likeCounts[article._id] || 0}
+                </span> */}
               </button>
               <button
                 className={`interaction ${
