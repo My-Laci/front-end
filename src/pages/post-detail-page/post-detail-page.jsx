@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
 import Navbar from "../../components/navbar/Navbar.jsx";
 import CommentFieldBox from "../../components/comment-field-box/comment-field-box.jsx";
@@ -13,6 +13,7 @@ import "./post-detail-page.css";
 const PostDetailPage = () => {
   // Mengambil postId dari URL
   const { postId } = useParams();
+  const navigate = useNavigate(); // Initialize the navigate function
 
   // State untuk menyimpan data postingan
   const [post, setPost] = useState(null);
@@ -23,8 +24,7 @@ const PostDetailPage = () => {
         const response = await axios.get(
           `http://localhost:8080/post/detail/${postId}`
         );
-        setPost(response.data);
-        console.log(response.data);
+        setPost(response.data.getData); // Assuming post data is inside getData
       } catch (error) {
         console.error("Error fetching post:", error);
       }
@@ -40,14 +40,13 @@ const PostDetailPage = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="container">
-        <Sidebar />
-        <div className="content">
+      <div className="post-detail-container">
+        <div className="post-detail-content">
           <div className="return-section">
-            <button>
+            <button onClick={() => navigate(-1)}>
+              {" "}
+              {/* Use navigate(-1) to go back */}
               <img src={BackButton2} alt="Back Button" />
-              <p>Back</p>
             </button>
           </div>
 
@@ -58,7 +57,7 @@ const PostDetailPage = () => {
           <PostContent post={post} showCommentSection={false} />
 
           {/* Komentar pada postingan */}
-          <PostComment />
+          <PostComment postId={post._id} />
         </div>
 
         {/* Sidebar versi tablet */}

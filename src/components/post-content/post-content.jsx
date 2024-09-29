@@ -32,8 +32,10 @@ const PostContent = ({
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
 
-  const [isLiked, setIsLiked] = useState(post.likes.includes(profile._id)); // Cek apakah user sudah like
-  const [likeCount, setLikeCount] = useState(post.likes.length); // Menyimpan jumlah likes
+  const [isLiked, setIsLiked] = useState(
+    post?.likes?.includes(profile?._id) || false
+  ); // Pastikan post.likes dan profile._id terdefinisi
+  const [likeCount, setLikeCount] = useState(post?.likes?.length || 0);
 
   const commentInputRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -42,18 +44,23 @@ const PostContent = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLiked(post.likes.includes(profile._id)); // Cek apakah user sudah like
-    setLikeCount(post.likes.length); // Set jumlah likes
-  }, [post.likes, profile._id]);
+    if (post?.likes && profile?._id) {
+      setIsLiked(post.likes.includes(profile._id));
+      setLikeCount(post.likes.length);
+    }
+  }, [post.likes, profile?._id]);
 
   const goToPostDetail = () => {
-    navigate(`/post/${post._id}`);
+    if (post?._id) {
+      navigate(`/post/${post._id}`);
+    }
   };
 
   const canEditOrDelete =
-    profile?.isAdmin == true || post?.author._id === profile?._id;
+    profile?.isAdmin === true || post?.author?._id === profile?._id;
 
   const handleLikeClick = async () => {
+    if (!post || !profile) return; // Tambahkan pengecekan untuk memastikan data ada
     try {
       if (isLiked) {
         // Unlike post
@@ -89,7 +96,13 @@ const PostContent = ({
   const triggerCommentAnimation = () => {
     setAnimateComment(true);
     setTimeout(() => setAnimateComment(false), 300);
-    focusCommentField();
+
+    // Check if we are already on the post detail page
+    if (window.location.pathname !== `/post/${post._id}`) {
+      navigate(`/post/${post._id}`); // Redirect to post detail page if not already there
+    } else {
+      focusCommentField(); // Focus comment field if on the same page
+    }
   };
 
   const triggerRepostAnimation = () => {
@@ -177,15 +190,17 @@ const PostContent = ({
       <div className="post-info">
         <div className="post-info-container">
           <div className="user-image">
-            <img src={post.author?.profileImg || GuestProfile} alt="User" />
+            <img src={post?.author?.profileImg || GuestProfile} alt="User" />
           </div>
           <div className="details-post">
             <div className="user-name">
-              {post.author.name}
+              {post?.author?.name || "Unknown"}
               <span className="divider"> | </span>
-              <span className="user-instance">{post.author.agencyOrigin}</span>
+              <span className="user-instance">
+                {post?.author?.agencyOrigin || "Unknown Agency"}
+              </span>
             </div>
-            <div className="date-time-post">{formatDate(post.createdAt)}</div>
+            <div className="date-time-post">{formatDate(post?.createdAt)}</div>
           </div>
         </div>
         <div className="post-info-drop-down" onClick={toggleDropdown}>
